@@ -1,0 +1,205 @@
+\hypertarget{domand_8c}{}\section{Reg\+Balancer/src/domand.c File Reference}
+\label{domand_8c}\index{Reg\+Balancer/src/domand.\+c@{Reg\+Balancer/src/domand.\+c}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for domand.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{domand_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{domand_8c_a711cc021ef860c4fffc532afd53b3758}{sbox} (bool x0\+\_\+0, bool x1\+\_\+0, bool x2\+\_\+0, bool x3\+\_\+0, bool x0\+\_\+1, bool x1\+\_\+1, bool x2\+\_\+1, bool x3\+\_\+1, bool r, bool $\ast$Y0\+\_\+0, bool $\ast$Y1\+\_\+0, bool $\ast$Y2\+\_\+0, bool $\ast$Y3\+\_\+0, bool $\ast$Y0\+\_\+1, bool $\ast$Y1\+\_\+1, bool $\ast$Y2\+\_\+1, bool $\ast$Y3\+\_\+1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{domand_8c_a711cc021ef860c4fffc532afd53b3758}\label{domand_8c_a711cc021ef860c4fffc532afd53b3758}} 
+\index{domand.\+c@{domand.\+c}!sbox@{sbox}}
+\index{sbox@{sbox}!domand.\+c@{domand.\+c}}
+\subsubsection{\texorpdfstring{sbox()}{sbox()}}
+{\footnotesize\ttfamily void sbox (\begin{DoxyParamCaption}\item[{bool}]{x0\+\_\+0,  }\item[{bool}]{x1\+\_\+0,  }\item[{bool}]{x2\+\_\+0,  }\item[{bool}]{x3\+\_\+0,  }\item[{bool}]{x0\+\_\+1,  }\item[{bool}]{x1\+\_\+1,  }\item[{bool}]{x2\+\_\+1,  }\item[{bool}]{x3\+\_\+1,  }\item[{bool}]{r,  }\item[{bool $\ast$}]{Y0\+\_\+0,  }\item[{bool $\ast$}]{Y1\+\_\+0,  }\item[{bool $\ast$}]{Y2\+\_\+0,  }\item[{bool $\ast$}]{Y3\+\_\+0,  }\item[{bool $\ast$}]{Y0\+\_\+1,  }\item[{bool $\ast$}]{Y1\+\_\+1,  }\item[{bool $\ast$}]{Y2\+\_\+1,  }\item[{bool $\ast$}]{Y3\+\_\+1 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 2 of file domand.\+c.
+
+
+\begin{DoxyCode}
+3 \{
+4   \textcolor{keywordtype}{bool} x0\_0\_inp;
+5   \textcolor{keywordtype}{bool} x1\_0\_inp;
+6   \textcolor{keywordtype}{bool} x2\_0\_inp;
+7   \textcolor{keywordtype}{bool} x3\_0\_inp;
+8   \textcolor{keywordtype}{bool} x0\_1\_inp;
+9   \textcolor{keywordtype}{bool} x1\_1\_inp;
+10   \textcolor{keywordtype}{bool} x2\_1\_inp;
+11   \textcolor{keywordtype}{bool} x3\_1\_inp;
+12   \textcolor{keywordtype}{bool} r\_inp;
+13   x0\_0\_inp = x0\_0;
+14   x1\_0\_inp = x1\_0;
+15   x2\_0\_inp = x2\_0;
+16   x3\_0\_inp = x3\_0;
+17   x0\_1\_inp = x0\_1;
+18   x1\_1\_inp = x1\_1;
+19   x2\_1\_inp = x2\_1;
+20   x3\_1\_inp = x3\_1;
+21   r\_inp = r;
+22   \textcolor{keywordtype}{bool} L0\_0;
+23   \textcolor{keywordtype}{bool} L1\_0;
+24   \textcolor{keywordtype}{bool} L2\_0;
+25   \textcolor{keywordtype}{bool} L3\_0;
+26   \textcolor{keywordtype}{bool} L4\_0;
+27   \textcolor{keywordtype}{bool} L5\_0;
+28   \textcolor{keywordtype}{bool} L6\_0;
+29   \textcolor{keywordtype}{bool} L7\_0;
+30   \textcolor{keywordtype}{bool} L8\_0;
+31   \textcolor{keywordtype}{bool} L9\_0;
+32   \textcolor{keywordtype}{bool} L10\_0;
+33   \textcolor{keywordtype}{bool} L11\_0;
+34   \textcolor{keywordtype}{bool} Q0\_0;
+35   \textcolor{keywordtype}{bool} Q1\_0;
+36   \textcolor{keywordtype}{bool} Q2\_0;
+37   \textcolor{keywordtype}{bool} Q3\_0;
+38   \textcolor{keywordtype}{bool} Q4\_0;
+39   \textcolor{keywordtype}{bool} Q5\_0;
+40   \textcolor{keywordtype}{bool} Q6\_0;
+41   \textcolor{keywordtype}{bool} Q7\_0;
+42   \textcolor{keywordtype}{bool} T0\_0;
+43   \textcolor{keywordtype}{bool} T1\_0;
+44   \textcolor{keywordtype}{bool} T2\_0;
+45   \textcolor{keywordtype}{bool} T3\_0;
+46   \textcolor{keywordtype}{bool} L0\_1;
+47   \textcolor{keywordtype}{bool} L1\_1;
+48   \textcolor{keywordtype}{bool} L2\_1;
+49   \textcolor{keywordtype}{bool} L3\_1;
+50   \textcolor{keywordtype}{bool} L4\_1;
+51   \textcolor{keywordtype}{bool} L5\_1;
+52   \textcolor{keywordtype}{bool} L6\_1;
+53   \textcolor{keywordtype}{bool} L7\_1;
+54   \textcolor{keywordtype}{bool} L8\_1;
+55   \textcolor{keywordtype}{bool} L9\_1;
+56   \textcolor{keywordtype}{bool} L10\_1;
+57   \textcolor{keywordtype}{bool} L11\_1;
+58   \textcolor{keywordtype}{bool} Q0\_1;
+59   \textcolor{keywordtype}{bool} Q1\_1;
+60   \textcolor{keywordtype}{bool} Q2\_1;
+61   \textcolor{keywordtype}{bool} Q3\_1;
+62   \textcolor{keywordtype}{bool} Q4\_1;
+63   \textcolor{keywordtype}{bool} Q5\_1;
+64   \textcolor{keywordtype}{bool} Q6\_1;
+65   \textcolor{keywordtype}{bool} Q7\_1;
+66   \textcolor{keywordtype}{bool} T0\_1;
+67   \textcolor{keywordtype}{bool} T1\_1;
+68   \textcolor{keywordtype}{bool} T2\_1;
+69   \textcolor{keywordtype}{bool} T3\_1;
+70   \textcolor{keywordtype}{bool} Y0\_01;
+71   \textcolor{keywordtype}{bool} Y1\_01;
+72   \textcolor{keywordtype}{bool} Y0\_11;
+73   \textcolor{keywordtype}{bool} Y1\_11;
+74   L0\_0 = x1\_0\_inp ^ x2\_0\_inp;
+75   L1\_0 = x0\_0\_inp ^ x1\_0\_inp;
+76   L8\_0 = x2\_0\_inp ^ x0\_0\_inp;
+77   L5\_0 = x0\_0\_inp ^ x3\_0\_inp;
+78   L0\_1 = x1\_1\_inp ^ x2\_1\_inp;
+79   L1\_1 = x0\_1\_inp ^ x1\_1\_inp;
+80   L8\_1 = x2\_1\_inp ^ x0\_1\_inp;
+81   L5\_1 = x0\_1\_inp ^ x3\_1\_inp;
+82   Q0\_0 = !L0\_0;
+83   Q1\_0 = !L1\_0;
+84   Q3\_0 = !x3\_0\_inp;
+85   Q4\_0 = !x2\_0\_inp;
+86   Q0\_1 = !L0\_1;
+87   Q1\_1 = !L1\_1;
+88   Q3\_1 = !x3\_1\_inp;
+89   Q4\_1 = !x2\_1\_inp;
+90   L2\_0 = Q1\_0 ^ x2\_0\_inp;
+91   L3\_0 = Q0\_0 ^ x3\_0\_inp;
+92   L2\_1 = Q1\_1 ^ x2\_1\_inp;
+93   L3\_1 = Q0\_1 ^ x3\_1\_inp;
+94   \textcolor{keywordtype}{bool} i1\_domand0;
+95   \textcolor{keywordtype}{bool} i2\_domand0;
+96   \textcolor{keywordtype}{bool} p2\_domand0;
+97   \textcolor{keywordtype}{bool} p3\_domand0;
+98   \textcolor{keywordtype}{bool} p1\_domand0;
+99   \textcolor{keywordtype}{bool} p4\_domand0;
+100   p2\_domand0 = Q0\_0 & Q1\_1;
+101   i1\_domand0 = p2\_domand0 ^ r\_inp;
+102   p3\_domand0 = Q0\_1 & Q1\_0;
+103   i2\_domand0 = p3\_domand0 ^ r\_inp;
+104   p1\_domand0 = Q0\_0 & Q1\_0;
+105   p4\_domand0 = Q0\_1 & Q1\_1;
+106   T0\_0 = reg(i1\_domand0) ^ p1\_domand0;
+107   T0\_1 = reg(i2\_domand0) ^ p4\_domand0;
+108   L10\_0 = !L2\_0;
+109   L10\_1 = !L2\_1;
+110   \textcolor{keywordtype}{bool} i1\_domand1;
+111   \textcolor{keywordtype}{bool} i2\_domand1;
+112   \textcolor{keywordtype}{bool} p2\_domand1;
+113   \textcolor{keywordtype}{bool} p3\_domand1;
+114   \textcolor{keywordtype}{bool} p1\_domand1;
+115   \textcolor{keywordtype}{bool} p4\_domand1;
+116   p2\_domand1 = x1\_0\_inp & Q4\_1;
+117   i1\_domand1 = p2\_domand1 ^ r\_inp;
+118   p3\_domand1 = x1\_1\_inp & Q4\_0;
+119   i2\_domand1 = p3\_domand1 ^ r\_inp;
+120   p1\_domand1 = x1\_0\_inp & Q4\_0;
+121   p4\_domand1 = x1\_1\_inp & Q4\_1;
+122   T2\_0 = reg(i1\_domand1) ^ p1\_domand1;
+123   T2\_1 = reg(i2\_domand1) ^ p4\_domand1;
+124   Q2\_0 = T0\_0 ^ L2\_0;
+125   L4\_0 = T0\_0 ^ T2\_0;
+126   Q7\_0 = T0\_0 ^ L5\_0;
+127   Q6\_0 = L4\_0 ^ L3\_0;
+128   Q2\_1 = T0\_1 ^ L2\_1;
+129   L4\_1 = T0\_1 ^ T2\_1;
+130   Q7\_1 = T0\_1 ^ L5\_1;
+131   Q6\_1 = L4\_1 ^ L3\_1;
+132   \textcolor{keywordtype}{bool} i1\_domand2;
+133   \textcolor{keywordtype}{bool} i2\_domand2;
+134   \textcolor{keywordtype}{bool} p2\_domand2;
+135   \textcolor{keywordtype}{bool} p3\_domand2;
+136   \textcolor{keywordtype}{bool} p1\_domand2;
+137   \textcolor{keywordtype}{bool} p4\_domand2;
+138   p2\_domand2 = Q2\_0 & Q3\_1;
+139   i1\_domand2 = p2\_domand2 ^ r\_inp;
+140   p3\_domand2 = Q2\_1 & Q3\_0;
+141   i2\_domand2 = p3\_domand2 ^ r\_inp;
+142   p1\_domand2 = Q2\_0 & Q3\_0;
+143   p4\_domand2 = Q2\_1 & Q3\_1;
+144   T1\_0 = reg(i1\_domand2) ^ p1\_domand2;
+145   T1\_1 = reg(i2\_domand2) ^ p4\_domand2;
+146   \textcolor{keywordtype}{bool} i1\_domand3;
+147   \textcolor{keywordtype}{bool} i2\_domand3;
+148   \textcolor{keywordtype}{bool} p2\_domand3;
+149   \textcolor{keywordtype}{bool} p3\_domand3;
+150   \textcolor{keywordtype}{bool} p1\_domand3;
+151   \textcolor{keywordtype}{bool} p4\_domand3;
+152   p2\_domand3 = Q6\_0 & Q7\_1;
+153   i1\_domand3 = p2\_domand3 ^ r\_inp;
+154   p3\_domand3 = Q6\_1 & Q7\_0;
+155   i2\_domand3 = p3\_domand3 ^ r\_inp;
+156   p1\_domand3 = Q6\_0 & Q7\_0;
+157   p4\_domand3 = Q6\_1 & Q7\_1;
+158   T3\_0 = reg(i1\_domand3) ^ p1\_domand3;
+159   T3\_1 = reg(i2\_domand3) ^ p4\_domand3;
+160   L7\_0 = T0\_0 ^ T1\_0;
+161   L11\_0 = T1\_0 ^ L10\_0;
+162   L7\_1 = T0\_1 ^ T1\_1;
+163   L11\_1 = T1\_1 ^ L10\_1;
+164   Y0\_01 = L7\_0 ^ T2\_0;
+165   Y1\_01 = L8\_0 ^ T3\_0;
+166   Y0\_11 = L7\_1 ^ T2\_1;
+167   Y1\_11 = L8\_1 ^ T3\_1;
+168   *Y0\_0 = reg(x3\_0\_inp ^ Y0\_01);
+169   *Y1\_0 = reg(L7\_0 ^ Y1\_01);
+170   *Y2\_0 = reg(L11\_0 ^ T2\_0);
+171   *Y3\_0 = reg(T2\_0 ^ L5\_0);
+172   *Y0\_1 = reg(x3\_1\_inp ^ Y0\_11);
+173   *Y1\_1 = reg(L7\_1 ^ Y1\_11);
+174   *Y2\_1 = reg(L11\_1 ^ T2\_1);
+175   *Y3\_1 = reg(T2\_1 ^ L5\_1);
+176 \}
+\end{DoxyCode}

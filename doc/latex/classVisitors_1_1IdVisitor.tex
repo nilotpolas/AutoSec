@@ -1,0 +1,130 @@
+\hypertarget{classVisitors_1_1IdVisitor}{}\section{Id\+Visitor Class Reference}
+\label{classVisitors_1_1IdVisitor}\index{Id\+Visitor@{Id\+Visitor}}
+
+
+Inheritance diagram for Id\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{classVisitors_1_1IdVisitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Id\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{classVisitors_1_1IdVisitor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classVisitors_1_1IdVisitor_a649fc0ef07aae1d9fc3a510d3fe85c7f}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, \hyperlink{classVisitors_1_1IdVisitor_a976941a4c7ae422cebf58ddfd2e8b479}{argument\+Map}, \hyperlink{classVisitors_1_1IdVisitor_ad7cca8103c884420bac50cbb68183848}{local\+Variables\+Map})
+\item 
+def \hyperlink{classVisitors_1_1IdVisitor_a876b22ca4502c2197e9881ebf8fb6288}{visit\+\_\+\+ID} (self, node)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVisitors_1_1IdVisitor_a976941a4c7ae422cebf58ddfd2e8b479}{argument\+Map}
+\item 
+\hyperlink{classVisitors_1_1IdVisitor_ad7cca8103c884420bac50cbb68183848}{local\+Variables\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@brief Visits identifier nodes and updates their names based on provided mappings.
+
+This visitor changes the names of identifiers according to the argument and local variable mappings.
+
+@param argumentMap: Mapping of argument names to new names.
+@type argumentMap: dict
+@param localVariablesMap: Mapping of local variable names to new names.
+@type localVariablesMap: dict
+\end{DoxyVerb}
+ 
+
+Definition at line 126 of file Visitors.\+py.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classVisitors_1_1IdVisitor_a649fc0ef07aae1d9fc3a510d3fe85c7f}\label{classVisitors_1_1IdVisitor_a649fc0ef07aae1d9fc3a510d3fe85c7f}} 
+\index{Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{argument\+Map,  }\item[{}]{local\+Variables\+Map }\end{DoxyParamCaption})}
+
+
+
+Definition at line 137 of file Visitors.\+py.
+
+
+\begin{DoxyCode}
+137     \textcolor{keyword}{def }\_\_init\_\_(self,argumentMap,localVariablesMap):
+138         self.localVariablesMap = localVariablesMap
+139         self.argumentMap = argumentMap
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classVisitors_1_1IdVisitor_a876b22ca4502c2197e9881ebf8fb6288}\label{classVisitors_1_1IdVisitor_a876b22ca4502c2197e9881ebf8fb6288}} 
+\index{Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}!visit\+\_\+\+ID@{visit\+\_\+\+ID}}
+\index{visit\+\_\+\+ID@{visit\+\_\+\+ID}!Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+I\+D()}{visit\_ID()}}
+{\footnotesize\ttfamily def visit\+\_\+\+ID (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Updates identifier names based on argument and local variable mappings.
+
+@param node: The identifier node to be updated.
+@type node: pycparser.c_ast.ID
+\end{DoxyVerb}
+ 
+
+Definition at line 140 of file Visitors.\+py.
+
+
+\begin{DoxyCode}
+140     \textcolor{keyword}{def }visit\_ID(self, node):
+141         \textcolor{stringliteral}{"""}
+142 \textcolor{stringliteral}{        @brief Updates identifier names based on argument and local variable mappings.}
+143 \textcolor{stringliteral}{}
+144 \textcolor{stringliteral}{        @param node: The identifier node to be updated.}
+145 \textcolor{stringliteral}{        @type node: pycparser.c\_ast.ID}
+146 \textcolor{stringliteral}{        """}
+147         \textcolor{keywordflow}{if} node.name \textcolor{keywordflow}{in} self.argumentMap:
+148             node.name = self.argumentMap[node.name]
+149         \textcolor{keywordflow}{if} node.name \textcolor{keywordflow}{in} self.localVariablesMap:
+150             node.name = self.localVariablesMap[node.name]
+151 
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classVisitors_1_1IdVisitor_a976941a4c7ae422cebf58ddfd2e8b479}\label{classVisitors_1_1IdVisitor_a976941a4c7ae422cebf58ddfd2e8b479}} 
+\index{Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}!argument\+Map@{argument\+Map}}
+\index{argument\+Map@{argument\+Map}!Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}}
+\subsubsection{\texorpdfstring{argument\+Map}{argumentMap}}
+{\footnotesize\ttfamily argument\+Map}
+
+
+
+Definition at line 139 of file Visitors.\+py.
+
+\mbox{\Hypertarget{classVisitors_1_1IdVisitor_ad7cca8103c884420bac50cbb68183848}\label{classVisitors_1_1IdVisitor_ad7cca8103c884420bac50cbb68183848}} 
+\index{Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}!local\+Variables\+Map@{local\+Variables\+Map}}
+\index{local\+Variables\+Map@{local\+Variables\+Map}!Visitors\+::\+Id\+Visitor@{Visitors\+::\+Id\+Visitor}}
+\subsubsection{\texorpdfstring{local\+Variables\+Map}{localVariablesMap}}
+{\footnotesize\ttfamily local\+Variables\+Map}
+
+
+
+Definition at line 138 of file Visitors.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Inliner/\hyperlink{Visitors_8py}{Visitors.\+py}\end{DoxyCompactItemize}

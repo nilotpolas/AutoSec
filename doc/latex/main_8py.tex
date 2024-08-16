@@ -1,0 +1,30 @@
+\hypertarget{main_8py}{}\section{Reg\+Balancer/src/main.py File Reference}
+\label{main_8py}\index{Reg\+Balancer/src/main.\+py@{Reg\+Balancer/src/main.\+py}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceRegBalancer_1_1src_1_1main}{Reg\+Balancer.\+src.\+main}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_a8187411843a6284ffb964ef3fb9fcab3}{args} = json.\+load(file)
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_a83d838e3813fb5999c0492e0d9474bd9}{ast} = parse\+\_\+file(file\+To\+Parse, use\+\_\+cpp=True)
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_aa5d70a518fbbc3f1e03d57deb06db2e4}{dfg\+\_\+gen} = Generate\+D\+FG()
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_afb358f48b1646c750fb9da6c6585be2b}{end}
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_a7b981d9b48acf5de0d1fefa71978ce4a}{file\+To\+Parse} = args\mbox{[}\char`\"{}post\+Processor\+Output\char`\"{}\mbox{]} if(args\mbox{[}\char`\"{}check\+Balancing\char`\"{}\mbox{]}) else args\mbox{[}\char`\"{}inliner\+Output\char`\"{}\mbox{]}
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_a6f1918359d19ff0f2ae80e155c83c951}{func\+\_\+body} = extract\+\_\+func\+\_\+body(ast)
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_aa9c65458d6900b176c9ff9b1ef34bed0}{manual\+Registers} = no\+Of\+Registers\+Manually(dfg\+\_\+gen.\+dfg)
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_a1209559bbc0dbee87e2e3044b791a287}{retimer} = Retime\+D\+FG(dfg\+\_\+gen.\+dfg)
+\item 
+\hyperlink{namespaceRegBalancer_1_1src_1_1main_a2530c3908f0179486a4c2255f792e27a}{start\+\_\+time} = time.\+time()
+\item 
+string \hyperlink{namespaceRegBalancer_1_1src_1_1main_a8feea255809654e1028144a6b312c9e8}{use\+Linear\+Algo} = \char`\"{}true\char`\"{}
+\end{DoxyCompactItemize}

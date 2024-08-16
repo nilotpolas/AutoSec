@@ -1,0 +1,144 @@
+\hypertarget{namespaceinliner}{}\section{inliner Namespace Reference}
+\label{namespaceinliner}\index{inliner@{inliner}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceinliner_a85ff5417ce309a641abfa41d26e8d7f3}{main\+Inline} (input\+File, output\+File, top\+Module)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceinliner_a8187411843a6284ffb964ef3fb9fcab3}{args} = json.\+load(file)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceinliner_a85ff5417ce309a641abfa41d26e8d7f3}\label{namespaceinliner_a85ff5417ce309a641abfa41d26e8d7f3}} 
+\index{inliner@{inliner}!main\+Inline@{main\+Inline}}
+\index{main\+Inline@{main\+Inline}!inliner@{inliner}}
+\subsubsection{\texorpdfstring{main\+Inline()}{mainInline()}}
+{\footnotesize\ttfamily def inliner.\+main\+Inline (\begin{DoxyParamCaption}\item[{}]{input\+File,  }\item[{}]{output\+File,  }\item[{}]{top\+Module }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Processes a C source file to inline functions, handle constants, and generate a new C file.
+
+This function parses the provided C source file, constructs a directed graph of functions, performs topological
+sorting, processes functions based on dependencies, handles array and constant values, and finally generates
+an updated C source file.
+
+@param inputFile: The path to the input C source file to be processed.
+@type inputFile: str
+@param outputFile: The path where the processed C source file will be saved.
+@type outputFile: str
+@param topModule: The name of the top-level module (function) to be used as the entry point.
+@type topModule: str
+
+@raises SystemExit: If the top module is not found in the sorted function list or if no functions are present.
+\end{DoxyVerb}
+ 
+
+Definition at line 12 of file inliner.\+py.
+
+
+\begin{DoxyCode}
+12 \textcolor{keyword}{def }\hyperlink{namespaceinliner_a85ff5417ce309a641abfa41d26e8d7f3}{mainInline}(inputFile,outputFile,topModule):
+13     \textcolor{stringliteral}{"""}
+14 \textcolor{stringliteral}{    @brief Processes a C source file to inline functions, handle constants, and generate a new C file.}
+15 \textcolor{stringliteral}{}
+16 \textcolor{stringliteral}{    This function parses the provided C source file, constructs a directed graph of functions, performs
+       topological}
+17 \textcolor{stringliteral}{    sorting, processes functions based on dependencies, handles array and constant values, and finally
+       generates}
+18 \textcolor{stringliteral}{    an updated C source file.}
+19 \textcolor{stringliteral}{}
+20 \textcolor{stringliteral}{    @param inputFile: The path to the input C source file to be processed.}
+21 \textcolor{stringliteral}{    @type inputFile: str}
+22 \textcolor{stringliteral}{    @param outputFile: The path where the processed C source file will be saved.}
+23 \textcolor{stringliteral}{    @type outputFile: str}
+24 \textcolor{stringliteral}{    @param topModule: The name of the top-level module (function) to be used as the entry point.}
+25 \textcolor{stringliteral}{    @type topModule: str}
+26 \textcolor{stringliteral}{}
+27 \textcolor{stringliteral}{    @raises SystemExit: If the top module is not found in the sorted function list or if no functions are
+       present.}
+28 \textcolor{stringliteral}{    """}
+29     ast = parse\_file(inputFile, use\_cpp=\textcolor{keyword}{True})
+30     arrMap = \{\}
+31     arrVisitor = DeclVisitor(arrayMap=arrMap,ast=ast)
+32     arrVisitor.visit(ast)
+33     functionGraph = \hyperlink{namespaceDiGraph}{DiGraph}()
+34     functionInfo = \{\}
+35 
+36     \textcolor{keywordflow}{for} fDef \textcolor{keywordflow}{in} ast.ext:
+37         \textcolor{keywordflow}{if} isinstance(fDef,c\_ast.FuncDef):
+38             functionGraph.addFunction(fDef.decl.name)
+39             visitor = FunctionVisitor(functionGraph,fDef.decl.name)
+40             visitor.visit(fDef)
+41 
+42     sortedList = functionGraph.topoSort()
+43     \textcolor{keywordflow}{if} topModule \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} sortedList:
+44         print(f\textcolor{stringliteral}{"No top module named \{topModule\} in given input file."})
+45         print(\textcolor{stringliteral}{"Note : The name of module is case sensitive"})
+46         sys.exit(1)
+47     if(len(sortedList) == 1):
+48         \hyperlink{namespaceutils_a5ab527c9affdfd39949f2e88c4299989}{generate\_c\_file}(ast,outputFile)
+49 
+50 
+51     \textcolor{keywordflow}{for} function \textcolor{keywordflow}{in} sortedList:
+52         inDegree = functionGraph.getIndegreeOf(function)
+53         \textcolor{keywordflow}{if} inDegree == 0:
+54             \textcolor{keywordflow}{for} fDef \textcolor{keywordflow}{in} ast.ext[:]:
+55                 \textcolor{keywordflow}{if} isinstance(fDef,c\_ast.FuncDef) \textcolor{keywordflow}{and} fDef.decl.name == function:
+56                     \hyperlink{namespaceutils_a01c8b36149daaab35946bf42cf90fcc1}{extractFunctionInfo}(fDef,functionInfo)
+57                     ast.ext.remove(fDef)
+58                     \textcolor{keywordflow}{break}
+59         
+60         \textcolor{keywordflow}{elif} function != topModule:
+61             \textcolor{keywordflow}{for} fDef \textcolor{keywordflow}{in} ast.ext[:]:
+62                 \textcolor{keywordflow}{if} isinstance(fDef,c\_ast.FuncDef) \textcolor{keywordflow}{and} fDef.decl.name == function:
+63                     \hyperlink{namespaceutils_a6c1d5e886507ec0741fb0fce3f642c5b}{processDependantFunctions}(fDef,functionInfo,\textcolor{keyword}{False})
+64                     \hyperlink{namespaceutils_a01c8b36149daaab35946bf42cf90fcc1}{extractFunctionInfo}(fDef,functionInfo)
+65                     ast.ext.remove(fDef)
+66                     \textcolor{keywordflow}{break}
+67         \textcolor{keywordflow}{else}:
+68             \textcolor{keywordflow}{for} fDef \textcolor{keywordflow}{in} ast.ext[:]:
+69                 \textcolor{keywordflow}{if} isinstance(fDef,c\_ast.FuncDef) \textcolor{keywordflow}{and} fDef.decl.name == function:
+70                     \hyperlink{namespaceutils_a6c1d5e886507ec0741fb0fce3f642c5b}{processDependantFunctions}(fDef,functionInfo,\textcolor{keyword}{True})
+71     
+72     \textcolor{keywordflow}{for} fDef \textcolor{keywordflow}{in} ast.ext[:]:
+73         \textcolor{keywordflow}{if} isinstance(fDef,c\_ast.Decl) \textcolor{keywordflow}{and} isinstance(fDef.type,c\_ast.ArrayDecl):
+74             ast.ext.remove(fDef)
+75 
+76     constArr = []
+77     arrValueReplacer = ArrayValueReplacer(arrMap,constArr)
+78     arrValueReplacer.visit(ast)
+79 
+80     constToVar = ConstToVar()
+81     constToVar.visit(ast)
+82     \hyperlink{namespaceutils_a694fa47d55cc41b3f9e86ab2f90e98f3}{insertAssignmentsAndDeclForConstants}(ast,constArr)
+83 
+84     assignmentChecker = AssignmentChecker();
+85     assignmentChecker.visit(ast)
+86     \hyperlink{namespaceutils_a5ab527c9affdfd39949f2e88c4299989}{generate\_c\_file}(ast,outputFile)
+87 
+88 
+89 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceinliner_a85ff5417ce309a641abfa41d26e8d7f3_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceinliner_a8187411843a6284ffb964ef3fb9fcab3}\label{namespaceinliner_a8187411843a6284ffb964ef3fb9fcab3}} 
+\index{inliner@{inliner}!args@{args}}
+\index{args@{args}!inliner@{inliner}}
+\subsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily args = json.\+load(file)}
+
+
+
+Definition at line 92 of file inliner.\+py.
+

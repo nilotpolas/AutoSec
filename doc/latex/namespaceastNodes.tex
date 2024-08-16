@@ -1,0 +1,145 @@
+\hypertarget{namespaceastNodes}{}\section{ast\+Nodes Namespace Reference}
+\label{namespaceastNodes}\index{ast\+Nodes@{ast\+Nodes}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceastNodes_a95c339903d1831fd083d074239667d3e}{get\+Const\+Assignment\+Node} (lvalue, rvalue)
+\item 
+def \hyperlink{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}{get\+Declaration\+Node} (id\+Name, type)
+\item 
+def \hyperlink{namespaceastNodes_a2403f5d006e54f20e614226280cb6cbc}{get\+Simple\+Assignment\+Node} (lvalue, rvalue)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceastNodes_a95c339903d1831fd083d074239667d3e}\label{namespaceastNodes_a95c339903d1831fd083d074239667d3e}} 
+\index{ast\+Nodes@{ast\+Nodes}!get\+Const\+Assignment\+Node@{get\+Const\+Assignment\+Node}}
+\index{get\+Const\+Assignment\+Node@{get\+Const\+Assignment\+Node}!ast\+Nodes@{ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Const\+Assignment\+Node()}{getConstAssignmentNode()}}
+{\footnotesize\ttfamily def ast\+Nodes.\+get\+Const\+Assignment\+Node (\begin{DoxyParamCaption}\item[{}]{lvalue,  }\item[{}]{rvalue }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates an assignment node where the right-hand side is a constant integer.
+
+@param lvalue: The left-hand side of the assignment, typically a variable name.
+@type lvalue: str
+@param rvalue: The constant integer value for the right-hand side of the assignment.
+@type rvalue: int
+
+@return: A `c_ast.Assignment` node representing the assignment of a constant integer value.
+@rtype: c_ast.Assignment
+\end{DoxyVerb}
+ 
+
+Definition at line 21 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+21 \textcolor{keyword}{def }\hyperlink{namespaceastNodes_a95c339903d1831fd083d074239667d3e}{getConstAssignmentNode}(lvalue,rvalue):
+22     \textcolor{stringliteral}{"""}
+23 \textcolor{stringliteral}{    Creates an assignment node where the right-hand side is a constant integer.}
+24 \textcolor{stringliteral}{}
+25 \textcolor{stringliteral}{    @param lvalue: The left-hand side of the assignment, typically a variable name.}
+26 \textcolor{stringliteral}{    @type lvalue: str}
+27 \textcolor{stringliteral}{    @param rvalue: The constant integer value for the right-hand side of the assignment.}
+28 \textcolor{stringliteral}{    @type rvalue: int}
+29 \textcolor{stringliteral}{}
+30 \textcolor{stringliteral}{    @return: A `c\_ast.Assignment` node representing the assignment of a constant integer value.}
+31 \textcolor{stringliteral}{    @rtype: c\_ast.Assignment}
+32 \textcolor{stringliteral}{    """}
+33     \textcolor{keywordflow}{return} c\_ast.Assignment(lvalue=c\_ast.ID(name=lvalue),rvalue=c\_ast.Constant(type=\textcolor{stringliteral}{"int"},value=rvalue),op=\textcolor{stringliteral}{
+      '='})
+34 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}\label{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}} 
+\index{ast\+Nodes@{ast\+Nodes}!get\+Declaration\+Node@{get\+Declaration\+Node}}
+\index{get\+Declaration\+Node@{get\+Declaration\+Node}!ast\+Nodes@{ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Declaration\+Node()}{getDeclarationNode()}}
+{\footnotesize\ttfamily def ast\+Nodes.\+get\+Declaration\+Node (\begin{DoxyParamCaption}\item[{}]{id\+Name,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates a declaration node for a variable with the specified name and type.
+
+@param idName: The name of the variable to declare.
+@type idName: str
+@param type: The type of the variable, e.g., 'int' or 'float'.
+@type type: str
+
+@return: A `c_ast.Decl` node representing the variable declaration.
+@rtype: c_ast.Decl
+\end{DoxyVerb}
+ 
+
+Definition at line 35 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+35 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_aebd6602b5bdafed24833f298500fd85c}{getDeclarationNode}(idName,type):
+36     \textcolor{stringliteral}{"""}
+37 \textcolor{stringliteral}{    Creates a declaration node for a variable with the specified name and type.}
+38 \textcolor{stringliteral}{}
+39 \textcolor{stringliteral}{    @param idName: The name of the variable to declare.}
+40 \textcolor{stringliteral}{    @type idName: str}
+41 \textcolor{stringliteral}{    @param type: The type of the variable, e.g., 'int' or 'float'.}
+42 \textcolor{stringliteral}{    @type type: str}
+43 \textcolor{stringliteral}{}
+44 \textcolor{stringliteral}{    @return: A `c\_ast.Decl` node representing the variable declaration.}
+45 \textcolor{stringliteral}{    @rtype: c\_ast.Decl}
+46 \textcolor{stringliteral}{    """}
+47 
+48     typeDeclNode = c\_ast.TypeDecl(declname = idName,quals = [],align = \textcolor{keywordtype}{None},
+49                                                   type=c\_ast.IdentifierType(names=[type]))
+50     declNode = c\_ast.Decl(name=idName, quals=[], storage=[], funcspec=[],
+51                 type=typeDeclNode, init=\textcolor{keywordtype}{None},
+52                 bitsize=\textcolor{keywordtype}{None}, align=[])
+53     \textcolor{keywordflow}{return} declNode
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespaceastNodes_a2403f5d006e54f20e614226280cb6cbc}\label{namespaceastNodes_a2403f5d006e54f20e614226280cb6cbc}} 
+\index{ast\+Nodes@{ast\+Nodes}!get\+Simple\+Assignment\+Node@{get\+Simple\+Assignment\+Node}}
+\index{get\+Simple\+Assignment\+Node@{get\+Simple\+Assignment\+Node}!ast\+Nodes@{ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Simple\+Assignment\+Node()}{getSimpleAssignmentNode()}}
+{\footnotesize\ttfamily def ast\+Nodes.\+get\+Simple\+Assignment\+Node (\begin{DoxyParamCaption}\item[{}]{lvalue,  }\item[{}]{rvalue }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates a simple assignment node with the specified left-hand side and right-hand side.
+
+@param lvalue: The left-hand side of the assignment, typically a variable name.
+@type lvalue: str
+@param rvalue: The right-hand side of the assignment, typically a variable name or expression.
+@type rvalue: str
+
+@return: A `c_ast.Assignment` node representing the assignment operation.
+@rtype: c_ast.Assignment
+\end{DoxyVerb}
+ 
+
+Definition at line 7 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+7 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_a1fc39a0ad420aefababe0a8ee2907f4e}{getSimpleAssignmentNode}(lvalue,rvalue):
+8     \textcolor{stringliteral}{"""}
+9 \textcolor{stringliteral}{    Creates a simple assignment node with the specified left-hand side and right-hand side.}
+10 \textcolor{stringliteral}{}
+11 \textcolor{stringliteral}{    @param lvalue: The left-hand side of the assignment, typically a variable name.}
+12 \textcolor{stringliteral}{    @type lvalue: str}
+13 \textcolor{stringliteral}{    @param rvalue: The right-hand side of the assignment, typically a variable name or expression.}
+14 \textcolor{stringliteral}{    @type rvalue: str}
+15 \textcolor{stringliteral}{}
+16 \textcolor{stringliteral}{    @return: A `c\_ast.Assignment` node representing the assignment operation.}
+17 \textcolor{stringliteral}{    @rtype: c\_ast.Assignment}
+18 \textcolor{stringliteral}{    """}
+19     \textcolor{keywordflow}{return} c\_ast.Assignment(lvalue=c\_ast.ID(name=lvalue),rvalue=c\_ast.ID(name=rvalue),op=\textcolor{stringliteral}{'='})
+20 
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceastNodes_a2403f5d006e54f20e614226280cb6cbc_icgraph}
+\end{center}
+\end{figure}

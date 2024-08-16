@@ -1,0 +1,1 @@
+globalType = "_Bool"

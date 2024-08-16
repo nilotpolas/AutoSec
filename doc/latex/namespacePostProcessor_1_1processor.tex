@@ -1,0 +1,133 @@
+\hypertarget{namespacePostProcessor_1_1processor}{}\section{Post\+Processor.\+processor Namespace Reference}
+\label{namespacePostProcessor_1_1processor}\index{Post\+Processor.\+processor@{Post\+Processor.\+processor}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacePostProcessor_1_1processor_a3f18e4947e2313a8b23367f06f4b02c2}{post\+Process} (input\+File, output\+File)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacePostProcessor_1_1processor_a8187411843a6284ffb964ef3fb9fcab3}{args} = json.\+load(file)
+\item 
+\hyperlink{namespacePostProcessor_1_1processor_a7e91ec681fdd5ff588de2f2d2c3dc3f6}{global\+Type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacePostProcessor_1_1processor_a3f18e4947e2313a8b23367f06f4b02c2}\label{namespacePostProcessor_1_1processor_a3f18e4947e2313a8b23367f06f4b02c2}} 
+\index{Post\+Processor\+::processor@{Post\+Processor\+::processor}!post\+Process@{post\+Process}}
+\index{post\+Process@{post\+Process}!Post\+Processor\+::processor@{Post\+Processor\+::processor}}
+\subsubsection{\texorpdfstring{post\+Process()}{postProcess()}}
+{\footnotesize\ttfamily def Post\+Processor.\+processor.\+post\+Process (\begin{DoxyParamCaption}\item[{}]{input\+File,  }\item[{}]{output\+File }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processes the input C file, applies transformations, and generates the output C file.
+
+@param inputFile: Path to the input C file to be processed.
+@param outputFile: Path to the output C file where the processed code will be saved.
+
+@raises FileNotFoundError: If the input file does not exist.
+@raises IOError: If there is an issue with file reading or writing.
+\end{DoxyVerb}
+ 
+
+Definition at line 32 of file processor.\+py.
+
+
+\begin{DoxyCode}
+32 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1processor_a3f18e4947e2313a8b23367f06f4b02c2}{postProcess}(inputFile,outputFile):
+33     \textcolor{stringliteral}{"""}
+34 \textcolor{stringliteral}{    Processes the input C file, applies transformations, and generates the output C file.}
+35 \textcolor{stringliteral}{}
+36 \textcolor{stringliteral}{    @param inputFile: Path to the input C file to be processed.}
+37 \textcolor{stringliteral}{    @param outputFile: Path to the output C file where the processed code will be saved.}
+38 \textcolor{stringliteral}{}
+39 \textcolor{stringliteral}{    @raises FileNotFoundError: If the input file does not exist.}
+40 \textcolor{stringliteral}{    @raises IOError: If there is an issue with file reading or writing.}
+41 \textcolor{stringliteral}{    """}
+42 
+43     assgnNo = 1
+44     ast = parse\_file(inputFile, use\_cpp=\textcolor{keyword}{True})
+45     bodyNodes = []
+46     with open(\textcolor{stringliteral}{'systemArgs.json'}, \textcolor{stringliteral}{'r') as file:}
+47 \textcolor{stringliteral}{        json\_data = file.read()}
+48 \textcolor{stringliteral}{    operatorNameMap = json.loads(json\_data)}
+49 \textcolor{stringliteral}{}
+50 \textcolor{stringliteral}{}\textcolor{comment}{#handling unary ops}
+51     negationVisitor = NegationVisitor(bodyNodes)
+52     negationVisitor.visit(ast)
+53     assgnNo = negationVisitor.assgnNo
+54     ast.ext[0].body.block\_items = bodyNodes
+55     bodyNodes = []
+56 
+57     unaryOpNodeChanger = UnaryOpNodeChanger(negationVisitor.unaryVarToNameMap)
+58     unaryOpNodeChanger.visit(ast)
+59 
+60 \textcolor{comment}{#handling source regs}
+61     sourceRegHandler = SourceRegHandler(bodyNodes,assgnNo)
+62     sourceRegHandler.visit(ast)
+63     assgnNo = sourceRegHandler.assignNo
+64     ast.ext[0].body.block\_items = bodyNodes
+65     bodyNodes = []
+66 
+67 \textcolor{comment}{#handling nested reg binary op inside a reg call}
+68     binaryOpInRegHandler = BinaryOpInRegHandler(bodyNodes,assgnNo)
+69     binaryOpInRegHandler.visit(ast)
+70     assgnNo = binaryOpInRegHandler.assignNo
+71     ast.ext[0].body.block\_items = bodyNodes
+72     bodyNodes = []
+73 
+74 \textcolor{comment}{#handling nested reg binary op}
+75     \textcolor{keywordflow}{for} node \textcolor{keywordflow}{in} ast.ext[0].body.block\_items:
+76         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} isinstance(node,c\_ast.Assignment):
+77             bodyNodes.append(node)
+78         \textcolor{keywordflow}{else}:
+79             \hyperlink{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1}{changeBinaryOps}(node,bodyNodes,assgnNo)
+80             assgnNo += 2
+81     ast.ext[0].body.block\_items = bodyNodes
+82     \textcolor{comment}{# # print(ast)}
+83 
+84     bodyNodes = []
+85     \textcolor{keywordflow}{for} node \textcolor{keywordflow}{in} ast.ext[0].body.block\_items:
+86         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} isinstance(node,c\_ast.Assignment):
+87             bodyNodes.append(node)
+88         \textcolor{keywordflow}{else}:
+89             \hyperlink{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6}{handleAssignmentNodes}(node,bodyNodes,operatorNameMap,assgnNo)
+90             assgnNo += 2
+91     \textcolor{comment}{# print(bodyNodes)}
+92     ast.ext[0].body.block\_items = bodyNodes
+93     \textcolor{comment}{# print(ast)}
+94     \hyperlink{namespaceutils_a5ab527c9affdfd39949f2e88c4299989}{generate\_c\_file}(ast,outputFile)
+95 
+96 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1processor_a3f18e4947e2313a8b23367f06f4b02c2_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacePostProcessor_1_1processor_a8187411843a6284ffb964ef3fb9fcab3}\label{namespacePostProcessor_1_1processor_a8187411843a6284ffb964ef3fb9fcab3}} 
+\index{Post\+Processor\+::processor@{Post\+Processor\+::processor}!args@{args}}
+\index{args@{args}!Post\+Processor\+::processor@{Post\+Processor\+::processor}}
+\subsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily args = json.\+load(file)}
+
+
+
+Definition at line 105 of file processor.\+py.
+
+\mbox{\Hypertarget{namespacePostProcessor_1_1processor_a7e91ec681fdd5ff588de2f2d2c3dc3f6}\label{namespacePostProcessor_1_1processor_a7e91ec681fdd5ff588de2f2d2c3dc3f6}} 
+\index{Post\+Processor\+::processor@{Post\+Processor\+::processor}!global\+Type@{global\+Type}}
+\index{global\+Type@{global\+Type}!Post\+Processor\+::processor@{Post\+Processor\+::processor}}
+\subsubsection{\texorpdfstring{global\+Type}{globalType}}
+{\footnotesize\ttfamily global\+Type}
+
+
+
+Definition at line 108 of file processor.\+py.
+

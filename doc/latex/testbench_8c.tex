@@ -1,0 +1,543 @@
+\hypertarget{testbench_8c}{}\section{Compiler/testbench.c File Reference}
+\label{testbench_8c}\index{Compiler/testbench.\+c@{Compiler/testbench.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}sbox.\+c\char`\"{}}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+Include dependency graph for testbench.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{testbench_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{testbench_8c_a27522c634ec947f820f72864225f6d64}{T\+E\+S\+T\+\_\+\+C\+A\+S\+ES}~10
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{testbench_8c_a44776816671ec3eee74a2e025a93dff8}{G16\+\_\+inv} (int x, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39}{G16\+\_\+mul} (int x, int y, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_a567a2272ff023f802ae4fb4b3dc62304}{G16\+\_\+sq\+\_\+scl} (int x, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_a3016fc90bf240f1159b9fb46a9d45a35}{G256\+\_\+inv} (int x, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_a847ca1d7d352b2cc292d78cb31307531}{G256\+\_\+newbasis} (int x, int b\mbox{[}$\,$\mbox{]}, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\+\_\+mul} (int x, int y, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_adcd04c7bf152f233efea4680af6d3ffb}{G4\+\_\+scl\+\_\+N} (int x, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_a5f7e1f8a70c5fbfd37d9ca69e6bb8e24}{G4\+\_\+scl\+\_\+\+N2} (int x, int $\ast$out)
+\item 
+void \hyperlink{testbench_8c_ac96b62b4e0d7523321df7126926641ff}{G4\+\_\+sq} (int x, int $\ast$out)
+\item 
+int \hyperlink{testbench_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\item 
+void \hyperlink{testbench_8c_ab48a3fd7704c01a0568fd8bacfae8de3}{sbox} (int n, int $\ast$out)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{testbench_8c_a27522c634ec947f820f72864225f6d64}\label{testbench_8c_a27522c634ec947f820f72864225f6d64}} 
+\index{testbench.\+c@{testbench.\+c}!T\+E\+S\+T\+\_\+\+C\+A\+S\+ES@{T\+E\+S\+T\+\_\+\+C\+A\+S\+ES}}
+\index{T\+E\+S\+T\+\_\+\+C\+A\+S\+ES@{T\+E\+S\+T\+\_\+\+C\+A\+S\+ES}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{T\+E\+S\+T\+\_\+\+C\+A\+S\+ES}{TEST\_CASES}}
+{\footnotesize\ttfamily \#define T\+E\+S\+T\+\_\+\+C\+A\+S\+ES~10}
+
+
+
+Definition at line 6 of file testbench.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{testbench_8c_a44776816671ec3eee74a2e025a93dff8}\label{testbench_8c_a44776816671ec3eee74a2e025a93dff8}} 
+\index{testbench.\+c@{testbench.\+c}!G16\+\_\+inv@{G16\+\_\+inv}}
+\index{G16\+\_\+inv@{G16\+\_\+inv}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G16\+\_\+inv()}{G16\_inv()}}
+{\footnotesize\ttfamily void G16\+\_\+inv (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+135 \{
+136     \textcolor{keywordtype}{int} a, b, c, d, e, p, q;
+137     \textcolor{keywordtype}{int} xAndC, axorb, g4\_sq\_axorb, cxord, pls2;
+138     xAndC = (x & 0xC);
+139     a = xAndC >> 2;
+140     b = (x & 0x3);
+141     axorb = a ^ b;
+142     \hyperlink{testbench_8c_ac96b62b4e0d7523321df7126926641ff}{G4\_sq}(axorb, &g4\_sq\_axorb);
+143     \hyperlink{testbench_8c_adcd04c7bf152f233efea4680af6d3ffb}{G4\_scl\_N}(g4\_sq\_axorb, &c);
+144     \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\_mul}(a, b, &d);
+145     cxord = c ^ d;
+146     \hyperlink{testbench_8c_ac96b62b4e0d7523321df7126926641ff}{G4\_sq}(cxord, &e); \textcolor{comment}{// really inverse, but same as square}
+147     \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\_mul}(e, b, &p);
+148     \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\_mul}(e, a, &q);
+149     pls2 = p << 2;
+150     *out = (pls2 | q);
+151 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{testbench_8c_a44776816671ec3eee74a2e025a93dff8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{testbench_8c_a44776816671ec3eee74a2e025a93dff8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39}\label{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39}} 
+\index{testbench.\+c@{testbench.\+c}!G16\+\_\+mul@{G16\+\_\+mul}}
+\index{G16\+\_\+mul@{G16\+\_\+mul}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G16\+\_\+mul()}{G16\_mul()}}
+{\footnotesize\ttfamily void G16\+\_\+mul (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 94 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+95 \{
+96     \textcolor{keywordtype}{int} a, b, c, d, e, p, q;
+97     \textcolor{keywordtype}{int} pls2, xAndC, yAndC, axorb, cxord, g4\_mul\_ac, g4\_mul\_bd;
+98     xAndC = (x & 0xC);
+99     yAndC = (y & 0xC);
+100     a = xAndC >> 2;
+101     b = (x & 0x3);
+102     c = yAndC >> 2;
+103     d = (y & 0x3);
+104     axorb = a ^ b;
+105     cxord = c ^ d;
+106     \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\_mul}(axorb, cxord, &e);
+107     \hyperlink{testbench_8c_adcd04c7bf152f233efea4680af6d3ffb}{G4\_scl\_N}(e, &e);
+108     \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\_mul}(a, c, &g4\_mul\_ac);
+109     \hyperlink{testbench_8c_a84495d93ade847d844239c27395b9825}{G4\_mul}(b, d, &g4\_mul\_bd);
+110     p = g4\_mul\_ac ^ e;
+111     q = g4\_mul\_bd ^ e;
+112     pls2 = (p << 2);
+113     *out = (pls2 | q);
+114 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_a567a2272ff023f802ae4fb4b3dc62304}\label{testbench_8c_a567a2272ff023f802ae4fb4b3dc62304}} 
+\index{testbench.\+c@{testbench.\+c}!G16\+\_\+sq\+\_\+scl@{G16\+\_\+sq\+\_\+scl}}
+\index{G16\+\_\+sq\+\_\+scl@{G16\+\_\+sq\+\_\+scl}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G16\+\_\+sq\+\_\+scl()}{G16\_sq\_scl()}}
+{\footnotesize\ttfamily void G16\+\_\+sq\+\_\+scl (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 118 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+119 \{
+120     \textcolor{keywordtype}{int} a, b, p, q;
+121     \textcolor{keywordtype}{int} pls2, xAndC, g4\_sq\_b, axorb;
+122     xAndC = (x & 0xC);
+123     a = xAndC >> 2;
+124     b = (x & 0x3);
+125     axorb = a ^ b;
+126     \hyperlink{testbench_8c_ac96b62b4e0d7523321df7126926641ff}{G4\_sq}(axorb, &p);
+127     \hyperlink{testbench_8c_ac96b62b4e0d7523321df7126926641ff}{G4\_sq}(b, &g4\_sq\_b);
+128     \hyperlink{testbench_8c_a5f7e1f8a70c5fbfd37d9ca69e6bb8e24}{G4\_scl\_N2}(g4\_sq\_b, &q);
+129     pls2 = p << 2;
+130     *out = (pls2 | q);
+131 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{testbench_8c_a567a2272ff023f802ae4fb4b3dc62304_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{testbench_8c_a567a2272ff023f802ae4fb4b3dc62304_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_a3016fc90bf240f1159b9fb46a9d45a35}\label{testbench_8c_a3016fc90bf240f1159b9fb46a9d45a35}} 
+\index{testbench.\+c@{testbench.\+c}!G256\+\_\+inv@{G256\+\_\+inv}}
+\index{G256\+\_\+inv@{G256\+\_\+inv}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G256\+\_\+inv()}{G256\_inv()}}
+{\footnotesize\ttfamily void G256\+\_\+inv (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 154 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+155 \{
+156     \textcolor{keywordtype}{int} a, b, c, d, e, p, q;
+157     \textcolor{keywordtype}{int} xAndF0, aOrb, cOrd, pls4;
+158     xAndF0 = (x & 0xF0);
+159     a = xAndF0 >> 4;
+160     b = (x & 0x0F);
+161     aOrb = a ^ b;
+162     \hyperlink{testbench_8c_a567a2272ff023f802ae4fb4b3dc62304}{G16\_sq\_scl}(aOrb, &c);
+163     \hyperlink{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39}{G16\_mul}(a, b, &d);
+164     cOrd = c ^ d;
+165     \hyperlink{testbench_8c_a44776816671ec3eee74a2e025a93dff8}{G16\_inv}(cOrd, &e);
+166     \hyperlink{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39}{G16\_mul}(e, b, &p);
+167     \hyperlink{testbench_8c_a9e729a5faf4676bc393c27b34f8e7f39}{G16\_mul}(e, a, &q);
+168     pls4 = p << 4;
+169     *out = (pls4 | q);
+170 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{testbench_8c_a3016fc90bf240f1159b9fb46a9d45a35_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_a847ca1d7d352b2cc292d78cb31307531}\label{testbench_8c_a847ca1d7d352b2cc292d78cb31307531}} 
+\index{testbench.\+c@{testbench.\+c}!G256\+\_\+newbasis@{G256\+\_\+newbasis}}
+\index{G256\+\_\+newbasis@{G256\+\_\+newbasis}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G256\+\_\+newbasis()}{G256\_newbasis()}}
+{\footnotesize\ttfamily void G256\+\_\+newbasis (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{b\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 174 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+175 \{
+176     \textcolor{keywordtype}{int} y, cond, yxorb, negCond, tempy, tempyIntoNegCond;
+177     \textcolor{keywordtype}{int} y1, y2, y3, y4, y5, y6, y7, y8;
+178     \textcolor{keywordtype}{int} cond1, cond2, cond3, cond4, cond5, cond6, cond7, cond8;
+179     \textcolor{keywordtype}{int} yxorb1, yxorb2, yxorb3, yxorb4, yxorb5, yxorb6, yxorb7, yxorb8;
+180     \textcolor{keywordtype}{int} negCond1, negCond2, negCond3, negCond4, negCond5, negCond6, negCond7, negCond8;
+181     \textcolor{keywordtype}{int} tempy1, tempy2, tempy3, tempy4, tempy5, tempy6, tempy7, tempy8;
+182     \textcolor{keywordtype}{int} ny1, ny2, ny3, ny4, ny5, ny6, ny7, ny8;
+183     \textcolor{keywordtype}{int} tempyIntoNegCond1, tempyIntoNegCond2, tempyIntoNegCond3, tempyIntoNegCond4, tempyIntoNegCond5, 
+      tempyIntoNegCond6;
+184     \textcolor{keywordtype}{int} tempyIntoNegCond7, tempyIntoNegCond8;
+185 
+186     y = 0;
+187 
+188     tempy1 = y;
+189     cond1 = x & 1;
+190     negCond1 = !cond1;
+191     yxorb1 = y ^ b[7];
+192     ny1 = cond * yxorb1;
+193     tempyIntoNegCond = tempy1 * negCond;
+194     y1 = ny1 + tempyIntoNegCond;
+195     x = x >> 1;
+196 
+197     tempy2 = y1;
+198     cond2 = x & 1;
+199     negCond2 = !cond2;
+200     yxorb2 = y1 ^ b[6];
+201     ny2 = cond2 * yxorb2;
+202     tempyIntoNegCond2 = tempy2 * negCond2;
+203     y2 = ny2 + tempyIntoNegCond2;
+204     x = x >> 1;
+205 
+206     tempy3 = y2;
+207     cond3 = x & 1;
+208     negCond3 = !cond3;
+209     yxorb3 = y2 ^ b[5];
+210     ny3 = cond3 * yxorb3;
+211     tempyIntoNegCond3 = tempy3 * negCond3;
+212     y3 = ny3 + tempyIntoNegCond3;
+213     x = x >> 1;
+214 
+215     tempy4 = y3;
+216     cond4 = x & 1;
+217     negCond4 = !cond4;
+218     yxorb4 = y3 ^ b[4];
+219     ny4 = cond4 * yxorb4;
+220     tempyIntoNegCond4 = tempy4 * negCond4;
+221     y4 = ny4 + tempyIntoNegCond4;
+222     x = x >> 1;
+223 
+224     tempy5 = y4;
+225     cond5 = x & 1;
+226     negCond5 = !cond5;
+227     yxorb5 = y4 ^ b[3];
+228     ny5 = cond * yxorb;
+229     tempyIntoNegCond5 = tempy5 * negCond5;
+230     y5 = ny5 + tempyIntoNegCond5;
+231     x = x >> 1;
+232 
+233     tempy6 = y5;
+234     cond6 = x & 1;
+235     negCond6 = !cond6;
+236     yxorb6 = y5 ^ b[2];
+237     ny6 = cond6 * yxorb6;
+238     tempyIntoNegCond6 = tempy6 * negCond6;
+239     y6 = ny6 + tempyIntoNegCond6;
+240     x = x >> 1;
+241 
+242     tempy7 = y6;
+243     cond7 = x & 1;
+244     negCond7 = !cond7;
+245     yxorb7 = y6 ^ b[1];
+246     ny7 = cond7 * yxorb7;
+247     tempyIntoNegCond7 = tempy7 * negCond7;
+248     y7 = ny7 + tempyIntoNegCond7;
+249     x = x >> 1;
+250 
+251     tempy8 = y7;
+252     cond8 = x & 1;
+253     negCond8 = !cond8;
+254     yxorb8 = y7 ^ b[0];
+255     ny8 = cond8 * yxorb8;
+256     tempyIntoNegCond8 = tempy8 * negCond8;
+257     y8 = ny8 + tempyIntoNegCond8;
+258     x = x >> 1;
+259 
+260     \textcolor{comment}{// for (i = 7; i >= 0; i--)}
+261     \textcolor{comment}{// \{}
+262     \textcolor{comment}{//  tempy = y;}
+263     \textcolor{comment}{//  cond = x & 1;}
+264     \textcolor{comment}{//  negCond = !cond;}
+265     \textcolor{comment}{//  yxorb = y ^ b[i];}
+266     \textcolor{comment}{//  y = cond * yxorb;}
+267     \textcolor{comment}{//  tempyIntoNegCond = tempy * negCond;}
+268     \textcolor{comment}{//  y = y + tempyIntoNegCond;}
+269     \textcolor{comment}{//  x = x >> 1;}
+270     \textcolor{comment}{// \}}
+271     *out = (y8);
+272 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{testbench_8c_a847ca1d7d352b2cc292d78cb31307531_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_a84495d93ade847d844239c27395b9825}\label{testbench_8c_a84495d93ade847d844239c27395b9825}} 
+\index{testbench.\+c@{testbench.\+c}!G4\+\_\+mul@{G4\+\_\+mul}}
+\index{G4\+\_\+mul@{G4\+\_\+mul}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G4\+\_\+mul()}{G4\_mul()}}
+{\footnotesize\ttfamily void G4\+\_\+mul (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+32 \{
+33     \textcolor{keywordtype}{int} a, b, c, d, e, p, q;
+34     \textcolor{keywordtype}{int} xand2, yand2, axorb, cxord, aAndc, bAndd, pls1;
+35     xand2 = (x & 0x2);
+36     yand2 = (y & 0x2);
+37     a = xand2 >> 1;
+38     b = (x & 0x1);
+39     c = yand2 >> 1;
+40     d = (y & 0x1);
+41     axorb = a ^ b;
+42     cxord = c ^ d;
+43     e = axorb & cxord;
+44     aAndc = a & c;
+45     bAndd = b & d;
+46     p = aAndc ^ e;
+47     q = bAndd ^ e;
+48     pls1 = p << 1;
+49     *out = (pls1 | q);
+50 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{testbench_8c_a84495d93ade847d844239c27395b9825_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_adcd04c7bf152f233efea4680af6d3ffb}\label{testbench_8c_adcd04c7bf152f233efea4680af6d3ffb}} 
+\index{testbench.\+c@{testbench.\+c}!G4\+\_\+scl\+\_\+N@{G4\+\_\+scl\+\_\+N}}
+\index{G4\+\_\+scl\+\_\+N@{G4\+\_\+scl\+\_\+N}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G4\+\_\+scl\+\_\+\+N()}{G4\_scl\_N()}}
+{\footnotesize\ttfamily void G4\+\_\+scl\+\_\+N (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 53 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+54 \{
+55     \textcolor{keywordtype}{int} a, b, p, q;
+56     \textcolor{keywordtype}{int} xAnd2, pls1;
+57     xAnd2 = x & 0x2;
+58     a = xAnd2 >> 1;
+59     b = (x & 0x1);
+60     p = b;
+61     q = a ^ b;
+62     pls1 = p << 1;
+63     *out = (pls1 | q);
+64 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{testbench_8c_adcd04c7bf152f233efea4680af6d3ffb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_a5f7e1f8a70c5fbfd37d9ca69e6bb8e24}\label{testbench_8c_a5f7e1f8a70c5fbfd37d9ca69e6bb8e24}} 
+\index{testbench.\+c@{testbench.\+c}!G4\+\_\+scl\+\_\+\+N2@{G4\+\_\+scl\+\_\+\+N2}}
+\index{G4\+\_\+scl\+\_\+\+N2@{G4\+\_\+scl\+\_\+\+N2}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G4\+\_\+scl\+\_\+\+N2()}{G4\_scl\_N2()}}
+{\footnotesize\ttfamily void G4\+\_\+scl\+\_\+\+N2 (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 67 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+68 \{
+69     \textcolor{keywordtype}{int} a, b, p, q;
+70     \textcolor{keywordtype}{int} pls1, xAnd2;
+71     xAnd2 = x & 0x2;
+72     a = xAnd2 >> 1;
+73     b = (x & 0x1);
+74     p = a ^ b;
+75     q = a;
+76     pls1 = p << 1;
+77     *out = (pls1 | q);
+78 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{testbench_8c_a5f7e1f8a70c5fbfd37d9ca69e6bb8e24_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_ac96b62b4e0d7523321df7126926641ff}\label{testbench_8c_ac96b62b4e0d7523321df7126926641ff}} 
+\index{testbench.\+c@{testbench.\+c}!G4\+\_\+sq@{G4\+\_\+sq}}
+\index{G4\+\_\+sq@{G4\+\_\+sq}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{G4\+\_\+sq()}{G4\_sq()}}
+{\footnotesize\ttfamily void G4\+\_\+sq (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 82 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+83 \{
+84     \textcolor{keywordtype}{int} a, b;
+85     \textcolor{keywordtype}{int} bls1, xAnd2;
+86     xAnd2 = x & 0x2;
+87     a = xAnd2 >> 1;
+88     b = (x & 0x1);
+89     bls1 = b << 1;
+90     *out = (bls1 | a);
+91 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{testbench_8c_ac96b62b4e0d7523321df7126926641ff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{testbench_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{testbench_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{testbench.\+c@{testbench.\+c}!main@{main}}
+\index{main@{main}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 285 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+286 \{
+287 
+288     \textcolor{keywordtype}{int} test\_cases = 0;
+289     \textcolor{keywordflow}{while} (test\_cases < \hyperlink{testbench_8c_a27522c634ec947f820f72864225f6d64}{TEST\_CASES})
+290     \{
+291         srand(test\_cases);
+292 
+293         \textcolor{comment}{// Generate random inputs}
+294         \textcolor{keywordtype}{int} x0\_0 = rand() % 256;
+295         \textcolor{keywordtype}{int} x0\_1 = rand() % 256;
+296 
+297         printf(\textcolor{stringliteral}{"Input: %d "}, x0\_0 ^ x0\_1);
+298 
+299         printf(\textcolor{stringliteral}{"---"});
+300         \textcolor{keywordtype}{int} Y;
+301 
+302         Y = Sbox(x0\_0 ^ x0\_1);
+303 
+304         printf(\textcolor{stringliteral}{"Output: %3d"}, Y);
+305 
+306         test\_cases++;
+307         printf(\textcolor{stringliteral}{"\(\backslash\)n"});
+308     \}
+309     \textcolor{keywordflow}{return} 0;
+310 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{testbench_8c_ab48a3fd7704c01a0568fd8bacfae8de3}\label{testbench_8c_ab48a3fd7704c01a0568fd8bacfae8de3}} 
+\index{testbench.\+c@{testbench.\+c}!sbox@{sbox}}
+\index{sbox@{sbox}!testbench.\+c@{testbench.\+c}}
+\subsubsection{\texorpdfstring{sbox()}{sbox()}}
+{\footnotesize\ttfamily void sbox (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{int $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 275 of file testbench.\+c.
+
+
+\begin{DoxyCode}
+276 \{
+277     \textcolor{keywordtype}{int} t, ret;
+278 
+279     \hyperlink{testbench_8c_a847ca1d7d352b2cc292d78cb31307531}{G256\_newbasis}(n, A2X, &t);
+280     \hyperlink{testbench_8c_a3016fc90bf240f1159b9fb46a9d45a35}{G256\_inv}(t, &t);
+281     \hyperlink{testbench_8c_a847ca1d7d352b2cc292d78cb31307531}{G256\_newbasis}(t, X2S, &t);
+282     *out = (t ^ 0x63);
+283 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{testbench_8c_ab48a3fd7704c01a0568fd8bacfae8de3_cgraph}
+\end{center}
+\end{figure}

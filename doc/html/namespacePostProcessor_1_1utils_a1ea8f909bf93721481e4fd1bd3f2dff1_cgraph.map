@@ -1,0 +1,8 @@
+<map id="changeBinaryOps" name="changeBinaryOps">
+<area shape="rect" id="node2" href="$namespacePostProcessor_1_1utils.html#a86292ec94138d20acb13a3c9c136a468" title="isNestedRegCall" alt="" coords="187,5,309,32"/>
+<area shape="rect" id="node4" href="$namespacePostProcessor_1_1utils.html#a69c4094b747eccefbd43b8011b1c3626" title="getNewVarName" alt="" coords="187,56,309,83"/>
+<area shape="rect" id="node5" href="$namespacePostProcessor_1_1utils.html#ab12ae71cedd8ec3fcbfedd7a6dbe6599" title="changeBinaryOpUtil" alt="" coords="179,107,317,133"/>
+<area shape="rect" id="node3" href="$namespacePostProcessor_1_1utils.html#a89d6f2461251261de6b862c69fe3c44a" title="isRegCall" alt="" coords="446,5,525,32"/>
+<area shape="rect" id="node6" href="$namespaceastNodes.html#ae5e5c7f09a1586002b20db6d72f6d30b" title="astNodes.getDeclarationNode" alt="" coords="387,81,584,108"/>
+<area shape="rect" id="node7" href="$namespaceastNodes.html#a2403f5d006e54f20e614226280cb6cbc" title="astNodes.getSimpleAssignmentNode" alt="" coords="365,132,605,159"/>
+</map>

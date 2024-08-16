@@ -1,0 +1,143 @@
+\hypertarget{classVisitors_1_1ConstantMerger}{}\section{Constant\+Merger Class Reference}
+\label{classVisitors_1_1ConstantMerger}\index{Constant\+Merger@{Constant\+Merger}}
+
+
+Inheritance diagram for Constant\+Merger\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classVisitors_1_1ConstantMerger__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Constant\+Merger\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classVisitors_1_1ConstantMerger__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classVisitors_1_1ConstantMerger_af7415dba49be733196acc4fe0274fb1f}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, \hyperlink{classVisitors_1_1ConstantMerger_a09a8838a26160063ff7f70a6d8ca53f8}{const\+To\+Global\+Map}, \hyperlink{classVisitors_1_1ConstantMerger_a6aa7ad73b0ac6388e786fd93172a1421}{local\+To\+Global\+Map})
+\item 
+def \hyperlink{classVisitors_1_1ConstantMerger_adae6ad6f5b94c4acd95924bb3df9ebc8}{visit\+\_\+\+Assignment} (self, node)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVisitors_1_1ConstantMerger_a09a8838a26160063ff7f70a6d8ca53f8}{const\+To\+Global\+Map}
+\item 
+\hyperlink{classVisitors_1_1ConstantMerger_a6aa7ad73b0ac6388e786fd93172a1421}{local\+To\+Global\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@brief Merges constants into global variables and updates local variable mappings.
+
+This visitor consolidates constant values into global variables and updates local variable mappings accordingly.
+
+@param constToGlobalMap: Mapping of constant values to global variable names.
+@type constToGlobalMap: dict
+@param localToGlobalMap: Mapping of local variable names to global variable names.
+@type localToGlobalMap: dict
+\end{DoxyVerb}
+ 
+
+Definition at line 232 of file Visitors.\+py.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classVisitors_1_1ConstantMerger_af7415dba49be733196acc4fe0274fb1f}\label{classVisitors_1_1ConstantMerger_af7415dba49be733196acc4fe0274fb1f}} 
+\index{Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{const\+To\+Global\+Map,  }\item[{}]{local\+To\+Global\+Map }\end{DoxyParamCaption})}
+
+
+
+Definition at line 243 of file Visitors.\+py.
+
+
+\begin{DoxyCode}
+243     \textcolor{keyword}{def }\_\_init\_\_(self,constToGlobalMap,localToGlobalMap):
+244         self.constToGlobalMap = constToGlobalMap
+245         self.localToGlobalMap = localToGlobalMap
+246 
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classVisitors_1_1ConstantMerger_adae6ad6f5b94c4acd95924bb3df9ebc8}\label{classVisitors_1_1ConstantMerger_adae6ad6f5b94c4acd95924bb3df9ebc8}} 
+\index{Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}!visit\+\_\+\+Assignment@{visit\+\_\+\+Assignment}}
+\index{visit\+\_\+\+Assignment@{visit\+\_\+\+Assignment}!Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Assignment()}{visit\_Assignment()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Assignment (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Converts constant values in assignments to global variable names.
+
+@param node: The assignment node being processed.
+@type node: pycparser.c_ast.Assignment
+\end{DoxyVerb}
+ 
+
+Definition at line 261 of file Visitors.\+py.
+
+
+\begin{DoxyCode}
+261     \textcolor{keyword}{def }visit\_Assignment(self,node):
+262         \textcolor{stringliteral}{"""}
+263 \textcolor{stringliteral}{        @brief Converts constant values in assignments to global variable names.}
+264 \textcolor{stringliteral}{}
+265 \textcolor{stringliteral}{        @param node: The assignment node being processed.}
+266 \textcolor{stringliteral}{        @type node: pycparser.c\_ast.Assignment}
+267 \textcolor{stringliteral}{        """}
+268         \textcolor{keywordflow}{if} isinstance(node.rvalue,c\_ast.Constant):
+269             constValue = node.rvalue.value
+270             idConstValue = self.\_\_getNameForConstants(constValue)
+271             \textcolor{keywordflow}{if} constValue \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} self.constToGlobalMap:
+272                 self.constToGlobalMap[constValue] = idConstValue
+273             self.localToGlobalMap[node.lvalue.name] = idConstValue
+274         \textcolor{keywordflow}{if} isinstance(node.rvalue,c\_ast.BinaryOp):
+275             constName = node.rvalue.right.name
+276             node.rvalue.right.name = self.localToGlobalMap[constName]
+277 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{classVisitors_1_1ConstantMerger_adae6ad6f5b94c4acd95924bb3df9ebc8_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classVisitors_1_1ConstantMerger_a09a8838a26160063ff7f70a6d8ca53f8}\label{classVisitors_1_1ConstantMerger_a09a8838a26160063ff7f70a6d8ca53f8}} 
+\index{Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}!const\+To\+Global\+Map@{const\+To\+Global\+Map}}
+\index{const\+To\+Global\+Map@{const\+To\+Global\+Map}!Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}}
+\subsubsection{\texorpdfstring{const\+To\+Global\+Map}{constToGlobalMap}}
+{\footnotesize\ttfamily const\+To\+Global\+Map}
+
+
+
+Definition at line 244 of file Visitors.\+py.
+
+\mbox{\Hypertarget{classVisitors_1_1ConstantMerger_a6aa7ad73b0ac6388e786fd93172a1421}\label{classVisitors_1_1ConstantMerger_a6aa7ad73b0ac6388e786fd93172a1421}} 
+\index{Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}!local\+To\+Global\+Map@{local\+To\+Global\+Map}}
+\index{local\+To\+Global\+Map@{local\+To\+Global\+Map}!Visitors\+::\+Constant\+Merger@{Visitors\+::\+Constant\+Merger}}
+\subsubsection{\texorpdfstring{local\+To\+Global\+Map}{localToGlobalMap}}
+{\footnotesize\ttfamily local\+To\+Global\+Map}
+
+
+
+Definition at line 245 of file Visitors.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Inliner/\hyperlink{Visitors_8py}{Visitors.\+py}\end{DoxyCompactItemize}

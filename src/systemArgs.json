@@ -1,0 +1,9 @@
+{
+    "topModule": "sbox",
+    "inputFile": "test.c",
+    "generatedRtl": "./output.v",
+    "bitWidth": 1,
+    "inlinerOutput": "tempFiles/inlinerOut.c",
+    "retimedOutput": "tempFiles/retimedOut.c",
+    "postProcessorOutput": "tempFiles/postProcessedOut.c"
+}

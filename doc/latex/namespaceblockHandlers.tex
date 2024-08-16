@@ -1,0 +1,370 @@
+\hypertarget{namespaceblockHandlers}{}\section{block\+Handlers Namespace Reference}
+\label{namespaceblockHandlers}\index{block\+Handlers@{block\+Handlers}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceblockHandlers_ac54cbd08eb8b12eed0c801fa775911dd}{handle\+Assignment\+Block} (node, internal\+Variables)
+\item 
+def \hyperlink{namespaceblockHandlers_ad92852be9f2eee24eb76b2dd747e7584}{handle\+Decl\+Block} (node, internal\+Variables)
+\item 
+def \hyperlink{namespaceblockHandlers_ac034bd474478ead202ae756242b4348c}{handle\+Func\+Call\+Block} (node, functions, f\+Name, function\+Calls, internal\+Variables)
+\item 
+def \hyperlink{namespaceblockHandlers_a9a619208834c3d0aa0861354376f5208}{handle\+Return\+Block} (node, internal\+Variables, functions, f\+Name)
+\item 
+def \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\+\_\+expression} (node, internal\+Variables)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceblockHandlers_ac54cbd08eb8b12eed0c801fa775911dd}\label{namespaceblockHandlers_ac54cbd08eb8b12eed0c801fa775911dd}} 
+\index{block\+Handlers@{block\+Handlers}!handle\+Assignment\+Block@{handle\+Assignment\+Block}}
+\index{handle\+Assignment\+Block@{handle\+Assignment\+Block}!block\+Handlers@{block\+Handlers}}
+\subsubsection{\texorpdfstring{handle\+Assignment\+Block()}{handleAssignmentBlock()}}
+{\footnotesize\ttfamily def block\+Handlers.\+handle\+Assignment\+Block (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{internal\+Variables }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Handles assignment blocks in the AST and updates internal variables.
+
+This function processes assignment nodes to determine the type of the variable (either "reg" or "wire") and reconstructs its assigned value.
+
+@param node: The assignment node being processed.
+@type node: pycparser.c_ast.Assignment
+@param internalVariables: A dictionary to store and manage internal variables.
+@type internalVariables: dict
+@return: Boolean indicating if a register variable is present.
+@rtype: bool
+\end{DoxyVerb}
+ 
+
+Definition at line 70 of file block\+Handlers.\+py.
+
+
+\begin{DoxyCode}
+70 \textcolor{keyword}{def }\hyperlink{namespaceblockHandlers_ac54cbd08eb8b12eed0c801fa775911dd}{handleAssignmentBlock}(node,internalVariables):
+71     \textcolor{stringliteral}{"""}
+72 \textcolor{stringliteral}{    @brief Handles assignment blocks in the AST and updates internal variables.}
+73 \textcolor{stringliteral}{}
+74 \textcolor{stringliteral}{    This function processes assignment nodes to determine the type of the variable (either "reg" or "wire")
+       and reconstructs its assigned value.}
+75 \textcolor{stringliteral}{}
+76 \textcolor{stringliteral}{    @param node: The assignment node being processed.}
+77 \textcolor{stringliteral}{    @type node: pycparser.c\_ast.Assignment}
+78 \textcolor{stringliteral}{    @param internalVariables: A dictionary to store and manage internal variables.}
+79 \textcolor{stringliteral}{    @type internalVariables: dict}
+80 \textcolor{stringliteral}{    @return: Boolean indicating if a register variable is present.}
+81 \textcolor{stringliteral}{    @rtype: bool}
+82 \textcolor{stringliteral}{    """}
+83     regPresent = \textcolor{keyword}{False}
+84     lval = node.lvalue.name \textcolor{keywordflow}{if} isinstance(node.lvalue,c\_ast.ID) \textcolor{keywordflow}{else} node.lvalue.expr.name
+85     
+86     \textcolor{keywordflow}{if} isinstance(node.rvalue,c\_ast.FuncCall) \textcolor{keywordflow}{and} node.rvalue.name.name == \textcolor{stringliteral}{"reg"}:
+87         exp = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.rvalue.args.exprs[0],internalVariables)
+88         internalVariables[lval] = \{\}
+89         internalVariables[lval][\textcolor{stringliteral}{"type"}] = \textcolor{stringliteral}{"reg"}
+90         regPresent = \textcolor{keyword}{True}
+91     \textcolor{keywordflow}{else}:
+92         exp = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.rvalue,internalVariables)
+93         internalVariables[lval] = \{\}
+94         \textcolor{keywordflow}{if} isinstance(node.lvalue,c\_ast.UnaryOp):
+95             internalVariables[lval][\textcolor{stringliteral}{"type"}] = \textcolor{stringliteral}{"reg"}
+96             regPresent = \textcolor{keyword}{True}
+97         \textcolor{keywordflow}{else}:
+98             internalVariables[lval][\textcolor{stringliteral}{"type"}] = \textcolor{stringliteral}{"wire"}
+99         
+100     internalVariables[lval][\textcolor{stringliteral}{"value"}] = exp
+101     \textcolor{keywordflow}{return} regPresent
+102 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceblockHandlers_ac54cbd08eb8b12eed0c801fa775911dd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceblockHandlers_ac54cbd08eb8b12eed0c801fa775911dd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespaceblockHandlers_ad92852be9f2eee24eb76b2dd747e7584}\label{namespaceblockHandlers_ad92852be9f2eee24eb76b2dd747e7584}} 
+\index{block\+Handlers@{block\+Handlers}!handle\+Decl\+Block@{handle\+Decl\+Block}}
+\index{handle\+Decl\+Block@{handle\+Decl\+Block}!block\+Handlers@{block\+Handlers}}
+\subsubsection{\texorpdfstring{handle\+Decl\+Block()}{handleDeclBlock()}}
+{\footnotesize\ttfamily def block\+Handlers.\+handle\+Decl\+Block (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{internal\+Variables }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Handles declaration blocks in the AST and updates internal variables.
+
+This function processes declaration nodes to determine the type of the variable (either "reg" or "wire") and reconstructs its initial value.
+
+@param node: The declaration node being processed.
+@type node: pycparser.c_ast.Decl
+@param internalVariables: A dictionary to store and manage internal variables.
+@type internalVariables: dict
+@return: Boolean indicating if a register variable is present.
+@rtype: bool
+\end{DoxyVerb}
+ 
+
+Definition at line 41 of file block\+Handlers.\+py.
+
+
+\begin{DoxyCode}
+41 \textcolor{keyword}{def }\hyperlink{namespaceblockHandlers_ad92852be9f2eee24eb76b2dd747e7584}{handleDeclBlock}(node,internalVariables):
+42     \textcolor{stringliteral}{"""}
+43 \textcolor{stringliteral}{    @brief Handles declaration blocks in the AST and updates internal variables.}
+44 \textcolor{stringliteral}{}
+45 \textcolor{stringliteral}{    This function processes declaration nodes to determine the type of the variable (either "reg" or "wire"
+      ) and reconstructs its initial value.}
+46 \textcolor{stringliteral}{}
+47 \textcolor{stringliteral}{    @param node: The declaration node being processed.}
+48 \textcolor{stringliteral}{    @type node: pycparser.c\_ast.Decl}
+49 \textcolor{stringliteral}{    @param internalVariables: A dictionary to store and manage internal variables.}
+50 \textcolor{stringliteral}{    @type internalVariables: dict}
+51 \textcolor{stringliteral}{    @return: Boolean indicating if a register variable is present.}
+52 \textcolor{stringliteral}{    @rtype: bool}
+53 \textcolor{stringliteral}{    """}
+54     regPresent = \textcolor{keyword}{False}
+55     \textcolor{keywordflow}{if} node.name \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} internalVariables:
+56         internalVariables[node.name] = \{
+57             \textcolor{stringliteral}{"type"} : \textcolor{stringliteral}{""},
+58             \textcolor{stringliteral}{"value"} : \textcolor{stringliteral}{""}
+59         \}
+60     \textcolor{keywordflow}{if} isinstance(node.init,c\_ast.FuncCall) \textcolor{keywordflow}{and} node.init.name.name == \textcolor{stringliteral}{"reg"}:
+61         internalVariables[node.name][\textcolor{stringliteral}{"type"}] = \textcolor{stringliteral}{"reg"}
+62         regPresent = \textcolor{keyword}{True}
+63         exp = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.init.args.exprs[0],internalVariables)
+64     \textcolor{keywordflow}{else}:
+65         internalVariables[node.name][\textcolor{stringliteral}{"type"}] = \textcolor{stringliteral}{"wire"}
+66         exp = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.init,internalVariables)
+67     internalVariables[node.name][\textcolor{stringliteral}{"value"}] = exp
+68     \textcolor{keywordflow}{return} regPresent
+69 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{namespaceblockHandlers_ad92852be9f2eee24eb76b2dd747e7584_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{namespaceblockHandlers_ad92852be9f2eee24eb76b2dd747e7584_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespaceblockHandlers_ac034bd474478ead202ae756242b4348c}\label{namespaceblockHandlers_ac034bd474478ead202ae756242b4348c}} 
+\index{block\+Handlers@{block\+Handlers}!handle\+Func\+Call\+Block@{handle\+Func\+Call\+Block}}
+\index{handle\+Func\+Call\+Block@{handle\+Func\+Call\+Block}!block\+Handlers@{block\+Handlers}}
+\subsubsection{\texorpdfstring{handle\+Func\+Call\+Block()}{handleFuncCallBlock()}}
+{\footnotesize\ttfamily def block\+Handlers.\+handle\+Func\+Call\+Block (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{functions,  }\item[{}]{f\+Name,  }\item[{}]{function\+Calls,  }\item[{}]{internal\+Variables }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Handles function call blocks in the AST and updates the function calls list.
+
+This function processes function call nodes to record the function instance, parameter list, and update the function call information.
+
+@param node: The function call node being processed.
+@type node: pycparser.c_ast.FuncCall
+@param functions: A dictionary containing function information.
+@type functions: dict
+@param fName: The name of the function making the call.
+@type fName: str
+@param functionCalls: A dictionary to store function calls information.
+@type functionCalls: dict
+@param internalVariables: A dictionary to store and manage internal variables.
+@type internalVariables: dict
+\end{DoxyVerb}
+ 
+
+Definition at line 126 of file block\+Handlers.\+py.
+
+
+\begin{DoxyCode}
+126 \textcolor{keyword}{def }\hyperlink{namespaceblockHandlers_ac034bd474478ead202ae756242b4348c}{handleFuncCallBlock}(node,functions,fName,functionCalls,internalVariables):
+127     \textcolor{stringliteral}{"""}
+128 \textcolor{stringliteral}{    @brief Handles function call blocks in the AST and updates the function calls list.}
+129 \textcolor{stringliteral}{}
+130 \textcolor{stringliteral}{    This function processes function call nodes to record the function instance, parameter list, and update
+       the function call information.}
+131 \textcolor{stringliteral}{}
+132 \textcolor{stringliteral}{    @param node: The function call node being processed.}
+133 \textcolor{stringliteral}{    @type node: pycparser.c\_ast.FuncCall}
+134 \textcolor{stringliteral}{    @param functions: A dictionary containing function information.}
+135 \textcolor{stringliteral}{    @type functions: dict}
+136 \textcolor{stringliteral}{    @param fName: The name of the function making the call.}
+137 \textcolor{stringliteral}{    @type fName: str}
+138 \textcolor{stringliteral}{    @param functionCalls: A dictionary to store function calls information.}
+139 \textcolor{stringliteral}{    @type functionCalls: dict}
+140 \textcolor{stringliteral}{    @param internalVariables: A dictionary to store and manage internal variables.}
+141 \textcolor{stringliteral}{    @type internalVariables: dict}
+142 \textcolor{stringliteral}{    """}
+143     called = functions[fName][\textcolor{stringliteral}{"called"}];
+144     called = called + 1
+145     inst = node.name.name + str(called)
+146     functions[fName][\textcolor{stringliteral}{"called"}] = called
+147     paramList = []
+148     paramList.append(\textcolor{stringliteral}{"clk"})
+149     \textcolor{keywordflow}{for} expr \textcolor{keywordflow}{in} node.args.exprs:
+150         \textcolor{keywordflow}{if} isinstance(expr,c\_ast.UnaryOp):
+151             exp = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(expr.expr,internalVariables)
+152         \textcolor{keywordflow}{else}:
+153             exp = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(expr,internalVariables)
+154         paramList.append(exp)
+155     functionCalls[fName].append(\{
+156         \textcolor{stringliteral}{"instanceName"} : inst,
+157         \textcolor{stringliteral}{"paramList"} : paramList,
+158         \textcolor{stringliteral}{"callee"} : node.name.name
+159     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{namespaceblockHandlers_ac034bd474478ead202ae756242b4348c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{namespaceblockHandlers_ac034bd474478ead202ae756242b4348c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespaceblockHandlers_a9a619208834c3d0aa0861354376f5208}\label{namespaceblockHandlers_a9a619208834c3d0aa0861354376f5208}} 
+\index{block\+Handlers@{block\+Handlers}!handle\+Return\+Block@{handle\+Return\+Block}}
+\index{handle\+Return\+Block@{handle\+Return\+Block}!block\+Handlers@{block\+Handlers}}
+\subsubsection{\texorpdfstring{handle\+Return\+Block()}{handleReturnBlock()}}
+{\footnotesize\ttfamily def block\+Handlers.\+handle\+Return\+Block (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{internal\+Variables,  }\item[{}]{functions,  }\item[{}]{f\+Name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Handles return blocks in the AST and updates function outputs.
+
+This function processes return nodes to identify output variables and updates the function's output list or internal variables accordingly.
+
+@param node: The return node being processed.
+@type node: pycparser.c_ast.Return
+@param internalVariables: A dictionary to store and manage internal variables.
+@type internalVariables: dict
+@param functions: A dictionary containing function information.
+@type functions: dict
+@param fName: The name of the function being processed.
+@type fName: str
+\end{DoxyVerb}
+ 
+
+Definition at line 103 of file block\+Handlers.\+py.
+
+
+\begin{DoxyCode}
+103 \textcolor{keyword}{def }\hyperlink{namespaceblockHandlers_a9a619208834c3d0aa0861354376f5208}{handleReturnBlock}(node,internalVariables,functions,fName):
+104     \textcolor{stringliteral}{"""}
+105 \textcolor{stringliteral}{    @brief Handles return blocks in the AST and updates function outputs.}
+106 \textcolor{stringliteral}{}
+107 \textcolor{stringliteral}{    This function processes return nodes to identify output variables and updates the function's output
+       list or internal variables accordingly.}
+108 \textcolor{stringliteral}{}
+109 \textcolor{stringliteral}{    @param node: The return node being processed.}
+110 \textcolor{stringliteral}{    @type node: pycparser.c\_ast.Return}
+111 \textcolor{stringliteral}{    @param internalVariables: A dictionary to store and manage internal variables.}
+112 \textcolor{stringliteral}{    @type internalVariables: dict}
+113 \textcolor{stringliteral}{    @param functions: A dictionary containing function information.}
+114 \textcolor{stringliteral}{    @type functions: dict}
+115 \textcolor{stringliteral}{    @param fName: The name of the function being processed.}
+116 \textcolor{stringliteral}{    @type fName: str}
+117 \textcolor{stringliteral}{    """}
+118     \textcolor{keywordflow}{if} isinstance(node.expr,c\_ast.ID):
+119         \textcolor{keywordflow}{if} node.expr.name \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} functions[fName][\textcolor{stringliteral}{"outputs"}]:
+120             functions[fName][\textcolor{stringliteral}{"outputs"}].append(node.expr.name)
+121     \textcolor{keywordflow}{elif} isinstance(node.expr, c\_ast.BinaryOp):
+122         internalVariables[\textcolor{stringliteral}{"r\_val"}] = \{\}
+123         internalVariables[\textcolor{stringliteral}{"r\_val"}][\textcolor{stringliteral}{"type"}] = \textcolor{stringliteral}{"wire"}
+124         internalVariables[\textcolor{stringliteral}{"r\_val"}][\textcolor{stringliteral}{"value"}] = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.expr,
+      internalVariables)
+125 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{namespaceblockHandlers_a9a619208834c3d0aa0861354376f5208_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{namespaceblockHandlers_a9a619208834c3d0aa0861354376f5208_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}\label{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}} 
+\index{block\+Handlers@{block\+Handlers}!reconstruct\+\_\+expression@{reconstruct\+\_\+expression}}
+\index{reconstruct\+\_\+expression@{reconstruct\+\_\+expression}!block\+Handlers@{block\+Handlers}}
+\subsubsection{\texorpdfstring{reconstruct\+\_\+expression()}{reconstruct\_expression()}}
+{\footnotesize\ttfamily def block\+Handlers.\+reconstruct\+\_\+expression (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{internal\+Variables }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Recursively reconstructs expressions from AST nodes.
+
+This function converts AST nodes into a string representation of the expression they represent. It supports binary operations, unary operations, constants, identifiers, and function calls.
+
+@param node: The AST node representing an expression.
+@type node: pycparser.c_ast.Node
+@param internalVariables: A dictionary to store and manage internal variables.
+@type internalVariables: dict
+@return: A string representing the reconstructed expression.
+@rtype: str
+@raises ValueError: If the node type is unsupported.
+\end{DoxyVerb}
+ 
+
+Definition at line 4 of file block\+Handlers.\+py.
+
+
+\begin{DoxyCode}
+4 \textcolor{keyword}{def }\hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node,internalVariables):
+5     \textcolor{stringliteral}{"""}
+6 \textcolor{stringliteral}{    @brief Recursively reconstructs expressions from AST nodes.}
+7 \textcolor{stringliteral}{}
+8 \textcolor{stringliteral}{    This function converts AST nodes into a string representation of the expression they represent. It
+       supports binary operations, unary operations, constants, identifiers, and function calls.}
+9 \textcolor{stringliteral}{}
+10 \textcolor{stringliteral}{    @param node: The AST node representing an expression.}
+11 \textcolor{stringliteral}{    @type node: pycparser.c\_ast.Node}
+12 \textcolor{stringliteral}{    @param internalVariables: A dictionary to store and manage internal variables.}
+13 \textcolor{stringliteral}{    @type internalVariables: dict}
+14 \textcolor{stringliteral}{    @return: A string representing the reconstructed expression.}
+15 \textcolor{stringliteral}{    @rtype: str}
+16 \textcolor{stringliteral}{    @raises ValueError: If the node type is unsupported.}
+17 \textcolor{stringliteral}{    """}
+18     \textcolor{keywordflow}{if} isinstance(node, c\_ast.BinaryOp):
+19         leftExpr = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.left,internalVariables)
+20         rightExpr = \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.right,internalVariables)
+21         \textcolor{keywordflow}{return} f\textcolor{stringliteral}{"(\{leftExpr\} \{node.op\} \{rightExpr\})"}
+22     \textcolor{keywordflow}{elif} isinstance(node, c\_ast.ID):
+23         \textcolor{keywordflow}{return} node.name
+24     \textcolor{keywordflow}{elif} isinstance(node,c\_ast.Constant):
+25         \textcolor{keywordflow}{return} node.value
+26     \textcolor{keywordflow}{elif} isinstance(node,c\_ast.UnaryOp):
+27         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"!"} + \hyperlink{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f}{reconstruct\_expression}(node.expr,internalVariables)
+28     \textcolor{keywordflow}{elif} isinstance(node,c\_ast.FuncCall):
+29         \textcolor{keywordflow}{if} node.name.name == \textcolor{stringliteral}{"reg"}:
+30             varName = str(node.args.exprs[0].name) + \textcolor{stringliteral}{"\_reg"};
+31             \textcolor{keywordflow}{if} varName \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} internalVariables:
+32                 internalVariables[varName] = \{
+33                     \textcolor{stringliteral}{"type"} : \textcolor{stringliteral}{"reg"},
+34                     \textcolor{stringliteral}{"value"} : str(node.args.exprs[0].name)
+35                 \}
+36             \textcolor{keywordflow}{return} varName;
+37     \textcolor{keywordflow}{else}:
+38         \textcolor{keywordflow}{raise} ValueError(f\textcolor{stringliteral}{"Unsupported node type: \{type(node).\_\_name\_\_\}"})
+39 
+40 \textcolor{comment}{#block handlers for corresponding blocks/nodes}
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceblockHandlers_a5dcb5985c58176982a44686f616daa7f_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,258 @@
+\hypertarget{namespacePostProcessor_1_1astNodes}{}\section{Post\+Processor.\+ast\+Nodes Namespace Reference}
+\label{namespacePostProcessor_1_1astNodes}\index{Post\+Processor.\+ast\+Nodes@{Post\+Processor.\+ast\+Nodes}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450}{get\+Assignment\+Node} (operands, operator, var\+To\+Assign)
+\item 
+def \hyperlink{namespacePostProcessor_1_1astNodes_aebd6602b5bdafed24833f298500fd85c}{get\+Declaration\+Node} (id\+Name)
+\item 
+def \hyperlink{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be}{get\+Left\+Or\+Right\+Node\+Of\+Assignment} (operand)
+\item 
+def \hyperlink{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b}{get\+Reg\+Func\+Call\+Node} (name)
+\item 
+def \hyperlink{namespacePostProcessor_1_1astNodes_a1fc39a0ad420aefababe0a8ee2907f4e}{get\+Simple\+Assignment\+Node} (lvalue, rvalue)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450}\label{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450}} 
+\index{Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}!get\+Assignment\+Node@{get\+Assignment\+Node}}
+\index{get\+Assignment\+Node@{get\+Assignment\+Node}!Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Assignment\+Node()}{getAssignmentNode()}}
+{\footnotesize\ttfamily def Post\+Processor.\+ast\+Nodes.\+get\+Assignment\+Node (\begin{DoxyParamCaption}\item[{}]{operands,  }\item[{}]{operator,  }\item[{}]{var\+To\+Assign }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates an assignment node with a binary operation if there are multiple operands, or a single operand otherwise.
+
+@param operands: A list of operands for the assignment.
+@type operands: list of str
+@param operator: The operator to use if there are multiple operands.
+@type operator: str
+@param varToAssign: The variable name to which the result is assigned.
+@type varToAssign: str
+
+@return: A `c_ast.Assignment` node with the specified operands and operator.
+@rtype: c_ast.Assignment
+\end{DoxyVerb}
+ 
+
+Definition at line 53 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+53 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450}{getAssignmentNode}(operands,operator,varToAssign):
+54     \textcolor{stringliteral}{"""}
+55 \textcolor{stringliteral}{    Creates an assignment node with a binary operation if there are multiple operands, or a single operand
+       otherwise.}
+56 \textcolor{stringliteral}{}
+57 \textcolor{stringliteral}{    @param operands: A list of operands for the assignment.}
+58 \textcolor{stringliteral}{    @type operands: list of str}
+59 \textcolor{stringliteral}{    @param operator: The operator to use if there are multiple operands.}
+60 \textcolor{stringliteral}{    @type operator: str}
+61 \textcolor{stringliteral}{    @param varToAssign: The variable name to which the result is assigned.}
+62 \textcolor{stringliteral}{    @type varToAssign: str}
+63 \textcolor{stringliteral}{}
+64 \textcolor{stringliteral}{    @return: A `c\_ast.Assignment` node with the specified operands and operator.}
+65 \textcolor{stringliteral}{    @rtype: c\_ast.Assignment}
+66 \textcolor{stringliteral}{    """}
+67     left = \textcolor{keywordtype}{None}
+68     right = \textcolor{keywordtype}{None}
+69     rvalue = \textcolor{keywordtype}{None}
+70 
+71     left = \hyperlink{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be}{getLeftOrRightNodeOfAssignment}(operands[0])
+72     \textcolor{keywordflow}{if} len(operands) > 1:
+73         right = \hyperlink{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be}{getLeftOrRightNodeOfAssignment}(operands[1])
+74     
+75     \textcolor{keywordflow}{if} right \textcolor{keywordflow}{is} \textcolor{keywordflow}{not} \textcolor{keywordtype}{None}:
+76         rvalue = c\_ast.BinaryOp(op=operator,left=left,right=right)
+77     \textcolor{keywordflow}{else}:
+78         rvalue = left
+79     
+80     \textcolor{keywordflow}{return} c\_ast.Assignment(op=\textcolor{stringliteral}{"="},lvalue=c\_ast.ID(name=varToAssign),rvalue=rvalue)
+81 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1astNodes_aebd6602b5bdafed24833f298500fd85c}\label{namespacePostProcessor_1_1astNodes_aebd6602b5bdafed24833f298500fd85c}} 
+\index{Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}!get\+Declaration\+Node@{get\+Declaration\+Node}}
+\index{get\+Declaration\+Node@{get\+Declaration\+Node}!Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Declaration\+Node()}{getDeclarationNode()}}
+{\footnotesize\ttfamily def Post\+Processor.\+ast\+Nodes.\+get\+Declaration\+Node (\begin{DoxyParamCaption}\item[{}]{id\+Name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates a declaration node for a variable with the specified name and the global type.
+
+@param idName: The name of the variable to declare.
+@type idName: str
+
+@return: A `c_ast.Decl` node representing the variable declaration.
+@rtype: c_ast.Decl
+\end{DoxyVerb}
+ 
+
+Definition at line 82 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+82 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_aebd6602b5bdafed24833f298500fd85c}{getDeclarationNode}(idName):
+83     \textcolor{stringliteral}{"""}
+84 \textcolor{stringliteral}{    Creates a declaration node for a variable with the specified name and the global type.}
+85 \textcolor{stringliteral}{}
+86 \textcolor{stringliteral}{    @param idName: The name of the variable to declare.}
+87 \textcolor{stringliteral}{    @type idName: str}
+88 \textcolor{stringliteral}{}
+89 \textcolor{stringliteral}{    @return: A `c\_ast.Decl` node representing the variable declaration.}
+90 \textcolor{stringliteral}{    @rtype: c\_ast.Decl}
+91 \textcolor{stringliteral}{    """}
+92     
+93     \textcolor{comment}{# print(globalVariables.globalType)}
+94     typeDeclNode = c\_ast.TypeDecl(declname = idName,quals = [],align = \textcolor{keywordtype}{None},
+95                                                 type=c\_ast.IdentifierType(names=[globalVariables.globalType
+      ]))
+96     declNode = c\_ast.Decl(name=idName, quals=[], storage=[], funcspec=[],
+97                 type=typeDeclNode, init=\textcolor{keywordtype}{None},
+98                 bitsize=\textcolor{keywordtype}{None}, align=[])
+99     \textcolor{keywordflow}{return} declNode
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be}\label{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be}} 
+\index{Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}!get\+Left\+Or\+Right\+Node\+Of\+Assignment@{get\+Left\+Or\+Right\+Node\+Of\+Assignment}}
+\index{get\+Left\+Or\+Right\+Node\+Of\+Assignment@{get\+Left\+Or\+Right\+Node\+Of\+Assignment}!Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Left\+Or\+Right\+Node\+Of\+Assignment()}{getLeftOrRightNodeOfAssignment()}}
+{\footnotesize\ttfamily def Post\+Processor.\+ast\+Nodes.\+get\+Left\+Or\+Right\+Node\+Of\+Assignment (\begin{DoxyParamCaption}\item[{}]{operand }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generates the corresponding AST node for a given operand based on its type.
+
+@param operand: The operand for which to create the AST node.
+@type operand: str
+
+@return: A `c_ast.ID`, `c_ast.UnaryOp`, or `c_ast.FuncCall` node based on the operand's prefix.
+@rtype: c_ast.ID | c_ast.UnaryOp | c_ast.FuncCall
+\end{DoxyVerb}
+ 
+
+Definition at line 21 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+21 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be}{getLeftOrRightNodeOfAssignment}(operand):
+22     \textcolor{stringliteral}{"""}
+23 \textcolor{stringliteral}{    Generates the corresponding AST node for a given operand based on its type.}
+24 \textcolor{stringliteral}{}
+25 \textcolor{stringliteral}{    @param operand: The operand for which to create the AST node.}
+26 \textcolor{stringliteral}{    @type operand: str}
+27 \textcolor{stringliteral}{}
+28 \textcolor{stringliteral}{    @return: A `c\_ast.ID`, `c\_ast.UnaryOp`, or `c\_ast.FuncCall` node based on the operand's prefix.}
+29 \textcolor{stringliteral}{    @rtype: c\_ast.ID | c\_ast.UnaryOp | c\_ast.FuncCall}
+30 \textcolor{stringliteral}{    """}
+31     \textcolor{keywordflow}{if} operand.startswith(\textcolor{stringliteral}{"v\_reg"}):
+32         node = \hyperlink{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b}{getRegFuncCallNode}(operand[6:])
+33     \textcolor{keywordflow}{elif} operand.startswith(\textcolor{stringliteral}{"v\_neg"}):
+34             node = c\_ast.UnaryOp(op=\textcolor{stringliteral}{'!'},expr=c\_ast.ID(name=operand[6:]))
+35     \textcolor{keywordflow}{else}:
+36         node = c\_ast.ID(name=operand)
+37     \textcolor{keywordflow}{return} node
+38 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1astNodes_afb1489449acb633bf78b48165fe578be_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b}\label{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b}} 
+\index{Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}!get\+Reg\+Func\+Call\+Node@{get\+Reg\+Func\+Call\+Node}}
+\index{get\+Reg\+Func\+Call\+Node@{get\+Reg\+Func\+Call\+Node}!Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Reg\+Func\+Call\+Node()}{getRegFuncCallNode()}}
+{\footnotesize\ttfamily def Post\+Processor.\+ast\+Nodes.\+get\+Reg\+Func\+Call\+Node (\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates a function call node for the 'reg' function with a given argument.
+
+@param name: The argument name for the 'reg' function.
+@type name: str
+
+@return: A `c_ast.FuncCall` node representing a function call to 'reg' with the specified argument.
+@rtype: c_ast.FuncCall
+\end{DoxyVerb}
+ 
+
+Definition at line 8 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+8 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b}{getRegFuncCallNode}(name):
+9     \textcolor{stringliteral}{"""}
+10 \textcolor{stringliteral}{    Creates a function call node for the 'reg' function with a given argument.}
+11 \textcolor{stringliteral}{}
+12 \textcolor{stringliteral}{    @param name: The argument name for the 'reg' function.}
+13 \textcolor{stringliteral}{    @type name: str}
+14 \textcolor{stringliteral}{}
+15 \textcolor{stringliteral}{    @return: A `c\_ast.FuncCall` node representing a function call to 'reg' with the specified argument.}
+16 \textcolor{stringliteral}{    @rtype: c\_ast.FuncCall}
+17 \textcolor{stringliteral}{    """}
+18     node = c\_ast.FuncCall(name=c\_ast.ID(name=\textcolor{stringliteral}{'reg'}),args=c\_ast.ExprList(exprs=[c\_ast.ID(name=name)]))
+19     \textcolor{keywordflow}{return} node
+20 
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1astNodes_a1fc39a0ad420aefababe0a8ee2907f4e}\label{namespacePostProcessor_1_1astNodes_a1fc39a0ad420aefababe0a8ee2907f4e}} 
+\index{Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}!get\+Simple\+Assignment\+Node@{get\+Simple\+Assignment\+Node}}
+\index{get\+Simple\+Assignment\+Node@{get\+Simple\+Assignment\+Node}!Post\+Processor\+::ast\+Nodes@{Post\+Processor\+::ast\+Nodes}}
+\subsubsection{\texorpdfstring{get\+Simple\+Assignment\+Node()}{getSimpleAssignmentNode()}}
+{\footnotesize\ttfamily def Post\+Processor.\+ast\+Nodes.\+get\+Simple\+Assignment\+Node (\begin{DoxyParamCaption}\item[{}]{lvalue,  }\item[{}]{rvalue }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates a simple assignment node with the specified left-hand side and right-hand side.
+
+@param lvalue: The left-hand side of the assignment.
+@type lvalue: str
+@param rvalue: The right-hand side of the assignment.
+@type rvalue: c_ast.Node
+
+@return: A `c_ast.Assignment` node representing the assignment operation.
+@rtype: c_ast.Assignment
+\end{DoxyVerb}
+ 
+
+Definition at line 39 of file ast\+Nodes.\+py.
+
+
+\begin{DoxyCode}
+39 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1astNodes_a1fc39a0ad420aefababe0a8ee2907f4e}{getSimpleAssignmentNode}(lvalue,rvalue):
+40     \textcolor{stringliteral}{"""}
+41 \textcolor{stringliteral}{    Creates a simple assignment node with the specified left-hand side and right-hand side.}
+42 \textcolor{stringliteral}{}
+43 \textcolor{stringliteral}{    @param lvalue: The left-hand side of the assignment.}
+44 \textcolor{stringliteral}{    @type lvalue: str}
+45 \textcolor{stringliteral}{    @param rvalue: The right-hand side of the assignment.}
+46 \textcolor{stringliteral}{    @type rvalue: c\_ast.Node}
+47 \textcolor{stringliteral}{}
+48 \textcolor{stringliteral}{    @return: A `c\_ast.Assignment` node representing the assignment operation.}
+49 \textcolor{stringliteral}{    @rtype: c\_ast.Assignment}
+50 \textcolor{stringliteral}{    """}
+51     \textcolor{keywordflow}{return} c\_ast.Assignment(op=\textcolor{stringliteral}{'='},lvalue=c\_ast.ID(name=lvalue),rvalue=rvalue)
+52 
+\end{DoxyCode}

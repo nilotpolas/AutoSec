@@ -1,0 +1,243 @@
+\hypertarget{PostProcessor_2output_8c}{}\section{Post\+Processor/output.c File Reference}
+\label{PostProcessor_2output_8c}\index{Post\+Processor/output.\+c@{Post\+Processor/output.\+c}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{PostProcessor_2output_8c_a69d3cae18364fc6ce3e5a25677f51513}{sbox} (\+\_\+\+Bool x0\+\_\+0, \+\_\+\+Bool x1\+\_\+0, \+\_\+\+Bool x2\+\_\+0, \+\_\+\+Bool x3\+\_\+0, \+\_\+\+Bool x0\+\_\+1, \+\_\+\+Bool x1\+\_\+1, \+\_\+\+Bool x2\+\_\+1, \+\_\+\+Bool x3\+\_\+1, \+\_\+\+Bool r, \+\_\+\+Bool $\ast$Y0\+\_\+0, \+\_\+\+Bool $\ast$Y1\+\_\+0, \+\_\+\+Bool $\ast$Y2\+\_\+0, \+\_\+\+Bool $\ast$Y3\+\_\+0, \+\_\+\+Bool $\ast$Y0\+\_\+1, \+\_\+\+Bool $\ast$Y1\+\_\+1, \+\_\+\+Bool $\ast$Y2\+\_\+1, \+\_\+\+Bool $\ast$Y3\+\_\+1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{PostProcessor_2output_8c_a69d3cae18364fc6ce3e5a25677f51513}\label{PostProcessor_2output_8c_a69d3cae18364fc6ce3e5a25677f51513}} 
+\index{Post\+Processor/output.\+c@{Post\+Processor/output.\+c}!sbox@{sbox}}
+\index{sbox@{sbox}!Post\+Processor/output.\+c@{Post\+Processor/output.\+c}}
+\subsubsection{\texorpdfstring{sbox()}{sbox()}}
+{\footnotesize\ttfamily void sbox (\begin{DoxyParamCaption}\item[{\+\_\+\+Bool}]{x0\+\_\+0,  }\item[{\+\_\+\+Bool}]{x1\+\_\+0,  }\item[{\+\_\+\+Bool}]{x2\+\_\+0,  }\item[{\+\_\+\+Bool}]{x3\+\_\+0,  }\item[{\+\_\+\+Bool}]{x0\+\_\+1,  }\item[{\+\_\+\+Bool}]{x1\+\_\+1,  }\item[{\+\_\+\+Bool}]{x2\+\_\+1,  }\item[{\+\_\+\+Bool}]{x3\+\_\+1,  }\item[{\+\_\+\+Bool}]{r,  }\item[{\+\_\+\+Bool $\ast$}]{Y0\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y1\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y2\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y3\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y0\+\_\+1,  }\item[{\+\_\+\+Bool $\ast$}]{Y1\+\_\+1,  }\item[{\+\_\+\+Bool $\ast$}]{Y2\+\_\+1,  }\item[{\+\_\+\+Bool $\ast$}]{Y3\+\_\+1 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1 of file output.\+c.
+
+
+\begin{DoxyCode}
+2 \{
+3   \_Bool x0\_0\_inp;
+4   \_Bool x1\_0\_inp;
+5   \_Bool x2\_0\_inp;
+6   \_Bool x3\_0\_inp;
+7   \_Bool x0\_1\_inp;
+8   \_Bool x1\_1\_inp;
+9   \_Bool x2\_1\_inp;
+10   \_Bool x3\_1\_inp;
+11   \_Bool r\_inp;
+12   x0\_0\_inp = x0\_0;
+13   x1\_0\_inp = x1\_0;
+14   x2\_0\_inp = x2\_0;
+15   x3\_0\_inp = x3\_0;
+16   x0\_1\_inp = x0\_1;
+17   x1\_1\_inp = x1\_1;
+18   x2\_1\_inp = x2\_1;
+19   x3\_1\_inp = x3\_1;
+20   \_Bool z199\_assgn199;
+21   z199\_assgn199 = r;
+22   \_Bool z199\_assgn1990;
+23   z199\_assgn1990 = reg(z199\_assgn199);
+24   \_Bool z199\_assgn1991;
+25   z199\_assgn1991 = reg(z199\_assgn1990);
+26   r\_inp = reg(z199\_assgn1991);
+27   \_Bool L0\_0;
+28   \_Bool L1\_0;
+29   \_Bool L2\_0;
+30   \_Bool L3\_0;
+31   \_Bool L4\_0;
+32   \_Bool L5\_0;
+33   \_Bool L6\_0;
+34   \_Bool L7\_0;
+35   \_Bool L8\_0;
+36   \_Bool L9\_0;
+37   \_Bool L10\_0;
+38   \_Bool L11\_0;
+39   \_Bool Q0\_0;
+40   \_Bool Q1\_0;
+41   \_Bool Q2\_0;
+42   \_Bool Q3\_0;
+43   \_Bool Q4\_0;
+44   \_Bool Q5\_0;
+45   \_Bool Q6\_0;
+46   \_Bool Q7\_0;
+47   \_Bool T0\_0;
+48   \_Bool T1\_0;
+49   \_Bool T2\_0;
+50   \_Bool T3\_0;
+51   \_Bool L0\_1;
+52   \_Bool L1\_1;
+53   \_Bool L2\_1;
+54   \_Bool L3\_1;
+55   \_Bool L4\_1;
+56   \_Bool L5\_1;
+57   \_Bool L6\_1;
+58   \_Bool L7\_1;
+59   \_Bool L8\_1;
+60   \_Bool L9\_1;
+61   \_Bool L10\_1;
+62   \_Bool L11\_1;
+63   \_Bool Q0\_1;
+64   \_Bool Q1\_1;
+65   \_Bool Q2\_1;
+66   \_Bool Q3\_1;
+67   \_Bool Q4\_1;
+68   \_Bool Q5\_1;
+69   \_Bool Q6\_1;
+70   \_Bool Q7\_1;
+71   \_Bool T0\_1;
+72   \_Bool T1\_1;
+73   \_Bool T2\_1;
+74   \_Bool T3\_1;
+75   \_Bool Y0\_01;
+76   \_Bool Y1\_01;
+77   \_Bool Y0\_11;
+78   \_Bool Y1\_11;
+79   L0\_0 = x1\_0\_inp ^ x2\_0\_inp;
+80   L1\_0 = x0\_0\_inp ^ x1\_0\_inp;
+81   L8\_0 = x2\_0\_inp ^ x0\_0\_inp;
+82   L5\_0 = x0\_0\_inp ^ x3\_0\_inp;
+83   L0\_1 = x1\_1\_inp ^ x2\_1\_inp;
+84   L1\_1 = x0\_1\_inp ^ x1\_1\_inp;
+85   L8\_1 = x2\_1\_inp ^ x0\_1\_inp;
+86   L5\_1 = x0\_1\_inp ^ x3\_1\_inp;
+87   Q0\_0 = !L0\_0;
+88   Q1\_0 = !L1\_0;
+89   Q3\_0 = !x3\_0\_inp;
+90   Q4\_0 = !x2\_0\_inp;
+91   Q0\_1 = !L0\_1;
+92   Q1\_1 = !L1\_1;
+93   Q3\_1 = !x3\_1\_inp;
+94   Q4\_1 = !x2\_1\_inp;
+95   L2\_0 = Q1\_0 ^ x2\_0\_inp;
+96   L3\_0 = Q0\_0 ^ x3\_0\_inp;
+97   L2\_1 = Q1\_1 ^ x2\_1\_inp;
+98   L3\_1 = Q0\_1 ^ x3\_1\_inp;
+99   \_Bool p2\_mult0;
+100   \_Bool p3\_mult0;
+101   \_Bool p1\_mult0;
+102   \_Bool p4\_mult0;
+103   p2\_mult0 = Q0\_0 & Q1\_1;
+104   p3\_mult0 = Q0\_1 & Q1\_0;
+105   p1\_mult0 = Q0\_0 & Q1\_0;
+106   p4\_mult0 = Q0\_1 & Q1\_1;
+107   T0\_0 = reg(p2\_mult0) ^ reg(p1\_mult0);
+108   T0\_1 = reg(p3\_mult0) ^ reg(p4\_mult0);
+109   L10\_0 = !L2\_0;
+110   L10\_1 = !L2\_1;
+111   \_Bool p2\_mult1;
+112   \_Bool p3\_mult1;
+113   \_Bool p1\_mult1;
+114   \_Bool p4\_mult1;
+115   p2\_mult1 = x1\_0\_inp & Q4\_1;
+116   p3\_mult1 = x1\_1\_inp & Q4\_0;
+117   p1\_mult1 = x1\_0\_inp & Q4\_0;
+118   p4\_mult1 = x1\_1\_inp & Q4\_1;
+119   T2\_0 = reg(p2\_mult1) ^ reg(p1\_mult1);
+120   T2\_1 = reg(p3\_mult1) ^ reg(p4\_mult1);
+121   Q2\_0 = T0\_0 ^ reg(L2\_0);
+122   L4\_0 = T0\_0 ^ T2\_0;
+123   Q7\_0 = T0\_0 ^ reg(L5\_0);
+124   Q6\_0 = L4\_0 ^ reg(L3\_0);
+125   Q2\_1 = T0\_1 ^ reg(L2\_1);
+126   L4\_1 = T0\_1 ^ T2\_1;
+127   Q7\_1 = T0\_1 ^ reg(L5\_1);
+128   Q6\_1 = L4\_1 ^ reg(L3\_1);
+129   \_Bool p2\_mult2;
+130   \_Bool p3\_mult2;
+131   \_Bool p1\_mult2;
+132   \_Bool p4\_mult2;
+133   p2\_mult2 = Q2\_0 & reg(Q3\_1);
+134   p3\_mult2 = Q2\_1 & reg(Q3\_0);
+135   p1\_mult2 = Q2\_0 & reg(Q3\_0);
+136   p4\_mult2 = Q2\_1 & reg(Q3\_1);
+137   T1\_0 = reg(p2\_mult2) ^ reg(p1\_mult2);
+138   T1\_1 = reg(p3\_mult2) ^ reg(p4\_mult2);
+139   \_Bool p2\_mult3;
+140   \_Bool p3\_mult3;
+141   \_Bool p1\_mult3;
+142   \_Bool p4\_mult3;
+143   p2\_mult3 = Q6\_0 & Q7\_1;
+144   p3\_mult3 = Q6\_1 & Q7\_0;
+145   p1\_mult3 = Q6\_0 & Q7\_0;
+146   p4\_mult3 = Q6\_1 & Q7\_1;
+147   T3\_0 = reg(p2\_mult3) ^ reg(p1\_mult3);
+148   T3\_1 = reg(p3\_mult3) ^ reg(p4\_mult3);
+149   L7\_0 = reg(T0\_0) ^ T1\_0;
+150   \_Bool z141\_assgn141;
+151   \_Bool z311\_assgn311;
+152   z311\_assgn311 = L10\_0;
+153   \_Bool z311\_assgn3110;
+154   z311\_assgn3110 = reg(z311\_assgn311);
+155   z141\_assgn141 = reg(z311\_assgn3110);
+156   L11\_0 = T1\_0 ^ z141\_assgn141;
+157   L7\_1 = reg(T0\_1) ^ T1\_1;
+158   \_Bool z145\_assgn145;
+159   \_Bool z317\_assgn317;
+160   z317\_assgn317 = L10\_1;
+161   \_Bool z317\_assgn3170;
+162   z317\_assgn3170 = reg(z317\_assgn317);
+163   z145\_assgn145 = reg(z317\_assgn3170);
+164   L11\_1 = T1\_1 ^ z145\_assgn145;
+165   Y0\_01 = L7\_0 ^ reg(T2\_0);
+166   \_Bool z150\_assgn150;
+167   \_Bool z323\_assgn323;
+168   z323\_assgn323 = L8\_0;
+169   \_Bool z323\_assgn3230;
+170   z323\_assgn3230 = reg(z323\_assgn323);
+171   z150\_assgn150 = reg(z323\_assgn3230);
+172   Y1\_01 = z150\_assgn150 ^ T3\_0;
+173   Y0\_11 = L7\_1 ^ reg(T2\_1);
+174   \_Bool z154\_assgn154;
+175   \_Bool z329\_assgn329;
+176   z329\_assgn329 = L8\_1;
+177   \_Bool z329\_assgn3290;
+178   z329\_assgn3290 = reg(z329\_assgn329);
+179   z154\_assgn154 = reg(z329\_assgn3290);
+180   Y1\_11 = z154\_assgn154 ^ T3\_1;
+181   \_Bool z1\_assgn1;
+182   \_Bool z156\_assgn156;
+183   \_Bool z333\_assgn333;
+184   z333\_assgn333 = x3\_0\_inp;
+185   \_Bool z333\_assgn3330;
+186   z333\_assgn3330 = reg(z333\_assgn333);
+187   z156\_assgn156 = reg(z333\_assgn3330);
+188   z1\_assgn1 = z156\_assgn156 ^ Y0\_01;
+189   *Y0\_0 = reg(z1\_assgn1);
+190   *Y1\_0 = reg(L7\_0 ^ Y1\_01);
+191   \_Bool z3\_assgn3;
+192   z3\_assgn3 = L11\_0 ^ reg(T2\_0);
+193   *Y2\_0 = reg(z3\_assgn3);
+194   \_Bool z5\_assgn5;
+195   z5\_assgn5 = T2\_0 ^ reg(L5\_0);
+196   \_Bool z347\_assgn347;
+197   z347\_assgn347 = z5\_assgn5;
+198   \_Bool z347\_assgn3470;
+199   z347\_assgn3470 = reg(z347\_assgn347);
+200   *Y3\_0 = reg(z347\_assgn3470);
+201   \_Bool z7\_assgn7;
+202   \_Bool z170\_assgn170;
+203   \_Bool z349\_assgn349;
+204   z349\_assgn349 = x3\_1\_inp;
+205   \_Bool z349\_assgn3490;
+206   z349\_assgn3490 = reg(z349\_assgn349);
+207   z170\_assgn170 = reg(z349\_assgn3490);
+208   z7\_assgn7 = z170\_assgn170 ^ Y0\_11;
+209   *Y0\_1 = reg(z7\_assgn7);
+210   *Y1\_1 = reg(L7\_1 ^ Y1\_11);
+211   \_Bool z9\_assgn9;
+212   z9\_assgn9 = L11\_1 ^ reg(T2\_1);
+213   *Y2\_1 = reg(z9\_assgn9);
+214   \_Bool z11\_assgn11;
+215   z11\_assgn11 = T2\_1 ^ reg(L5\_1);
+216   \_Bool z363\_assgn363;
+217   z363\_assgn363 = z11\_assgn11;
+218   \_Bool z363\_assgn3630;
+219   z363\_assgn3630 = reg(z363\_assgn363);
+220   *Y3\_1 = reg(z363\_assgn3630);
+221 \}
+\end{DoxyCode}

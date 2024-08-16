@@ -1,0 +1,485 @@
+\hypertarget{namespacePostProcessor_1_1utils}{}\section{Post\+Processor.\+utils Namespace Reference}
+\label{namespacePostProcessor_1_1utils}\index{Post\+Processor.\+utils@{Post\+Processor.\+utils}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1}{change\+Binary\+Ops} (node, body\+Nodes, assgn\+No)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599}{change\+Binary\+Op\+Util} (node, var\+For\+Binary\+Op, body\+Nodes)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}{extract\+Operands} (node)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a998fb471074ff747973a0d974eb9fbd1}{generate\+\_\+c\+\_\+file} (ast, filename)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}{get\+New\+Var\+Name} (assgn\+No)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a9d9413cee00e1440bd03c215f3ebbaff}{get\+Variable\+Name\+From\+Operands} (operands, operator\+Name\+Map, operator=\char`\"{}\char`\"{})
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6}{handle\+Assignment\+Nodes} (node, body\+Nodes, operator\+Name\+Map, assgn\+No)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468}{is\+Nested\+Reg\+Call} (node)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{is\+Reg\+Call} (node)
+\item 
+def \hyperlink{namespacePostProcessor_1_1utils_a379c264b5800e073d327d90d53cb854f}{none\+Operand\+Starts\+Withv} (operands)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1}\label{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!change\+Binary\+Ops@{change\+Binary\+Ops}}
+\index{change\+Binary\+Ops@{change\+Binary\+Ops}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{change\+Binary\+Ops()}{changeBinaryOps()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+change\+Binary\+Ops (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{body\+Nodes,  }\item[{}]{assgn\+No }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Modifies binary operations in the AST.
+
+@param node: The node containing the binary operation to modify.
+@param bodyNodes: The list of body nodes to append the modified nodes to.
+@param assgnNo: The current assignment number used for generating new variable names.
+\end{DoxyVerb}
+ 
+
+Definition at line 114 of file utils.\+py.
+
+
+\begin{DoxyCode}
+114 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1}{changeBinaryOps}(node,bodyNodes,assgnNo):
+115     \textcolor{stringliteral}{"""}
+116 \textcolor{stringliteral}{    Modifies binary operations in the AST.}
+117 \textcolor{stringliteral}{}
+118 \textcolor{stringliteral}{    @param node: The node containing the binary operation to modify.}
+119 \textcolor{stringliteral}{    @param bodyNodes: The list of body nodes to append the modified nodes to.}
+120 \textcolor{stringliteral}{    @param assgnNo: The current assignment number used for generating new variable names.}
+121 \textcolor{stringliteral}{    """}
+122     currNode = node.rvalue
+123     \textcolor{keywordflow}{if} isinstance(currNode,c\_ast.BinaryOp):
+124         origLeft = currNode.left
+125         origRight = currNode.right
+126         
+127         \textcolor{keywordflow}{if} \hyperlink{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468}{isNestedRegCall}(currNode.right):
+128             varForBinaryOp = \hyperlink{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}{getNewVarName}(assgnNo)
+129             \hyperlink{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599}{changeBinaryOpUtil}(currNode.right,varForBinaryOp,bodyNodes)
+130             origRight = c\_ast.ID(varForBinaryOp)
+131         \textcolor{keywordflow}{if} \hyperlink{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468}{isNestedRegCall}(currNode.left):
+132             varForBinaryOp = \hyperlink{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}{getNewVarName}(assgnNo+1)
+133             \hyperlink{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599}{changeBinaryOpUtil}(currNode.left,varForBinaryOp,bodyNodes)
+134             origLeft = c\_ast.ID(varForBinaryOp)
+135         binaryOpNode = c\_ast.BinaryOp(op=currNode.op,left=origLeft,right=origRight)
+136         bodyNodes.append(c\_ast.Assignment(op=\textcolor{stringliteral}{'='},lvalue=node.lvalue,rvalue=binaryOpNode))
+137     \textcolor{keywordflow}{else}:
+138         bodyNodes.append(node)
+139 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a1ea8f909bf93721481e4fd1bd3f2dff1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599}\label{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!change\+Binary\+Op\+Util@{change\+Binary\+Op\+Util}}
+\index{change\+Binary\+Op\+Util@{change\+Binary\+Op\+Util}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{change\+Binary\+Op\+Util()}{changeBinaryOpUtil()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+change\+Binary\+Op\+Util (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{var\+For\+Binary\+Op,  }\item[{}]{body\+Nodes }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Utility function for changing binary operations.
+
+@param node: The node representing the binary operation.
+@param varForBinaryOp: The variable name for the binary operation.
+@param bodyNodes: The list of body nodes to append the new nodes to.
+\end{DoxyVerb}
+ 
+
+Definition at line 103 of file utils.\+py.
+
+
+\begin{DoxyCode}
+103 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599}{changeBinaryOpUtil}(node,varForBinaryOp,bodyNodes):
+104     \textcolor{stringliteral}{"""}
+105 \textcolor{stringliteral}{    Utility function for changing binary operations.}
+106 \textcolor{stringliteral}{}
+107 \textcolor{stringliteral}{    @param node: The node representing the binary operation.}
+108 \textcolor{stringliteral}{    @param varForBinaryOp: The variable name for the binary operation.}
+109 \textcolor{stringliteral}{    @param bodyNodes: The list of body nodes to append the new nodes to.}
+110 \textcolor{stringliteral}{    """}
+111     bodyNodes.append(\hyperlink{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}{getDeclarationNode}(varForBinaryOp))
+112     bodyNodes.append(\hyperlink{namespaceastNodes_a2403f5d006e54f20e614226280cb6cbc}{getSimpleAssignmentNode}(varForBinaryOp,node))
+113 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_ab12ae71cedd8ec3fcbfedd7a6dbe6599_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}\label{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!extract\+Operands@{extract\+Operands}}
+\index{extract\+Operands@{extract\+Operands}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{extract\+Operands()}{extractOperands()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+extract\+Operands (\begin{DoxyParamCaption}\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extracts operands from a node, handling different node types.
+
+@param node: The node from which to extract operands.
+
+@return: A list of operands or a string representing the operand.
+@raises ValueError: If the node type is unsupported.
+\end{DoxyVerb}
+ 
+
+Definition at line 43 of file utils.\+py.
+
+
+\begin{DoxyCode}
+43 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}{extractOperands}(node):
+44     \textcolor{stringliteral}{"""}
+45 \textcolor{stringliteral}{    Extracts operands from a node, handling different node types.}
+46 \textcolor{stringliteral}{}
+47 \textcolor{stringliteral}{    @param node: The node from which to extract operands.}
+48 \textcolor{stringliteral}{}
+49 \textcolor{stringliteral}{    @return: A list of operands or a string representing the operand.}
+50 \textcolor{stringliteral}{    @raises ValueError: If the node type is unsupported.}
+51 \textcolor{stringliteral}{    """}
+52     \textcolor{keywordflow}{if} (isinstance(node, c\_ast.BinaryOp)):
+53         leftOperand = \hyperlink{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}{extractOperands}(node.left) 
+54         rightOperand = \hyperlink{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}{extractOperands}(node.right)
+55         \textcolor{keywordflow}{return} [leftOperand,rightOperand]
+56     \textcolor{keywordflow}{elif} \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(node):
+57         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"v\_reg\_"} + node.args.exprs[0].name
+58     \textcolor{keywordflow}{elif} isinstance(node,c\_ast.ID):
+59         \textcolor{keywordflow}{return} node.name
+60     \textcolor{keywordflow}{elif} isinstance(node,c\_ast.UnaryOp):
+61         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"v\_neg\_"} + \hyperlink{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}{extractOperands}(node.expr)
+62     \textcolor{keywordflow}{else}:
+63         \textcolor{keywordflow}{raise} ValueError(f\textcolor{stringliteral}{"Unsupported node type: \{type(node).\_\_name\_\_\}"})
+64     
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a998fb471074ff747973a0d974eb9fbd1}\label{namespacePostProcessor_1_1utils_a998fb471074ff747973a0d974eb9fbd1}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!generate\+\_\+c\+\_\+file@{generate\+\_\+c\+\_\+file}}
+\index{generate\+\_\+c\+\_\+file@{generate\+\_\+c\+\_\+file}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{generate\+\_\+c\+\_\+file()}{generate\_c\_file()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+generate\+\_\+c\+\_\+file (\begin{DoxyParamCaption}\item[{}]{ast,  }\item[{}]{filename }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generates C code from the provided Abstract Syntax Tree (AST) and saves it to a file.
+
+@param ast: The Abstract Syntax Tree (AST) to generate C code from.
+@param filename: The path to the file where the generated C code will be saved.
+\end{DoxyVerb}
+ 
+
+Definition at line 140 of file utils.\+py.
+
+
+\begin{DoxyCode}
+140 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a998fb471074ff747973a0d974eb9fbd1}{generate\_c\_file}(ast,filename):
+141     \textcolor{stringliteral}{"""}
+142 \textcolor{stringliteral}{    Generates C code from the provided Abstract Syntax Tree (AST) and saves it to a file.}
+143 \textcolor{stringliteral}{}
+144 \textcolor{stringliteral}{    @param ast: The Abstract Syntax Tree (AST) to generate C code from.}
+145 \textcolor{stringliteral}{    @param filename: The path to the file where the generated C code will be saved.}
+146 \textcolor{stringliteral}{    """}
+147     generator = c\_generator.CGenerator()
+148     with open(filename, \textcolor{stringliteral}{'w'}) \textcolor{keyword}{as} output\_file:
+149         print(generator.visit(ast), file=output\_file)
+150 
+151 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}\label{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!get\+New\+Var\+Name@{get\+New\+Var\+Name}}
+\index{get\+New\+Var\+Name@{get\+New\+Var\+Name}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{get\+New\+Var\+Name()}{getNewVarName()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+get\+New\+Var\+Name (\begin{DoxyParamCaption}\item[{}]{assgn\+No }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generates a new variable name for assignments.
+
+@param assgnNo: The assignment number to include in the variable name.
+
+@return: A string representing the new variable name.
+\end{DoxyVerb}
+ 
+
+Definition at line 93 of file utils.\+py.
+
+
+\begin{DoxyCode}
+93 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}{getNewVarName}(assgnNo):
+94     \textcolor{stringliteral}{"""}
+95 \textcolor{stringliteral}{    Generates a new variable name for assignments.}
+96 \textcolor{stringliteral}{}
+97 \textcolor{stringliteral}{    @param assgnNo: The assignment number to include in the variable name.}
+98 \textcolor{stringliteral}{}
+99 \textcolor{stringliteral}{    @return: A string representing the new variable name.}
+100 \textcolor{stringliteral}{    """}
+101     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"z"} + str(assgnNo) + \textcolor{stringliteral}{"\_assgn"} + str(assgnNo)
+102 
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a9d9413cee00e1440bd03c215f3ebbaff}\label{namespacePostProcessor_1_1utils_a9d9413cee00e1440bd03c215f3ebbaff}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!get\+Variable\+Name\+From\+Operands@{get\+Variable\+Name\+From\+Operands}}
+\index{get\+Variable\+Name\+From\+Operands@{get\+Variable\+Name\+From\+Operands}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{get\+Variable\+Name\+From\+Operands()}{getVariableNameFromOperands()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+get\+Variable\+Name\+From\+Operands (\begin{DoxyParamCaption}\item[{}]{operands,  }\item[{}]{operator\+Name\+Map,  }\item[{}]{operator = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructs a variable name based on operands and operator.
+
+@param operands: The list of operands.
+@param operatorNameMap: A dictionary mapping operators to their names.
+@param operator: The operator to include in the variable name.
+
+@return: A string representing the variable name.
+\end{DoxyVerb}
+ 
+
+Definition at line 65 of file utils.\+py.
+
+
+\begin{DoxyCode}
+65 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a9d9413cee00e1440bd03c215f3ebbaff}{getVariableNameFromOperands}(operands,operatorNameMap,operator = ""):
+66     \textcolor{stringliteral}{"""}
+67 \textcolor{stringliteral}{    Constructs a variable name based on operands and operator.}
+68 \textcolor{stringliteral}{}
+69 \textcolor{stringliteral}{    @param operands: The list of operands.}
+70 \textcolor{stringliteral}{    @param operatorNameMap: A dictionary mapping operators to their names.}
+71 \textcolor{stringliteral}{    @param operator: The operator to include in the variable name.}
+72 \textcolor{stringliteral}{}
+73 \textcolor{stringliteral}{    @return: A string representing the variable name.}
+74 \textcolor{stringliteral}{    """}
+75     variableName = operands[0]
+76     if(len(operands) > 1):
+77         variableName += (\textcolor{stringliteral}{"\_"} + operatorNameMap[operator] + \textcolor{stringliteral}{"\_"} + operands[1])
+78     \textcolor{keywordflow}{return} variableName
+79 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6}\label{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!handle\+Assignment\+Nodes@{handle\+Assignment\+Nodes}}
+\index{handle\+Assignment\+Nodes@{handle\+Assignment\+Nodes}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{handle\+Assignment\+Nodes()}{handleAssignmentNodes()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+handle\+Assignment\+Nodes (\begin{DoxyParamCaption}\item[{}]{node,  }\item[{}]{body\+Nodes,  }\item[{}]{operator\+Name\+Map,  }\item[{}]{assgn\+No }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processes and handles assignment nodes in the AST.
+
+@param node: The assignment node to process.
+@param bodyNodes: The list of body nodes to append the processed nodes to.
+@param operatorNameMap: A dictionary mapping operators to their names.
+@param assgnNo: The current assignment number used for generating new variable names.
+\end{DoxyVerb}
+ 
+
+Definition at line 152 of file utils.\+py.
+
+
+\begin{DoxyCode}
+152 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6}{handleAssignmentNodes}(node,bodyNodes,operatorNameMap,assgnNo):
+153     \textcolor{stringliteral}{"""}
+154 \textcolor{stringliteral}{    Processes and handles assignment nodes in the AST.}
+155 \textcolor{stringliteral}{}
+156 \textcolor{stringliteral}{    @param node: The assignment node to process.}
+157 \textcolor{stringliteral}{    @param bodyNodes: The list of body nodes to append the processed nodes to.}
+158 \textcolor{stringliteral}{    @param operatorNameMap: A dictionary mapping operators to their names.}
+159 \textcolor{stringliteral}{    @param assgnNo: The current assignment number used for generating new variable names.}
+160 \textcolor{stringliteral}{    """}
+161     count = 1;
+162     currNode = node.rvalue
+163     \textcolor{keywordflow}{if} \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(currNode):
+164         \textcolor{keywordflow}{while} \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(currNode.args.exprs[0]):
+165             count += 1
+166             currNode = currNode.args.exprs[0]
+167         currNode = currNode.args.exprs[0]
+168         operands = \hyperlink{namespacePostProcessor_1_1utils_a756305ef1f9ed9b8a0f01428433e026e}{extractOperands}(currNode)
+169         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} isinstance(operands,list):
+170             operands = [operands]
+171 
+172         \textcolor{keywordflow}{if} count == 1 \textcolor{keywordflow}{and} \hyperlink{namespacePostProcessor_1_1utils_a379c264b5800e073d327d90d53cb854f}{noneOperandStartsWithv}(operands):
+173              bodyNodes.append(node)
+174              \textcolor{keywordflow}{return}
+175 
+176         op = currNode.op \textcolor{keywordflow}{if} isinstance(currNode, c\_ast.BinaryOp) \textcolor{keywordflow}{else} \textcolor{stringliteral}{""}
+177         variableName = \hyperlink{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}{getNewVarName}(assgnNo)
+178         assignmentNode = \hyperlink{namespacePostProcessor_1_1astNodes_aa6c634c9a1dceb3e9cc65cadadf5f450}{getAssignmentNode}(operands,op,variableName)
+179         \textcolor{comment}{# if len(operands) > 1:}
+180         bodyNodes.append(\hyperlink{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}{getDeclarationNode}(variableName))
+181         bodyNodes.append(assignmentNode)
+182         prevVarName = variableName
+183 
+184         \textcolor{keywordflow}{for} index \textcolor{keywordflow}{in} range(count):
+185             newVarName = variableName + str(index)
+186             \textcolor{keywordflow}{if} index != count - 1:
+187                 bodyNodes.append(\hyperlink{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}{getDeclarationNode}(newVarName))
+188             regCallNode = \hyperlink{namespacePostProcessor_1_1astNodes_a30de65f8e1753733f88a01d42927ef1b}{getRegFuncCallNode}(prevVarName)
+189             lvalue = c\_ast.ID(newVarName) \textcolor{keywordflow}{if} index != count -1 \textcolor{keywordflow}{else} node.lvalue
+190             bodyNodes.append(c\_ast.Assignment(op=\textcolor{stringliteral}{'='},lvalue=lvalue,rvalue=regCallNode))
+191             prevVarName = newVarName
+192         
+193     \textcolor{keywordflow}{else}:
+194         bodyNodes.append(node)
+195     
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a8b77a1f205d7dac14e6bdcccdb61e5f6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468}\label{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!is\+Nested\+Reg\+Call@{is\+Nested\+Reg\+Call}}
+\index{is\+Nested\+Reg\+Call@{is\+Nested\+Reg\+Call}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{is\+Nested\+Reg\+Call()}{isNestedRegCall()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+is\+Nested\+Reg\+Call (\begin{DoxyParamCaption}\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if a node is a nested register function call.
+
+@param node: The node to check.
+
+@return: True if the node is a nested `reg` function call, False otherwise.
+\end{DoxyVerb}
+ 
+
+Definition at line 33 of file utils.\+py.
+
+
+\begin{DoxyCode}
+33 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468}{isNestedRegCall}(node):
+34     \textcolor{stringliteral}{"""}
+35 \textcolor{stringliteral}{    Checks if a node is a nested register function call.}
+36 \textcolor{stringliteral}{}
+37 \textcolor{stringliteral}{    @param node: The node to check.}
+38 \textcolor{stringliteral}{}
+39 \textcolor{stringliteral}{    @return: True if the node is a nested `reg` function call, False otherwise.}
+40 \textcolor{stringliteral}{    """}
+41     \textcolor{keywordflow}{return} \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(node) \textcolor{keywordflow}{and} \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(node.args.exprs[0])
+42 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a86292ec94138d20acb13a3c9c136a468_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}\label{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!is\+Reg\+Call@{is\+Reg\+Call}}
+\index{is\+Reg\+Call@{is\+Reg\+Call}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{is\+Reg\+Call()}{isRegCall()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+is\+Reg\+Call (\begin{DoxyParamCaption}\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if a node represents a call to the "reg" function.
+
+@param node: The node to check.
+
+@return: True if the node is a `reg` function call, False otherwise.
+\end{DoxyVerb}
+ 
+
+Definition at line 23 of file utils.\+py.
+
+
+\begin{DoxyCode}
+23 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(node):
+24     \textcolor{stringliteral}{"""}
+25 \textcolor{stringliteral}{    Checks if a node represents a call to the "reg" function.}
+26 \textcolor{stringliteral}{}
+27 \textcolor{stringliteral}{    @param node: The node to check.}
+28 \textcolor{stringliteral}{}
+29 \textcolor{stringliteral}{    @return: True if the node is a `reg` function call, False otherwise.}
+30 \textcolor{stringliteral}{    """}
+31     \textcolor{keywordflow}{return} isinstance(node,c\_ast.FuncCall) \textcolor{keywordflow}{and} node.name.name == \textcolor{stringliteral}{'reg'}
+32 
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacePostProcessor_1_1utils_a379c264b5800e073d327d90d53cb854f}\label{namespacePostProcessor_1_1utils_a379c264b5800e073d327d90d53cb854f}} 
+\index{Post\+Processor\+::utils@{Post\+Processor\+::utils}!none\+Operand\+Starts\+Withv@{none\+Operand\+Starts\+Withv}}
+\index{none\+Operand\+Starts\+Withv@{none\+Operand\+Starts\+Withv}!Post\+Processor\+::utils@{Post\+Processor\+::utils}}
+\subsubsection{\texorpdfstring{none\+Operand\+Starts\+Withv()}{noneOperandStartsWithv()}}
+{\footnotesize\ttfamily def Post\+Processor.\+utils.\+none\+Operand\+Starts\+Withv (\begin{DoxyParamCaption}\item[{}]{operands }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if none of the operands start with 'v'.
+
+@param operands: The list of operands.
+
+@return: True if none of the operands start with 'v', False otherwise.
+\end{DoxyVerb}
+ 
+
+Definition at line 80 of file utils.\+py.
+
+
+\begin{DoxyCode}
+80 \textcolor{keyword}{def }\hyperlink{namespacePostProcessor_1_1utils_a379c264b5800e073d327d90d53cb854f}{noneOperandStartsWithv}(operands):
+81     \textcolor{stringliteral}{"""}
+82 \textcolor{stringliteral}{    Checks if none of the operands start with 'v'.}
+83 \textcolor{stringliteral}{}
+84 \textcolor{stringliteral}{    @param operands: The list of operands.}
+85 \textcolor{stringliteral}{}
+86 \textcolor{stringliteral}{    @return: True if none of the operands start with 'v', False otherwise.}
+87 \textcolor{stringliteral}{    """}
+88     \textcolor{keywordflow}{for} operand \textcolor{keywordflow}{in} operands:
+89         \textcolor{keywordflow}{if} operand.startswith(\textcolor{stringliteral}{"v"}):
+90             \textcolor{keywordflow}{return} \textcolor{keyword}{False}
+91     \textcolor{keywordflow}{return} \textcolor{keyword}{True}
+92 
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacePostProcessor_1_1utils_a379c264b5800e073d327d90d53cb854f_icgraph}
+\end{center}
+\end{figure}

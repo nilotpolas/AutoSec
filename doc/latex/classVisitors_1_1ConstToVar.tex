@@ -1,0 +1,108 @@
+\hypertarget{classVisitors_1_1ConstToVar}{}\section{Const\+To\+Var Class Reference}
+\label{classVisitors_1_1ConstToVar}\index{Const\+To\+Var@{Const\+To\+Var}}
+
+
+Inheritance diagram for Const\+To\+Var\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classVisitors_1_1ConstToVar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Const\+To\+Var\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classVisitors_1_1ConstToVar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classVisitors_1_1ConstToVar_adae6ad6f5b94c4acd95924bb3df9ebc8}{visit\+\_\+\+Assignment} (self, node)
+\item 
+def \hyperlink{classVisitors_1_1ConstToVar_a6329fbf13e2d22de5384fbca843113b8}{visit\+\_\+\+Binary\+Op} (self, node)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@brief Converts constant values in the AST to variable names.
+
+This visitor replaces constant values in assignments and binary operations with corresponding variable names.\end{DoxyVerb}
+ 
+
+Definition at line 198 of file Visitors.\+py.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classVisitors_1_1ConstToVar_adae6ad6f5b94c4acd95924bb3df9ebc8}\label{classVisitors_1_1ConstToVar_adae6ad6f5b94c4acd95924bb3df9ebc8}} 
+\index{Visitors\+::\+Const\+To\+Var@{Visitors\+::\+Const\+To\+Var}!visit\+\_\+\+Assignment@{visit\+\_\+\+Assignment}}
+\index{visit\+\_\+\+Assignment@{visit\+\_\+\+Assignment}!Visitors\+::\+Const\+To\+Var@{Visitors\+::\+Const\+To\+Var}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Assignment()}{visit\_Assignment()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Assignment (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Replaces constant values in assignment operations with variable names.
+
+@param node: The assignment node being processed.
+@type node: pycparser.c_ast.Assignment
+\end{DoxyVerb}
+ 
+
+Definition at line 205 of file Visitors.\+py.
+
+
+\begin{DoxyCode}
+205     \textcolor{keyword}{def }visit\_Assignment(self,node):
+206         \textcolor{stringliteral}{"""}
+207 \textcolor{stringliteral}{        @brief Replaces constant values in assignment operations with variable names.}
+208 \textcolor{stringliteral}{}
+209 \textcolor{stringliteral}{        @param node: The assignment node being processed.}
+210 \textcolor{stringliteral}{        @type node: pycparser.c\_ast.Assignment}
+211 \textcolor{stringliteral}{        """}
+212         \textcolor{keywordflow}{if} isinstance(node.rvalue,c\_ast.Constant):
+213             constName = node.rvalue.value
+214             node.rvalue = c\_ast.ID(name=\textcolor{stringliteral}{"dec\_"} + constName + \textcolor{stringliteral}{"\_inp"})
+215             \textcolor{keywordflow}{return}
+216         \textcolor{keywordflow}{else}:
+217             self.generic\_visit(node)
+\end{DoxyCode}
+\mbox{\Hypertarget{classVisitors_1_1ConstToVar_a6329fbf13e2d22de5384fbca843113b8}\label{classVisitors_1_1ConstToVar_a6329fbf13e2d22de5384fbca843113b8}} 
+\index{Visitors\+::\+Const\+To\+Var@{Visitors\+::\+Const\+To\+Var}!visit\+\_\+\+Binary\+Op@{visit\+\_\+\+Binary\+Op}}
+\index{visit\+\_\+\+Binary\+Op@{visit\+\_\+\+Binary\+Op}!Visitors\+::\+Const\+To\+Var@{Visitors\+::\+Const\+To\+Var}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Binary\+Op()}{visit\_BinaryOp()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Binary\+Op (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Replaces constant values in binary operations with variable names.
+
+@param node: The binary operation node being processed.
+@type node: pycparser.c_ast.BinaryOp
+\end{DoxyVerb}
+ 
+
+Definition at line 218 of file Visitors.\+py.
+
+
+\begin{DoxyCode}
+218     \textcolor{keyword}{def }visit\_BinaryOp(self,node):
+219         \textcolor{stringliteral}{"""}
+220 \textcolor{stringliteral}{        @brief Replaces constant values in binary operations with variable names.}
+221 \textcolor{stringliteral}{}
+222 \textcolor{stringliteral}{        @param node: The binary operation node being processed.}
+223 \textcolor{stringliteral}{        @type node: pycparser.c\_ast.BinaryOp}
+224 \textcolor{stringliteral}{        """}
+225         \textcolor{keywordflow}{if} isinstance(node.right,c\_ast.Constant):
+226             constName = node.right.value
+227             node.right = c\_ast.ID(name=\textcolor{stringliteral}{"dec\_"} + constName + \textcolor{stringliteral}{"\_inp"})
+228         \textcolor{keywordflow}{if} isinstance(node.left,c\_ast.Constant):
+229             constName = node.left.value
+230             node.left = c\_ast.ID(name=\textcolor{stringliteral}{"dec\_"} + constName + \textcolor{stringliteral}{"\_inp"})
+231 
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Inliner/\hyperlink{Visitors_8py}{Visitors.\+py}\end{DoxyCompactItemize}

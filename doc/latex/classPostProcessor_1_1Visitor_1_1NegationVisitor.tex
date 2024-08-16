@@ -1,0 +1,254 @@
+\hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor}{}\section{Negation\+Visitor Class Reference}
+\label{classPostProcessor_1_1Visitor_1_1NegationVisitor}\index{Negation\+Visitor@{Negation\+Visitor}}
+
+
+Inheritance diagram for Negation\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classPostProcessor_1_1Visitor_1_1NegationVisitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Negation\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classPostProcessor_1_1Visitor_1_1NegationVisitor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_a2ed95e2a3a463515d5383413f46a06ad}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, \hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_afde190707204b09a99ff642a6afa5695}{body\+Nodes})
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_adae6ad6f5b94c4acd95924bb3df9ebc8}{visit\+\_\+\+Assignment} (self, node)
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_a6568bead87923bbcaa593e5f226920f0}{visit\+\_\+\+Decl} (self, node)
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_a49d407ef465dd0eba624f0f54fb18041}{visit\+\_\+\+Func\+Def} (self, node)
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_ad32412c74dc29affe693267c23ea968a}{visit\+\_\+\+Unary\+Op} (self, node)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_a8e21c5a928a9743b32315c26ab87b613}{assgn\+No}
+\item 
+\hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_afde190707204b09a99ff642a6afa5695}{body\+Nodes}
+\item 
+\hyperlink{classPostProcessor_1_1Visitor_1_1NegationVisitor_a4c1b0115a62793d277d164b911165b46}{unary\+Var\+To\+Name\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Visitor for handling negation operations and replacing unary operations with equivalent assignments.
+
+@param bodyNodes: A list to store transformed nodes.
+\end{DoxyVerb}
+ 
+
+Definition at line 61 of file Visitor.\+py.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_a2ed95e2a3a463515d5383413f46a06ad}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_a2ed95e2a3a463515d5383413f46a06ad}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{body\+Nodes }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes the NegationVisitor.
+
+@param bodyNodes: A list to store transformed nodes.
+\end{DoxyVerb}
+ 
+
+Definition at line 67 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+67     \textcolor{keyword}{def }\_\_init\_\_(self,bodyNodes):
+68         \textcolor{stringliteral}{"""}
+69 \textcolor{stringliteral}{        Initializes the NegationVisitor.}
+70 \textcolor{stringliteral}{}
+71 \textcolor{stringliteral}{        @param bodyNodes: A list to store transformed nodes.}
+72 \textcolor{stringliteral}{        """}
+73         self.bodyNodes = bodyNodes
+74         self.assgnNo = 1
+75         self.unaryVarToNameMap = \{\}
+76 
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_adae6ad6f5b94c4acd95924bb3df9ebc8}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_adae6ad6f5b94c4acd95924bb3df9ebc8}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!visit\+\_\+\+Assignment@{visit\+\_\+\+Assignment}}
+\index{visit\+\_\+\+Assignment@{visit\+\_\+\+Assignment}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Assignment()}{visit\_Assignment()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Assignment (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visits assignment nodes and processes the right-hand side based on its type.
+
+@param node: The assignment node to visit.
+\end{DoxyVerb}
+ 
+
+Definition at line 95 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+95     \textcolor{keyword}{def }visit\_Assignment(self,node):
+96         \textcolor{stringliteral}{"""}
+97 \textcolor{stringliteral}{        Visits assignment nodes and processes the right-hand side based on its type.}
+98 \textcolor{stringliteral}{}
+99 \textcolor{stringliteral}{        @param node: The assignment node to visit.}
+100 \textcolor{stringliteral}{        """}
+101         \textcolor{keywordflow}{if} isinstance(node.rvalue,c\_ast.BinaryOp) \textcolor{keywordflow}{or} \hyperlink{namespacePostProcessor_1_1utils_a89d6f2461251261de6b862c69fe3c44a}{isRegCall}(node.rvalue):
+102             self.generic\_visit(node.rvalue)
+103             self.bodyNodes.append(node)
+104         \textcolor{keywordflow}{else}:
+105             self.bodyNodes.append(node)
+106             \textcolor{keywordflow}{return}
+107 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPostProcessor_1_1Visitor_1_1NegationVisitor_adae6ad6f5b94c4acd95924bb3df9ebc8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_a6568bead87923bbcaa593e5f226920f0}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_a6568bead87923bbcaa593e5f226920f0}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!visit\+\_\+\+Decl@{visit\+\_\+\+Decl}}
+\index{visit\+\_\+\+Decl@{visit\+\_\+\+Decl}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Decl()}{visit\_Decl()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Decl (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visits declaration nodes and appends them to the body nodes list.
+
+@param node: The declaration node to visit.
+\end{DoxyVerb}
+ 
+
+Definition at line 85 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+85     \textcolor{keyword}{def }visit\_Decl(self,node):
+86         \textcolor{stringliteral}{"""}
+87 \textcolor{stringliteral}{        Visits declaration nodes and appends them to the body nodes list.}
+88 \textcolor{stringliteral}{}
+89 \textcolor{stringliteral}{        @param node: The declaration node to visit.}
+90 \textcolor{stringliteral}{        """}
+91         \textcolor{keywordflow}{if} isinstance(node.type,c\_ast.TypeDecl):
+92             self.bodyNodes.append(node)
+93         \textcolor{keywordflow}{return}
+94         
+\end{DoxyCode}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_a49d407ef465dd0eba624f0f54fb18041}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_a49d407ef465dd0eba624f0f54fb18041}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!visit\+\_\+\+Func\+Def@{visit\+\_\+\+Func\+Def}}
+\index{visit\+\_\+\+Func\+Def@{visit\+\_\+\+Func\+Def}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Func\+Def()}{visit\_FuncDef()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Func\+Def (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visits function definition nodes and continues traversal.
+
+@param node: The function definition node to visit.
+\end{DoxyVerb}
+ 
+
+Definition at line 77 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+77     \textcolor{keyword}{def }visit\_FuncDef(self,node):
+78         \textcolor{stringliteral}{"""}
+79 \textcolor{stringliteral}{        Visits function definition nodes and continues traversal.}
+80 \textcolor{stringliteral}{}
+81 \textcolor{stringliteral}{        @param node: The function definition node to visit.}
+82 \textcolor{stringliteral}{        """}
+83         self.generic\_visit(node)
+84 
+\end{DoxyCode}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_ad32412c74dc29affe693267c23ea968a}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_ad32412c74dc29affe693267c23ea968a}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!visit\+\_\+\+Unary\+Op@{visit\+\_\+\+Unary\+Op}}
+\index{visit\+\_\+\+Unary\+Op@{visit\+\_\+\+Unary\+Op}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Unary\+Op()}{visit\_UnaryOp()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Unary\+Op (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visits unary operation nodes and replaces them with equivalent assignments.
+
+@param node: The unary operation node to visit.
+\end{DoxyVerb}
+ 
+
+Definition at line 108 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+108     \textcolor{keyword}{def }visit\_UnaryOp(self,node):
+109         \textcolor{stringliteral}{"""}
+110 \textcolor{stringliteral}{        Visits unary operation nodes and replaces them with equivalent assignments.}
+111 \textcolor{stringliteral}{}
+112 \textcolor{stringliteral}{        @param node: The unary operation node to visit.}
+113 \textcolor{stringliteral}{        """}
+114         \textcolor{keywordflow}{if} node.expr.name \textcolor{keywordflow}{in} self.unaryVarToNameMap:
+115             \textcolor{keywordflow}{return}
+116         \textcolor{keywordflow}{if} node.op == \textcolor{stringliteral}{'!'} \textcolor{keywordflow}{or} node.op == \textcolor{stringliteral}{'~'}:
+117             varName = \hyperlink{namespacePostProcessor_1_1utils_a69c4094b747eccefbd43b8011b1c3626}{getNewVarName}(self.assgnNo)
+118             declNode = \hyperlink{namespaceastNodes_ae5e5c7f09a1586002b20db6d72f6d30b}{getDeclarationNode}(varName)
+119             self.bodyNodes.append(declNode)
+120             assgnNode = \hyperlink{namespaceastNodes_a2403f5d006e54f20e614226280cb6cbc}{getSimpleAssignmentNode}(varName,node)
+121             self.bodyNodes.append(assgnNode)
+122             self.unaryVarToNameMap[node.expr.name] = varName
+123             self.assgnNo += 1
+124 
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPostProcessor_1_1Visitor_1_1NegationVisitor_ad32412c74dc29affe693267c23ea968a_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_a8e21c5a928a9743b32315c26ab87b613}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_a8e21c5a928a9743b32315c26ab87b613}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!assgn\+No@{assgn\+No}}
+\index{assgn\+No@{assgn\+No}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{assgn\+No}{assgnNo}}
+{\footnotesize\ttfamily assgn\+No}
+
+
+
+Definition at line 74 of file Visitor.\+py.
+
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_afde190707204b09a99ff642a6afa5695}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_afde190707204b09a99ff642a6afa5695}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!body\+Nodes@{body\+Nodes}}
+\index{body\+Nodes@{body\+Nodes}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{body\+Nodes}{bodyNodes}}
+{\footnotesize\ttfamily body\+Nodes}
+
+
+
+Definition at line 73 of file Visitor.\+py.
+
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1NegationVisitor_a4c1b0115a62793d277d164b911165b46}\label{classPostProcessor_1_1Visitor_1_1NegationVisitor_a4c1b0115a62793d277d164b911165b46}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}!unary\+Var\+To\+Name\+Map@{unary\+Var\+To\+Name\+Map}}
+\index{unary\+Var\+To\+Name\+Map@{unary\+Var\+To\+Name\+Map}!Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor@{Post\+Processor\+::\+Visitor\+::\+Negation\+Visitor}}
+\subsubsection{\texorpdfstring{unary\+Var\+To\+Name\+Map}{unaryVarToNameMap}}
+{\footnotesize\ttfamily unary\+Var\+To\+Name\+Map}
+
+
+
+Definition at line 75 of file Visitor.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Post\+Processor/\hyperlink{Visitor_8py}{Visitor.\+py}\end{DoxyCompactItemize}

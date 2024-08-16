@@ -1,0 +1,155 @@
+\hypertarget{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger}{}\section{Unary\+Op\+Node\+Changer Class Reference}
+\label{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger}\index{Unary\+Op\+Node\+Changer@{Unary\+Op\+Node\+Changer}}
+
+
+Inheritance diagram for Unary\+Op\+Node\+Changer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Unary\+Op\+Node\+Changer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a5c7851b11b60cfafc8885d45b07ead44}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, \hyperlink{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a45d99513007ccd4190a027d805a8d0db}{unary\+Node\+Map})
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a6329fbf13e2d22de5384fbca843113b8}{visit\+\_\+\+Binary\+Op} (self, node)
+\item 
+def \hyperlink{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a48e7baeee3968db14598ff72b6be63bd}{visit\+\_\+\+Func\+Call} (self, node)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a45d99513007ccd4190a027d805a8d0db}{unary\+Node\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Visitor for changing unary operation nodes in the AST based on a provided map.
+
+@param unaryNodeMap: A dictionary mapping unary operation variable names to new variable names.
+\end{DoxyVerb}
+ 
+
+Definition at line 20 of file Visitor.\+py.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a5c7851b11b60cfafc8885d45b07ead44}\label{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a5c7851b11b60cfafc8885d45b07ead44}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{unary\+Node\+Map }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes the UnaryOpNodeChanger.
+
+@param unaryNodeMap: A dictionary mapping unary operation variable names to new variable names.
+\end{DoxyVerb}
+ 
+
+Definition at line 26 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+26     \textcolor{keyword}{def }\_\_init\_\_(self,unaryNodeMap):
+27         \textcolor{stringliteral}{"""}
+28 \textcolor{stringliteral}{        Initializes the UnaryOpNodeChanger.}
+29 \textcolor{stringliteral}{}
+30 \textcolor{stringliteral}{        @param unaryNodeMap: A dictionary mapping unary operation variable names to new variable names.}
+31 \textcolor{stringliteral}{        """}
+32         self.unaryNodeMap = unaryNodeMap
+33     
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a6329fbf13e2d22de5384fbca843113b8}\label{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a6329fbf13e2d22de5384fbca843113b8}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}!visit\+\_\+\+Binary\+Op@{visit\+\_\+\+Binary\+Op}}
+\index{visit\+\_\+\+Binary\+Op@{visit\+\_\+\+Binary\+Op}!Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Binary\+Op()}{visit\_BinaryOp()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Binary\+Op (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visits binary operation nodes and replaces unary operation nodes with corresponding IDs.
+
+@param node: The binary operation node to visit.
+\end{DoxyVerb}
+ 
+
+Definition at line 34 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+34     \textcolor{keyword}{def }visit\_BinaryOp(self,node):
+35         \textcolor{stringliteral}{"""}
+36 \textcolor{stringliteral}{        Visits binary operation nodes and replaces unary operation nodes with corresponding IDs.}
+37 \textcolor{stringliteral}{}
+38 \textcolor{stringliteral}{        @param node: The binary operation node to visit.}
+39 \textcolor{stringliteral}{        """}
+40         \textcolor{keywordflow}{if} isinstance(node.right,c\_ast.UnaryOp):
+41             node.right = c\_ast.ID(name=self.unaryNodeMap[node.right.expr.name])
+42             \textcolor{comment}{# self.generic\_visit(node.left)}
+43         \textcolor{keywordflow}{if} isinstance(node.left,c\_ast.UnaryOp):
+44             node.left = c\_ast.ID(name=self.unaryNodeMap[node.left.expr.name])
+45             \textcolor{comment}{# self.generic\_visit(node.right)}
+46         self.generic\_visit(node)
+47     
+\end{DoxyCode}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a48e7baeee3968db14598ff72b6be63bd}\label{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a48e7baeee3968db14598ff72b6be63bd}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}!visit\+\_\+\+Func\+Call@{visit\+\_\+\+Func\+Call}}
+\index{visit\+\_\+\+Func\+Call@{visit\+\_\+\+Func\+Call}!Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}}
+\subsubsection{\texorpdfstring{visit\+\_\+\+Func\+Call()}{visit\_FuncCall()}}
+{\footnotesize\ttfamily def visit\+\_\+\+Func\+Call (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{node }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visits function call nodes and replaces unary operation arguments with corresponding IDs.
+
+@param node: The function call node to visit.
+\end{DoxyVerb}
+ 
+
+Definition at line 48 of file Visitor.\+py.
+
+
+\begin{DoxyCode}
+48     \textcolor{keyword}{def }visit\_FuncCall(self,node):
+49         \textcolor{stringliteral}{"""}
+50 \textcolor{stringliteral}{        Visits function call nodes and replaces unary operation arguments with corresponding IDs.}
+51 \textcolor{stringliteral}{}
+52 \textcolor{stringliteral}{        @param node: The function call node to visit.}
+53 \textcolor{stringliteral}{        """}
+54         param = node.args.exprs[0]
+55         \textcolor{keywordflow}{if} isinstance(param,c\_ast.UnaryOp):
+56             node.args.exprs[0] = c\_ast.ID(name=self.unaryNodeMap[param.expr.name])
+57             \textcolor{keywordflow}{return}
+58         \textcolor{keywordflow}{else}:
+59             self.generic\_visit(node)
+60 
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a45d99513007ccd4190a027d805a8d0db}\label{classPostProcessor_1_1Visitor_1_1UnaryOpNodeChanger_a45d99513007ccd4190a027d805a8d0db}} 
+\index{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}!unary\+Node\+Map@{unary\+Node\+Map}}
+\index{unary\+Node\+Map@{unary\+Node\+Map}!Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer@{Post\+Processor\+::\+Visitor\+::\+Unary\+Op\+Node\+Changer}}
+\subsubsection{\texorpdfstring{unary\+Node\+Map}{unaryNodeMap}}
+{\footnotesize\ttfamily unary\+Node\+Map}
+
+
+
+Definition at line 32 of file Visitor.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Post\+Processor/\hyperlink{Visitor_8py}{Visitor.\+py}\end{DoxyCompactItemize}

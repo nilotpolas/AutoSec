@@ -1,0 +1,197 @@
+\hypertarget{bal__domand_8c}{}\section{Reg\+Balancer/src/bal\+\_\+domand.c File Reference}
+\label{bal__domand_8c}\index{Reg\+Balancer/src/bal\+\_\+domand.\+c@{Reg\+Balancer/src/bal\+\_\+domand.\+c}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{bal__domand_8c_a69d3cae18364fc6ce3e5a25677f51513}{sbox} (\+\_\+\+Bool x0\+\_\+0, \+\_\+\+Bool x1\+\_\+0, \+\_\+\+Bool x2\+\_\+0, \+\_\+\+Bool x3\+\_\+0, \+\_\+\+Bool x0\+\_\+1, \+\_\+\+Bool x1\+\_\+1, \+\_\+\+Bool x2\+\_\+1, \+\_\+\+Bool x3\+\_\+1, \+\_\+\+Bool r, \+\_\+\+Bool $\ast$Y0\+\_\+0, \+\_\+\+Bool $\ast$Y1\+\_\+0, \+\_\+\+Bool $\ast$Y2\+\_\+0, \+\_\+\+Bool $\ast$Y3\+\_\+0, \+\_\+\+Bool $\ast$Y0\+\_\+1, \+\_\+\+Bool $\ast$Y1\+\_\+1, \+\_\+\+Bool $\ast$Y2\+\_\+1, \+\_\+\+Bool $\ast$Y3\+\_\+1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{bal__domand_8c_a69d3cae18364fc6ce3e5a25677f51513}\label{bal__domand_8c_a69d3cae18364fc6ce3e5a25677f51513}} 
+\index{bal\+\_\+domand.\+c@{bal\+\_\+domand.\+c}!sbox@{sbox}}
+\index{sbox@{sbox}!bal\+\_\+domand.\+c@{bal\+\_\+domand.\+c}}
+\subsubsection{\texorpdfstring{sbox()}{sbox()}}
+{\footnotesize\ttfamily void sbox (\begin{DoxyParamCaption}\item[{\+\_\+\+Bool}]{x0\+\_\+0,  }\item[{\+\_\+\+Bool}]{x1\+\_\+0,  }\item[{\+\_\+\+Bool}]{x2\+\_\+0,  }\item[{\+\_\+\+Bool}]{x3\+\_\+0,  }\item[{\+\_\+\+Bool}]{x0\+\_\+1,  }\item[{\+\_\+\+Bool}]{x1\+\_\+1,  }\item[{\+\_\+\+Bool}]{x2\+\_\+1,  }\item[{\+\_\+\+Bool}]{x3\+\_\+1,  }\item[{\+\_\+\+Bool}]{r,  }\item[{\+\_\+\+Bool $\ast$}]{Y0\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y1\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y2\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y3\+\_\+0,  }\item[{\+\_\+\+Bool $\ast$}]{Y0\+\_\+1,  }\item[{\+\_\+\+Bool $\ast$}]{Y1\+\_\+1,  }\item[{\+\_\+\+Bool $\ast$}]{Y2\+\_\+1,  }\item[{\+\_\+\+Bool $\ast$}]{Y3\+\_\+1 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1 of file bal\+\_\+domand.\+c.
+
+
+\begin{DoxyCode}
+2 \{
+3   \_Bool x0\_0\_inp;
+4   \_Bool x1\_0\_inp;
+5   \_Bool x2\_0\_inp;
+6   \_Bool x3\_0\_inp;
+7   \_Bool x0\_1\_inp;
+8   \_Bool x1\_1\_inp;
+9   \_Bool x2\_1\_inp;
+10   \_Bool x3\_1\_inp;
+11   \_Bool r\_inp;
+12   x0\_0\_inp = x0\_0;
+13   x1\_0\_inp = x1\_0;
+14   x2\_0\_inp = x2\_0;
+15   x3\_0\_inp = x3\_0;
+16   x0\_1\_inp = x0\_1;
+17   x1\_1\_inp = x1\_1;
+18   x2\_1\_inp = x2\_1;
+19   x3\_1\_inp = x3\_1;
+20   r\_inp = r;
+21   \_Bool L0\_0;
+22   \_Bool L1\_0;
+23   \_Bool L2\_0;
+24   \_Bool L3\_0;
+25   \_Bool L4\_0;
+26   \_Bool L5\_0;
+27   \_Bool L6\_0;
+28   \_Bool L7\_0;
+29   \_Bool L8\_0;
+30   \_Bool L9\_0;
+31   \_Bool L10\_0;
+32   \_Bool L11\_0;
+33   \_Bool Q0\_0;
+34   \_Bool Q1\_0;
+35   \_Bool Q2\_0;
+36   \_Bool Q3\_0;
+37   \_Bool Q4\_0;
+38   \_Bool Q5\_0;
+39   \_Bool Q6\_0;
+40   \_Bool Q7\_0;
+41   \_Bool T0\_0;
+42   \_Bool T1\_0;
+43   \_Bool T2\_0;
+44   \_Bool T3\_0;
+45   \_Bool L0\_1;
+46   \_Bool L1\_1;
+47   \_Bool L2\_1;
+48   \_Bool L3\_1;
+49   \_Bool L4\_1;
+50   \_Bool L5\_1;
+51   \_Bool L6\_1;
+52   \_Bool L7\_1;
+53   \_Bool L8\_1;
+54   \_Bool L9\_1;
+55   \_Bool L10\_1;
+56   \_Bool L11\_1;
+57   \_Bool Q0\_1;
+58   \_Bool Q1\_1;
+59   \_Bool Q2\_1;
+60   \_Bool Q3\_1;
+61   \_Bool Q4\_1;
+62   \_Bool Q5\_1;
+63   \_Bool Q6\_1;
+64   \_Bool Q7\_1;
+65   \_Bool T0\_1;
+66   \_Bool T1\_1;
+67   \_Bool T2\_1;
+68   \_Bool T3\_1;
+69   \_Bool Y0\_01;
+70   \_Bool Y1\_01;
+71   \_Bool Y0\_11;
+72   \_Bool Y1\_11;
+73   L0\_0 = x1\_0\_inp ^ x2\_0\_inp;
+74   L1\_0 = x0\_0\_inp ^ x1\_0\_inp;
+75   L8\_0 = x2\_0\_inp ^ x0\_0\_inp;
+76   L5\_0 = x0\_0\_inp ^ x3\_0\_inp;
+77   L0\_1 = x1\_1\_inp ^ x2\_1\_inp;
+78   L1\_1 = x0\_1\_inp ^ x1\_1\_inp;
+79   L8\_1 = x2\_1\_inp ^ x0\_1\_inp;
+80   L5\_1 = x0\_1\_inp ^ x3\_1\_inp;
+81   Q0\_0 = !L0\_0;
+82   Q1\_0 = !L1\_0;
+83   Q3\_0 = !x3\_0\_inp;
+84   Q4\_0 = !x2\_0\_inp;
+85   Q0\_1 = !L0\_1;
+86   Q1\_1 = !L1\_1;
+87   Q3\_1 = !x3\_1\_inp;
+88   Q4\_1 = !x2\_1\_inp;
+89   L2\_0 = Q1\_0 ^ x2\_0\_inp;
+90   L3\_0 = Q0\_0 ^ x3\_0\_inp;
+91   L2\_1 = Q1\_1 ^ x2\_1\_inp;
+92   L3\_1 = Q0\_1 ^ x3\_1\_inp;
+93   \_Bool i1\_domand0;
+94   \_Bool i2\_domand0;
+95   \_Bool p2\_domand0;
+96   \_Bool p3\_domand0;
+97   \_Bool p1\_domand0;
+98   \_Bool p4\_domand0;
+99   p2\_domand0 = Q0\_0 & Q1\_1;
+100   i1\_domand0 = p2\_domand0 ^ r\_inp;
+101   p3\_domand0 = Q0\_1 & Q1\_0;
+102   i2\_domand0 = p3\_domand0 ^ r\_inp;
+103   p1\_domand0 = Q0\_0 & Q1\_0;
+104   p4\_domand0 = Q0\_1 & Q1\_1;
+105   T0\_0 = reg(i1\_domand0) ^ reg(p1\_domand0);
+106   T0\_1 = reg(i2\_domand0) ^ reg(p4\_domand0);
+107   L10\_0 = !L2\_0;
+108   L10\_1 = !L2\_1;
+109   \_Bool i1\_domand1;
+110   \_Bool i2\_domand1;
+111   \_Bool p2\_domand1;
+112   \_Bool p3\_domand1;
+113   \_Bool p1\_domand1;
+114   \_Bool p4\_domand1;
+115   p2\_domand1 = x1\_0\_inp & Q4\_1;
+116   i1\_domand1 = p2\_domand1 ^ r\_inp;
+117   p3\_domand1 = x1\_1\_inp & Q4\_0;
+118   i2\_domand1 = p3\_domand1 ^ r\_inp;
+119   p1\_domand1 = x1\_0\_inp & Q4\_0;
+120   p4\_domand1 = x1\_1\_inp & Q4\_1;
+121   T2\_0 = reg(i1\_domand1) ^ reg(p1\_domand1);
+122   T2\_1 = reg(i2\_domand1) ^ reg(p4\_domand1);
+123   Q2\_0 = T0\_0 ^ reg(L2\_0);
+124   L4\_0 = T0\_0 ^ T2\_0;
+125   Q7\_0 = T0\_0 ^ reg(L5\_0);
+126   Q6\_0 = L4\_0 ^ reg(L3\_0);
+127   Q2\_1 = T0\_1 ^ reg(L2\_1);
+128   L4\_1 = T0\_1 ^ T2\_1;
+129   Q7\_1 = T0\_1 ^ reg(L5\_1);
+130   Q6\_1 = L4\_1 ^ reg(L3\_1);
+131   \_Bool i1\_domand2;
+132   \_Bool i2\_domand2;
+133   \_Bool p2\_domand2;
+134   \_Bool p3\_domand2;
+135   \_Bool p1\_domand2;
+136   \_Bool p4\_domand2;
+137   p2\_domand2 = Q2\_0 & reg(Q3\_1);
+138   i1\_domand2 = p2\_domand2 ^ reg(r\_inp);
+139   p3\_domand2 = Q2\_1 & reg(Q3\_0);
+140   i2\_domand2 = p3\_domand2 ^ reg(r\_inp);
+141   p1\_domand2 = Q2\_0 & reg(Q3\_0);
+142   p4\_domand2 = Q2\_1 & reg(Q3\_1);
+143   T1\_0 = reg(i1\_domand2) ^ reg(p1\_domand2);
+144   T1\_1 = reg(i2\_domand2) ^ reg(p4\_domand2);
+145   \_Bool i1\_domand3;
+146   \_Bool i2\_domand3;
+147   \_Bool p2\_domand3;
+148   \_Bool p3\_domand3;
+149   \_Bool p1\_domand3;
+150   \_Bool p4\_domand3;
+151   p2\_domand3 = Q6\_0 & Q7\_1;
+152   i1\_domand3 = p2\_domand3 ^ reg(r\_inp);
+153   p3\_domand3 = Q6\_1 & Q7\_0;
+154   i2\_domand3 = p3\_domand3 ^ reg(r\_inp);
+155   p1\_domand3 = Q6\_0 & Q7\_0;
+156   p4\_domand3 = Q6\_1 & Q7\_1;
+157   T3\_0 = reg(i1\_domand3) ^ reg(p1\_domand3);
+158   T3\_1 = reg(i2\_domand3) ^ reg(p4\_domand3);
+159   L7\_0 = reg(T0\_0) ^ T1\_0;
+160   L11\_0 = T1\_0 ^ reg(reg(L10\_0));
+161   L7\_1 = reg(T0\_1) ^ T1\_1;
+162   L11\_1 = T1\_1 ^ reg(reg(L10\_1));
+163   Y0\_01 = L7\_0 ^ reg(T2\_0);
+164   Y1\_01 = reg(reg(L8\_0)) ^ T3\_0;
+165   Y0\_11 = L7\_1 ^ reg(T2\_1);
+166   Y1\_11 = reg(reg(L8\_1)) ^ T3\_1;
+167   *Y0\_0 = reg(reg(reg(x3\_0\_inp)) ^ Y0\_01);
+168   *Y1\_0 = reg(L7\_0 ^ Y1\_01);
+169   *Y2\_0 = reg(L11\_0 ^ reg(T2\_0));
+170   *Y3\_0 = reg(reg(T2\_0 ^ reg(L5\_0)));
+171   *Y0\_1 = reg(reg(reg(x3\_1\_inp)) ^ Y0\_11);
+172   *Y1\_1 = reg(L7\_1 ^ Y1\_11);
+173   *Y2\_1 = reg(L11\_1 ^ reg(T2\_1));
+174   *Y3\_1 = reg(reg(T2\_1 ^ reg(L5\_1)));
+175 \}
+\end{DoxyCode}

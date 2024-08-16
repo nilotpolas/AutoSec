@@ -1,0 +1,258 @@
+\hypertarget{classDiGraph_1_1DiGraph}{}\section{Di\+Graph Class Reference}
+\label{classDiGraph_1_1DiGraph}\index{Di\+Graph@{Di\+Graph}}
+
+
+Collaboration diagram for Di\+Graph\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{classDiGraph_1_1DiGraph__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classDiGraph_1_1DiGraph_ae64f0875afe3067b97ba370b354b9213}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classDiGraph_1_1DiGraph_ab064bb6af6f4d1916413e2ab9ef9cdb4}{add\+Edge\+Between} (self, f1, f2)
+\item 
+def \hyperlink{classDiGraph_1_1DiGraph_a9e00e5549f827c5cbba05adaa49d7e57}{add\+Function} (self, f\+Name)
+\item 
+def \hyperlink{classDiGraph_1_1DiGraph_a02f36c0ebca9e0e4fab9591c7d43130b}{get\+Indegree\+Of} (self, f\+Name)
+\item 
+def \hyperlink{classDiGraph_1_1DiGraph_ab37be01195a3d4a4cb7c992114e93219}{topo\+Sort} (self)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDiGraph_1_1DiGraph_af9bd6d4d8ecd1b0563241fd648435e14}{num\+Nodes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@brief A class representing a directed graph with nodes and edges.
+
+This class provides methods for adding nodes and edges, retrieving in-degrees, and performing topological sorting.
+\end{DoxyVerb}
+ 
+
+Definition at line 5 of file Di\+Graph.\+py.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDiGraph_1_1DiGraph_ae64f0875afe3067b97ba370b354b9213}\label{classDiGraph_1_1DiGraph_ae64f0875afe3067b97ba370b354b9213}} 
+\index{Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes an empty directed graph.
+
+Sets up internal data structures to keep track of nodes, adjacency lists, and in-degrees.
+\end{DoxyVerb}
+ 
+
+Definition at line 11 of file Di\+Graph.\+py.
+
+
+\begin{DoxyCode}
+11     \textcolor{keyword}{def }\_\_init\_\_(self):
+12         \textcolor{stringliteral}{"""}
+13 \textcolor{stringliteral}{        @brief Initializes an empty directed graph.}
+14 \textcolor{stringliteral}{}
+15 \textcolor{stringliteral}{        Sets up internal data structures to keep track of nodes, adjacency lists, and in-degrees.}
+16 \textcolor{stringliteral}{        """}
+17         self.\_\_inEdges = []
+18         self.\_\_functionIndexMap = \{\}
+19         self.\_\_indexFunctionMap = \{\}
+20         self.\_\_adjacencyList = []
+21         self.numNodes = 0
+22     
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classDiGraph_1_1DiGraph_ab064bb6af6f4d1916413e2ab9ef9cdb4}\label{classDiGraph_1_1DiGraph_ab064bb6af6f4d1916413e2ab9ef9cdb4}} 
+\index{Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}!add\+Edge\+Between@{add\+Edge\+Between}}
+\index{add\+Edge\+Between@{add\+Edge\+Between}!Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}}
+\subsubsection{\texorpdfstring{add\+Edge\+Between()}{addEdgeBetween()}}
+{\footnotesize\ttfamily def add\+Edge\+Between (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{f1,  }\item[{}]{f2 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Adds a directed edge from function f1 to function f2.
+
+Updates the adjacency list and the in-degree of function f2.
+
+@param f1: The name of the source function.
+@type f1: str
+@param f2: The name of the target function.
+@type f2: str
+
+@raises KeyError: If either function name is not present in the graph.
+\end{DoxyVerb}
+ 
+
+Definition at line 41 of file Di\+Graph.\+py.
+
+
+\begin{DoxyCode}
+41     \textcolor{keyword}{def }addEdgeBetween(self,f1,f2):
+42         \textcolor{stringliteral}{"""}
+43 \textcolor{stringliteral}{        @brief Adds a directed edge from function f1 to function f2.}
+44 \textcolor{stringliteral}{}
+45 \textcolor{stringliteral}{        Updates the adjacency list and the in-degree of function f2.}
+46 \textcolor{stringliteral}{}
+47 \textcolor{stringliteral}{        @param f1: The name of the source function.}
+48 \textcolor{stringliteral}{        @type f1: str}
+49 \textcolor{stringliteral}{        @param f2: The name of the target function.}
+50 \textcolor{stringliteral}{        @type f2: str}
+51 \textcolor{stringliteral}{}
+52 \textcolor{stringliteral}{        @raises KeyError: If either function name is not present in the graph.}
+53 \textcolor{stringliteral}{        """}
+54         f1Index = self.\_\_functionIndexMap[f1]
+55         f2Index = self.\_\_functionIndexMap[f2]
+56         \textcolor{keywordflow}{if} f2Index \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} self.\_\_adjacencyList[f1Index]:
+57             self.\_\_adjacencyList[f1Index].append(f2Index)
+58             self.\_\_inEdges[f2Index] += 1
+59     
+\end{DoxyCode}
+\mbox{\Hypertarget{classDiGraph_1_1DiGraph_a9e00e5549f827c5cbba05adaa49d7e57}\label{classDiGraph_1_1DiGraph_a9e00e5549f827c5cbba05adaa49d7e57}} 
+\index{Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}!add\+Function@{add\+Function}}
+\index{add\+Function@{add\+Function}!Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}}
+\subsubsection{\texorpdfstring{add\+Function()}{addFunction()}}
+{\footnotesize\ttfamily def add\+Function (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{f\+Name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Adds a function as a node to the graph.
+
+If the function is not already present, it adds it and initializes its adjacency list and in-degree.
+
+@param fName: The name of the function to be added as a node.
+@type fName: str
+
+@raises KeyError: If the function name is already in the graph.
+\end{DoxyVerb}
+ 
+
+Definition at line 23 of file Di\+Graph.\+py.
+
+
+\begin{DoxyCode}
+23     \textcolor{keyword}{def }addFunction(self,fName):
+24         \textcolor{stringliteral}{"""}
+25 \textcolor{stringliteral}{        @brief Adds a function as a node to the graph.}
+26 \textcolor{stringliteral}{}
+27 \textcolor{stringliteral}{        If the function is not already present, it adds it and initializes its adjacency list and
+       in-degree.}
+28 \textcolor{stringliteral}{}
+29 \textcolor{stringliteral}{        @param fName: The name of the function to be added as a node.}
+30 \textcolor{stringliteral}{        @type fName: str}
+31 \textcolor{stringliteral}{}
+32 \textcolor{stringliteral}{        @raises KeyError: If the function name is already in the graph.}
+33 \textcolor{stringliteral}{        """}
+34         \textcolor{keywordflow}{if} fName \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} self.\_\_functionIndexMap:
+35             self.\_\_functionIndexMap[fName] = self.numNodes
+36             self.\_\_indexFunctionMap[self.numNodes] = fName
+37             self.numNodes += 1
+38             self.\_\_adjacencyList.append([])
+39             self.\_\_inEdges.append(0)
+40     
+\end{DoxyCode}
+\mbox{\Hypertarget{classDiGraph_1_1DiGraph_a02f36c0ebca9e0e4fab9591c7d43130b}\label{classDiGraph_1_1DiGraph_a02f36c0ebca9e0e4fab9591c7d43130b}} 
+\index{Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}!get\+Indegree\+Of@{get\+Indegree\+Of}}
+\index{get\+Indegree\+Of@{get\+Indegree\+Of}!Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}}
+\subsubsection{\texorpdfstring{get\+Indegree\+Of()}{getIndegreeOf()}}
+{\footnotesize\ttfamily def get\+Indegree\+Of (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{f\+Name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Retrieves the in-degree of the specified function.
+
+@param fName: The name of the function whose in-degree is to be retrieved.
+@type fName: str
+
+@return: The in-degree of the specified function.
+@rtype: int
+
+@raises KeyError: If the function name is not present in the graph.
+\end{DoxyVerb}
+ 
+
+Definition at line 60 of file Di\+Graph.\+py.
+
+
+\begin{DoxyCode}
+60     \textcolor{keyword}{def }getIndegreeOf(self,fName):
+61         \textcolor{stringliteral}{"""}
+62 \textcolor{stringliteral}{        @brief Retrieves the in-degree of the specified function.}
+63 \textcolor{stringliteral}{}
+64 \textcolor{stringliteral}{        @param fName: The name of the function whose in-degree is to be retrieved.}
+65 \textcolor{stringliteral}{        @type fName: str}
+66 \textcolor{stringliteral}{}
+67 \textcolor{stringliteral}{        @return: The in-degree of the specified function.}
+68 \textcolor{stringliteral}{        @rtype: int}
+69 \textcolor{stringliteral}{}
+70 \textcolor{stringliteral}{        @raises KeyError: If the function name is not present in the graph.}
+71 \textcolor{stringliteral}{        """}
+72         \textcolor{keywordflow}{return} self.\_\_inEdges[self.\_\_functionIndexMap[fName]]
+73     
+\end{DoxyCode}
+\mbox{\Hypertarget{classDiGraph_1_1DiGraph_ab37be01195a3d4a4cb7c992114e93219}\label{classDiGraph_1_1DiGraph_ab37be01195a3d4a4cb7c992114e93219}} 
+\index{Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}!topo\+Sort@{topo\+Sort}}
+\index{topo\+Sort@{topo\+Sort}!Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}}
+\subsubsection{\texorpdfstring{topo\+Sort()}{topoSort()}}
+{\footnotesize\ttfamily def topo\+Sort (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Performs a topological sort on the graph.
+
+Uses Kahn's algorithm to return a list of nodes in topologically sorted order.
+
+@return: A list of function names in topologically sorted order.
+@rtype: list of str
+\end{DoxyVerb}
+ 
+
+Definition at line 74 of file Di\+Graph.\+py.
+
+
+\begin{DoxyCode}
+74     \textcolor{keyword}{def }topoSort(self):
+75         \textcolor{stringliteral}{"""}
+76 \textcolor{stringliteral}{        @brief Performs a topological sort on the graph.}
+77 \textcolor{stringliteral}{}
+78 \textcolor{stringliteral}{        Uses Kahn's algorithm to return a list of nodes in topologically sorted order.}
+79 \textcolor{stringliteral}{}
+80 \textcolor{stringliteral}{        @return: A list of function names in topologically sorted order.}
+81 \textcolor{stringliteral}{        @rtype: list of str}
+82 \textcolor{stringliteral}{        """}
+83         q = deque()
+84         inEdges = copy.deepcopy(self.\_\_inEdges)
+85         \textcolor{keywordflow}{for} index \textcolor{keywordflow}{in} range(self.numNodes):
+86             if(inEdges[index] == 0):
+87                 q.append(index)
+88         sortedList = []
+89         \textcolor{keywordflow}{while} q:
+90             node = q.popleft()
+91             sortedList.append(self.\_\_indexFunctionMap[node])
+92             \textcolor{keywordflow}{for} adj \textcolor{keywordflow}{in} self.\_\_adjacencyList[node]:
+93                 inEdges[adj] -= 1
+94                 if(inEdges[adj] == 0):
+95                     q.append(adj)
+96         \textcolor{keywordflow}{return} sortedList
+97 
+98 \end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classDiGraph_1_1DiGraph_af9bd6d4d8ecd1b0563241fd648435e14}\label{classDiGraph_1_1DiGraph_af9bd6d4d8ecd1b0563241fd648435e14}} 
+\index{Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}!num\+Nodes@{num\+Nodes}}
+\index{num\+Nodes@{num\+Nodes}!Di\+Graph\+::\+Di\+Graph@{Di\+Graph\+::\+Di\+Graph}}
+\subsubsection{\texorpdfstring{num\+Nodes}{numNodes}}
+{\footnotesize\ttfamily num\+Nodes}
+
+
+
+Definition at line 21 of file Di\+Graph.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Inliner/\hyperlink{DiGraph_8py}{Di\+Graph.\+py}\end{DoxyCompactItemize}
