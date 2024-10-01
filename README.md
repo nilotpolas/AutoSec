@@ -202,11 +202,13 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
             |       75       | 666  | 1998 |     133k     |
             \---------------------------------------------/
         c. Run 
+        
         ```
         python3 input_generator.py
         ```
 
     2. Run vlogan 
+    
     ```
     vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
     ```
@@ -217,11 +219,13 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
     ```
     
     4. Run simv
+    
     ```
     ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
     ```
 
     5. Run primetime
+    
         ```
         pt_shell -f px_sbox.tcl (make sure all paths and files name are correct)
         ```
@@ -229,6 +233,7 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
      
 
     6.  Open traces using waveview
+    
         ```
         wv sbox_hpc2.fsdb (this command will open custom waveview) 
         ```
@@ -241,6 +246,7 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
         * change file_num = hpc2 (or gadget concerned) in tvla_parser_2d.py
 
    10. Run
+       
        ```
        tvla_parser_2d.py
        ```
