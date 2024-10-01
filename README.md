@@ -182,7 +182,7 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
     
         b. Replace the value of the variables in the file in path 
         
-        ```
+        
         /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
         
 
@@ -206,31 +206,31 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
           
         c. Run input generator 
         
-        ```
+        
         python3 input_generator.py
         
 
     2. Run vlogan 
     
-        ```
+        
         vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
         
 
     3. Run vcs
     
-        ```
+        
         vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
         
     
     4. Run simv
     
-    ```
+    
     ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
     
 
     5. Run primetime
     
-        ```
+        
         pt_shell -f px_sbox.tcl (make sure all paths and files name are correct)
         
         this generates sbox_hpc2.fsdb file which we need run in custom waveview to get power traces 
@@ -238,7 +238,7 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
 
     6.  Open traces using waveview
     
-        ```
+        
         wv sbox_hpc2.fsdb (this command will open custom waveview) 
         
         
