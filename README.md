@@ -1,20 +1,34 @@
-Instructions to Install and Execute the Tool
+# Instructions to Install and Execute the Tool
+## Installing the dependencies
 
-Steps:
-1. Install dependencies:
-   $ pip install -r requirements.txt
+Install my-project with npm
 
-2. Run the tool:
-   $ python script.py <options>
+```bash
+  pip install -r requirements.txt
+```
+    
+## Run the tool
 
-   Following are the options:
-   --topModule    : Name of the top module (mandatory)
-   --inputFile    : Name of the input file (mandatory, should be in the same directory as script.py)
-   --rtlFile      : Name of the final Verilog code file (default is output.v)
-   --bitWidth     : Specify the bit width for the RTL code
-   --checkBalancing : Set to 1 to verify the balancing (default is 0)
+cd to the folder where the script.py file is present.
+Run the following command:
+```
+ $ python script.py <options>
+```
+The following operations are supported.
 
-Notes:
+```
+| Option  | Use |
+| ------------- | ------------- |
+| --topModule  | Name of the top topModule (mandatory)  |
+| --inputFile  |  Name of the input file (it is mandatory too and shouldbe in the same directory as script.py |
+| --rtlFile|the final verilog code file(default is output.v) |
+| --bitWidth|specify the bitWidth for the rtl code |
+| --checkBalancing|Set to 1 to verify the balancing (default is 0) |
+
+
+
+## Note
+
 - Temporary files will be generated in the tempFiles folder.
 - The output Verilog file will be in the same folder as the input file.
   
