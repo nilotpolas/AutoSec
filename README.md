@@ -130,14 +130,16 @@ Design is balanced.
    ```
    Here N means the number of samples you want to test the design for:
    Say we put 498, it gives us the test for that many number of samples into files "out0Comb.txt","out1Comb.txt"  with the 0-shares and 1-shares respectively.
-    **Step3: Simulate the verilog file using**
+
+    **Step4: Simulate the verilog file using**
    ```
    iverilog -o simulation design.v design_tb.v
    ```
    ```
    vvp simulation
    ```
-   **Step4:Sort and compare the generated simulation file with the original S-box output**
+
+   **Step5:Sort and compare the generated simulation file with the original S-box output**
    ```
    diff simulation_out_cfile_sorted.csv simulation_out_iverilog_sorted.csv
    ``` 
