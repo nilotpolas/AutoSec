@@ -1,0 +1,59 @@
+Steps for Netlist Generation:
+
+ Inside 172.16.82.121
+    1. cd /home/c_karfa/anuj/april2024/protected/hpc2 (for example for hpc2)
+
+    2. edit/update file present_hpc2.v
+
+    3. run dc_shell -f dc_script.tcl (make sure all the paths are correct in dc_script.tcl file)
+            will generate present_hpc2.dc.v,file1.sdc, sbox.area, sbox.timing, sbox.power
+
+Steps for TVLA: 
+
+ Inside 172.16.82.121
+    1.  a. bash cleanup.sh (to remove unnecessary files)
+    
+        b. Replace the value of the variables: 
+
+            parameter latency = 5; (design latency)
+            parameter N = x; // use x from one of the values in following table
+            
+            these values are only for PRESENT for 5 cycles
+            /---------------------------------------------\
+            | Picoseconds(ps)|  N   |  3N  |    Traces    |
+            ----------------------------------------------
+            |      300       | 166  | 498  |      82k     |
+            |      275       | 181  | 543  |      98k     |
+            |      240       | 208  | 624  |     129k     |
+            |      225       | 222  | 666  |     147k     |
+            |      215       | 232  | 696  |     161k     |
+            |      175       | 285  | 855  |     243k     |
+            |       85       | 588  | 1764 |   103.7k     |
+            |       75       | 666  | 1998 |     133k     |
+            \---------------------------------------------/
+        c. python3 input_generator.py
+
+    2. vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
+
+    3. vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
+ 
+    4. ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
+
+    5. pt_shell -f px_sbox.tcl (make sure all paths and files name are correct)
+        this generates sbox_hpc2.fsdb file which we need to copy to 172.16.82.117 to run in custom waveview to get power traces 
+     
+Inside 172.16.82.117
+    6. Import sbox_hpc2.fsdb using
+        scp c_karfa@172.16.82.121:/home/c_karfa/anuj/april2024/protected/hpc2/reports/*.fsdb .
+
+    7.  wv sbox_hpc2.fsdb (this command will open custom waveview) 
+
+    8. Collect power traces in csv format with value in ps corresponding to x in table, 
+        for example for N - 166, it will be traces_300ps.csv
+        do this for 300,275,240,225,115,215,175,85,75 ps.csv for that start from step 1 
+
+    9. Download present_hpc2_300ps.csv to local and run file:
+        * change file_num = hpc2 (or gadget concerned) in tvla_parser_2d.py
+        * change path = "5cycle/hpc2/" in tvla_parser_2d.py
+        * change latency value to the current design latency
+        * python3 tvla_parser_2d.py
