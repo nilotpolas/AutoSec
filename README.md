@@ -1,8 +1,6 @@
 # Instructions to Install and Execute the Tool
 ## Installing the dependencies
 
-Install my-project with npm
-
 ```bash
   pip install -r requirements.txt
 ```
