@@ -114,6 +114,22 @@ Design is balanced.
    ```
    /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/AES/aes_tb.v
    ```
+    **Step3: Generate the simulation input files**
+   The input generator code generates the input simulation files: 
+   ```
+   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/input_generator.py
+   ```
+   Run it using:
+   ```
+   python input_generator.py
+   ```
+   You can edit the *total_record = 50000* on line *37* in the file to specify the total number of records
+   It asks for the following input
+   ```
+   Enter Size of N: 
+   ```
+   Here N means the number of samples you want to test the design for:
+   Say we put 498, it gives us the test for that many number of samples into files "out0Comb.txt","out1Comb.txt"  with the 0-shares and 1-shares respectively.
     **Step3: Simulate the verilog file using**
    ```
    iverilog -o simulation design.v design_tb.v
