@@ -102,9 +102,27 @@ Design is balanced.
 
 ## Bonus Features:
 1. **Checking functional correctness via Simulation-Based Verification:**  
-   Example: ...
+   **Step1: Install IARCUS-verilog**
+   ```
+   sudo apt-get install iverilog
+   ```
+   **Step2: Write a testbench file**
+    We have testbenches for the AES and PRESENT S-boxes:
+   ```
+   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/PRESENT/present_tb
+   ```
+   ```
+   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/AES/aes_tb.v
+   ```
+    **Step3: Simulate the verilog file using**
+   ```
+    iverilog -o simulation design.v design_tb.v
+   vvp simulation
+   ```
 
-2. **Checking the AST-graphs**
+   Example: 
 
-3. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
+3. **Checking the AST-graphs**
+
+4. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
    Example: ...
