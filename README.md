@@ -181,27 +181,30 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
     1.  a. bash cleanup.sh (to remove unnecessary files)
     
         b. Replace the value of the variables in the file in path 
-            ```
-            /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
-            ```
+        
+        ```
+        /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
+        ```
 
-            parameter latency = 5; (design latency)
-            parameter N = x; // use x from one of the values in following table
-            
-            these values are only for PRESENT for 5 cycles (hpc1, hpc2)
-            /---------------------------------------------\
-            | Picoseconds(ps)|  N   |  3N  |    Traces    |
-            ----------------------------------------------
-            |      300       | 166  | 498  |      82k     |
-            |      275       | 181  | 543  |      98k     |
-            |      240       | 208  | 624  |     129k     |
-            |      225       | 222  | 666  |     147k     |
-            |      215       | 232  | 696  |     161k     |
-            |      175       | 285  | 855  |     243k     |
-            |       85       | 588  | 1764 |   103.7k     |
-            |       75       | 666  | 1998 |     133k     |
-            \---------------------------------------------/
-        c. Run 
+          parameter latency = 5; (design latency)
+          parameter N = x; // use x from one of the values in following table
+          
+          these values are only for PRESENT for 5 cycles (hpc1, hpc2)
+          /---------------------------------------------\
+          | Picoseconds(ps)|  N   |  3N  |    Traces    |
+          ----------------------------------------------
+          |      300       | 166  | 498  |      82k     |
+          |      275       | 181  | 543  |      98k     |
+          |      240       | 208  | 624  |     129k     |
+          |      225       | 222  | 666  |     147k     |
+          |      215       | 232  | 696  |     161k     |
+          |      175       | 285  | 855  |     243k     |
+          |       85       | 588  | 1764 |   103.7k     |
+          |       75       | 666  | 1998 |     133k     |
+          \---------------------------------------------/
+
+          
+        c. Run input generator 
         
         ```
         python3 input_generator.py
@@ -209,14 +212,15 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
 
     2. Run vlogan 
     
-    ```
-    vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
-    ```
+        ```
+        vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
+        ```
 
     3. Run vcs
-    ```
-    vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
-    ```
+    
+        ```
+        vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
+        ```
     
     4. Run simv
     
