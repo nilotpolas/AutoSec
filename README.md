@@ -16,7 +16,7 @@ Run the following command:
 ```
 The following operations are supported.
 
-```
+
 | Option  | Use |
 | ------------- | ------------- |
 | --topModule  | Name of the top topModule (mandatory)  |
