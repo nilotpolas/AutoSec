@@ -109,7 +109,7 @@ Design is balanced.
    **Step2: Write a testbench file**
     We have testbenches for the AES and PRESENT S-boxes:
    ```
-   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/PRESENT/present_tb
+   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/PRESENT/present_tb.v
    ```
    ```
    /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/AES/aes_tb.v
