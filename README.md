@@ -102,7 +102,7 @@ Design is balanced.
 
 ## Bonus Features:
 1. **Checking functional correctness via Simulation-Based Verification:**  
-   **Step1: Install IARCUS-verilog**
+   **Step1: Install ICARUS-verilog**
    ```
    sudo apt-get install iverilog
    ```
