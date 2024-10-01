@@ -116,7 +116,9 @@ Design is balanced.
    ```
     **Step3: Simulate the verilog file using**
    ```
-    iverilog -o simulation design.v design_tb.v
+   iverilog -o simulation design.v design_tb.v
+   ```
+   ```
    vvp simulation
    ```
 
