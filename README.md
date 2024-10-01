@@ -163,5 +163,7 @@ Design is balanced.
   AutoSec-master/src/graph.png
   ```
   Note: Doing this for bigger designs (AES) is not scalable due to the screen being unable to render such a huge graph.
+
+  
 3. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
    Example: ...
