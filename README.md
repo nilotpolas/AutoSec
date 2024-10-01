@@ -121,7 +121,10 @@ Design is balanced.
    ```
    vvp simulation
    ```
-
+   **Step4:Sort and compare the generated simulation file with the original S-box output**
+   ```
+   diff simulation_out_cfile_sorted.csv simulation_out_iverilog_sorted.csv
+   ```
    Example: 
 
 3. **Checking the AST-graphs**
