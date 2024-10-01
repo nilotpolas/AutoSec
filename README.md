@@ -184,7 +184,7 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
         
         ```
         /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
-        ```
+        
 
           parameter latency = 5; (design latency)
           parameter N = x; // use x from one of the values in following table
@@ -208,31 +208,31 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
         
         ```
         python3 input_generator.py
-        ```
+        
 
     2. Run vlogan 
     
         ```
         vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
-        ```
+        
 
     3. Run vcs
     
         ```
         vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
-        ```
+        
     
     4. Run simv
     
     ```
     ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
-    ```
+    
 
     5. Run primetime
     
         ```
         pt_shell -f px_sbox.tcl (make sure all paths and files name are correct)
-        ```
+        
         this generates sbox_hpc2.fsdb file which we need run in custom waveview to get power traces 
      
 
@@ -240,7 +240,7 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
     
         ```
         wv sbox_hpc2.fsdb (this command will open custom waveview) 
-        ```
+        
         
     7. Collect power traces in csv format with value in ps corresponding to x in table, 
         for example for N - 166, it will be traces_300ps.csv
@@ -253,5 +253,5 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
        
        ```
        tvla_parser_2d.py
-       ```
+       
        It will generate the plots and the tvla results in the same folder.
