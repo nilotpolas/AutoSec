@@ -109,15 +109,15 @@ Design is balanced.
    **Step2: Write a testbench file**
     We have testbenches for the AES and PRESENT S-boxes:
    ```
-   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/PRESENT/present_tb.v
+   AutoSec-master/src/FunctionalCorrectness/PRESENT/present_tb.v
    ```
    ```
-   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/AES/aes_tb.v
+   AutoSec-master/src/FunctionalCorrectness/AES/aes_tb.v
    ```
     **Step3: Generate the simulation input files**
    The input generator code generates the input simulation files: 
    ```
-   /home/nilotpola/Desktop/ESSC/AutoSec-master/src/FunctionalCorrectness/input_generator.py
+   AutoSec-master/src/FunctionalCorrectness/input_generator.py
    ```
    Run it using:
    ```
@@ -145,6 +145,18 @@ Design is balanced.
    ``` 
 
 3. **Checking the AST-graphs**
-
-4. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
+    We can print the AST after dummy node insertion (or at any step in the algorithm by re-using the same function) by uncommenting line 62 in:
+   ```
+  AutoSec-master/src/RegBalancer/src/main.py
+  ```
+  the line is: 
+  ```
+  save_graph(dfg_gen.dfg, "graph.png")
+  ```
+  The graph will be generated at:
+   ```
+  AutoSec-master/src/graph.png
+  ```
+  Note: Doing this for bigger designs (AES) is not scalable due to the screen being unable to render such a huge graph.
+5. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
    Example: ...
