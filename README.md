@@ -144,7 +144,7 @@ Design is balanced.
    diff simulation_out_cfile_sorted.csv simulation_out_iverilog_sorted.csv
    ``` 
 
-3. **Checking the AST-graphs**
+2. **Checking the AST-graphs**
     We can print the AST after dummy node insertion (or at any step in the algorithm by re-using the same function) by uncommenting line 62 in:
    
   ```
@@ -163,5 +163,5 @@ Design is balanced.
   AutoSec-master/src/graph.png
   ```
   Note: Doing this for bigger designs (AES) is not scalable due to the screen being unable to render such a huge graph.
-5. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
+3. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
    Example: ...
