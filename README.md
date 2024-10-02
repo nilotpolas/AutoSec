@@ -174,9 +174,9 @@ Use design compiler to generate the netlist:
 
     2. run:
        ```
-       dc_shell -f dc_script.tcl (make sure all the paths are correct in dc_script.tcl file)
+       dc_shell -f dc_script.tcl 
        ```
-       will generate present_hpc2.dc.v,file1.sdc, sbox.area, sbox.timing, sbox.power
+       will generate present_hpc2.dc.v,file1.sdc, sbox.area, sbox.timing, sbox.power (make sure all the paths are correct in dc_script.tcl file)
       
 
 Steps for TVLA: 
