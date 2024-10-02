@@ -183,7 +183,7 @@ Steps for TVLA:
 **Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView**
     1.  a. bash cleanup.sh (to remove unnecessary files)
     
-        b. Replace the value of the variables in the file in path 
+        b. **Replace the value of the variables in the file in path** 
         
          ```
          /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
@@ -207,32 +207,32 @@ Steps for TVLA:
           \---------------------------------------------/
 
           
-        c. Run input generator 
+        c. **Run input generator** 
         
         ```
         python3 input_generator.py
         ```
         
 
-    2. Run vlogan 
+    2. **Run vlogan** 
     
         ```
         vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
         ```
 
-    3. Run vcs
+    3. **Run vcs**
     
         ```
         vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
         ```
     
-    4. Run simv
+    4. **Run simv**
     
         ```
         ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
         ```
 
-    5. Run primetime (make sure all paths and files name are correct)
+    5. **Run primetime (make sure all paths and files name are correct)**
     
         ```
         pt_shell -f px_sbox.tcl 
@@ -241,7 +241,7 @@ Steps for TVLA:
         this generates sbox_hpc2.fsdb file which we need run in custom waveview to get power traces 
      
 
-    6.  Open traces using waveview
+    6.  **Open traces using waveview**
     
         ```
         wv sbox_hpc2.fsdb (this command will open custom waveview) 
