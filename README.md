@@ -168,23 +168,26 @@ Design is balanced.
 3. **TVLA - analysis**: Automated scripts to be used after the design compiler is used to generate netlist.
    Example: 
 Use design compiler to generate the netlist: 
-
-Steps for Netlist Generation:
+**Steps for Netlist Generation:**
 
     1. Given that RTL output from AutoSec is present_hpc2.v
 
-    2. run dc_shell -f dc_script.tcl (make sure all the paths are correct in dc_script.tcl file)
-            will generate present_hpc2.dc.v,file1.sdc, sbox.area, sbox.timing, sbox.power
+    2. run:
+       ```
+       dc_shell -f dc_script.tcl (make sure all the paths are correct in dc_script.tcl file)
+       ```
+       will generate present_hpc2.dc.v,file1.sdc, sbox.area, sbox.timing, sbox.power
+      
 
 Steps for TVLA: 
-Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
+**Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView**
     1.  a. bash cleanup.sh (to remove unnecessary files)
     
         b. Replace the value of the variables in the file in path 
         
-        
-        /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
-        
+         ```
+         /home/nilotpola/Desktop/ESSC/AutoSec-master/src/SecurityAnalysis/PRESENT/5cycle/hpc2/input_generator.py
+         ```
 
           parameter latency = 5; (design latency)
           parameter N = x; // use x from one of the values in following table
@@ -206,52 +209,54 @@ Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView
           
         c. Run input generator 
         
-        
+        ```
         python3 input_generator.py
+        ```
         
 
     2. Run vlogan 
     
-        
+        ```
         vlogan -full64 tsl18fs120_scl.v present_hpc2.dc.v present_tb.v 
-        
+        ```
 
     3. Run vcs
     
-        
+        ```
         vcs -full64 -debug_all present_tb  (this command will generate simv executable file)
-        
+        ```
     
     4. Run simv
     
-    
-    ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
-    
+        ```
+        ./simv > simv_output.txt  (generate sbox_vcd.vcd file, that is used in px_sbox.tcl)
+        ```
 
-    5. Run primetime
+    5. Run primetime (make sure all paths and files name are correct)
     
-        
-        pt_shell -f px_sbox.tcl (make sure all paths and files name are correct)
+        ```
+        pt_shell -f px_sbox.tcl 
+        ```
         
         this generates sbox_hpc2.fsdb file which we need run in custom waveview to get power traces 
      
 
     6.  Open traces using waveview
     
-        
+        ```
         wv sbox_hpc2.fsdb (this command will open custom waveview) 
+        ```
         
-        
-    7. Collect power traces in csv format with value in ps corresponding to x in table, 
+    7. *Collect power traces in csv format with value in ps corresponding to x in table, 
         for example for N - 166, it will be traces_300ps.csv
         do this for 300,275,240,225,115,215,175,85,75 ps.csv for that start from step 1 
 
-    9. Download present_hpc2_300ps.csv to local and run file:
+    8. **Download present_hpc2_300ps.csv to local and run file:**
         * change file_num = hpc2 (or gadget concerned) in tvla_parser_2d.py
 
-   10. Run
+   9. **Run TVLA**
        
        ```
        tvla_parser_2d.py
-       
+       ```
        It will generate the plots and the tvla results in the same folder.
