@@ -181,6 +181,7 @@ Use design compiler to generate the netlist:
 
 Steps for TVLA: 
 **Tools requried: Synopsys PrimeTime, Synopsys Design Compiler, Synopsys WaveView**
+
     1.  a. bash cleanup.sh (to remove unnecessary files)
     
         b. **Replace the value of the variables in the file in path** 
